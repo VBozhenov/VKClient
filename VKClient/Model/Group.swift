@@ -16,10 +16,6 @@ class Group: Object {
     @objc dynamic var name = ""
     @objc dynamic var photo = ""
     
-//    override static func primaryKey() -> String? {
-//        return "id"
-//    }
-    
      convenience init(json: JSON) {
         self.init()
         self.id = json["id"].intValue

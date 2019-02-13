@@ -17,10 +17,6 @@ class Photo: Object {
     @objc dynamic var likes = 0
     @objc dynamic var reposts = 0
     
-//    override static func primaryKey() -> String? {
-//        return "id"
-//    }
-    
     convenience init(json: JSON) {
         self.init()
         self.id = json["id"].intValue

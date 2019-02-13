@@ -17,10 +17,6 @@ class User: Object {
     @objc dynamic var lastName = ""
     @objc dynamic var avatar = ""
     
-//    override static func primaryKey() -> String? {
-//        return "id"
-//    }
-    
     convenience init(json: JSON) {
         self.init()
         self.id = json["id"].intValue
