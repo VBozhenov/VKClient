@@ -81,7 +81,6 @@
                                 <segue destination="3Rb-f7-6YL" kind="unwind" unwindAction="myUnwindActionWithUnwindSegue:" id="zDS-4c-DrN"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Lpg-bl-Dvf"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uuh-Fg-KRi" userLabel="First Responder" sceneMemberID="firstResponder"/>

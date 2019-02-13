@@ -41,7 +41,6 @@ class LoginFormViewController: UIViewController {
     }
 }
 
-
 extension LoginFormViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         

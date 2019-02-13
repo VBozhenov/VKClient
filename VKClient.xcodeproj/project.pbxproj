@@ -84,7 +84,7 @@
 		E7DB5CAF22100082003CBFCD /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E7DB5CB122100107003CBFCD /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		E7E66588220779940071B5C9 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		E7EA7DF021EA750C00D813B3 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GradientView.swift; path = "Available Groups/GradientView.swift"; sourceTree = "<group>"; };
+		E7EA7DF021EA750C00D813B3 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E7F0EDF121E353DF00F299B5 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,24 +156,32 @@
 				E7A135202211F0CF00506CEE /* NetworkService.swift */,
 				E7BCA87722062C1B00FDC05A /* Stotyboards */,
 				E79EC7BB22061EC400D25DDB /* Start Screen */,
-				E7D28F0521D15C72008F4475 /* FriendFoto */,
 				E7D28F0421D15C54008F4475 /* Friends */,
+				E7D28F0521D15C72008F4475 /* FriendFoto */,
 				E7A11C5721D018DF000DB879 /* MyGroups */,
 				E702434221F03BDB00BFB542 /* News */,
 				E7D1A6D921F30C23001858C8 /* Detailed News */,
 				E702434121F03B6B00BFB542 /* Model */,
-				E707E69422032AFE0096693E /* CustomPushAnimator.swift */,
-				E707E696220339710096693E /* CustomPopAnimator.swift */,
-				E707E69822033BBB0096693E /* CustomNavigationController.swift */,
-				E7AE481E2203706900AE346A /* CustomInteractiveTransition.swift */,
-				E7F0EDF121E353DF00F299B5 /* UIImageView.swift */,
-				E7EA7DF021EA750C00D813B3 /* GradientView.swift */,
+				E789E83422140ED3009E51ED /* Animation and custom controllers */,
 				E78054E321C6CFDC008D179C /* Assets.xcassets */,
 				E78054DC21C6CFDB008D179C /* AppDelegate.swift */,
 				E78054E521C6CFDC008D179C /* LaunchScreen.storyboard */,
 				E78054E821C6CFDC008D179C /* Info.plist */,
 			);
 			path = VKClient;
+			sourceTree = "<group>";
+		};
+		E789E83422140ED3009E51ED /* Animation and custom controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E707E69422032AFE0096693E /* CustomPushAnimator.swift */,
+				E707E696220339710096693E /* CustomPopAnimator.swift */,
+				E707E69822033BBB0096693E /* CustomNavigationController.swift */,
+				E7AE481E2203706900AE346A /* CustomInteractiveTransition.swift */,
+				E7F0EDF121E353DF00F299B5 /* UIImageView.swift */,
+				E7EA7DF021EA750C00D813B3 /* GradientView.swift */,
+			);
+			path = "Animation and custom controllers";
 			sourceTree = "<group>";
 		};
 		E79EC7BB22061EC400D25DDB /* Start Screen */ = {
