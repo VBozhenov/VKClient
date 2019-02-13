@@ -117,7 +117,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07e-kW-cmY">
-                                            <rect key="frame" x="98" y="141" width="40" height="16"/>
+                                            <rect key="frame" x="98" y="141" width="39.5" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -126,6 +126,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="164" height="165"/>
                                             <connections>
                                                 <action selector="fotoPressed:" destination="JUW-g4-3Cd" eventType="touchUpInside" id="L4e-ES-ipH"/>
+                                                <segue destination="Kkj-4f-gQ7" kind="show" identifier="ShowDetailedFoto" id="JdM-b5-vc8"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qe5-SQ-sJ4">
@@ -175,6 +176,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DEW-Ss-kCU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5388" y="-337.78110944527737"/>
+        </scene>
+        <!--Detailed Friend Foto View Controller-->
+        <scene sceneID="FCc-pm-OXC">
+            <objects>
+                <collectionViewController id="Kkj-4f-gQ7" customClass="DetailedFriendFotoViewController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="KBN-E8-jaE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="C1l-2V-rsy" customClass="DetailedNewsCellLayout" customModule="VKClient" customModuleProvider="target">
+                            <size key="itemSize" width="287" height="267"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FriendFotoImage" id="5Eo-Eo-GcW" customClass="DetailedFriendFotoCell" customModule="VKClient" customModuleProvider="target">
+                                <rect key="frame" x="44" y="0.0" width="287" height="267"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="267"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KFs-cL-aGu">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="267"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="KFs-cL-aGu" firstAttribute="leading" secondItem="5Eo-Eo-GcW" secondAttribute="leading" id="8ii-gW-VVv"/>
+                                    <constraint firstItem="KFs-cL-aGu" firstAttribute="top" secondItem="5Eo-Eo-GcW" secondAttribute="top" id="Cji-Wr-wys"/>
+                                    <constraint firstAttribute="trailing" secondItem="KFs-cL-aGu" secondAttribute="trailing" id="eRL-7m-dx7"/>
+                                    <constraint firstAttribute="bottom" secondItem="KFs-cL-aGu" secondAttribute="bottom" id="tGm-XO-fwO"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="friendFoto" destination="KFs-cL-aGu" id="fdY-Oe-lZC"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Kkj-4f-gQ7" id="4RN-eQ-37A"/>
+                            <outlet property="delegate" destination="Kkj-4f-gQ7" id="SNV-GJ-xL0"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="39M-R3-sXE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6196" y="-338.68065967016497"/>
         </scene>
         <!--Friends-->
         <scene sceneID="Cau-db-lMa">

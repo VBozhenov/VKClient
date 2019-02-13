@@ -19,6 +19,8 @@
 		E78054E721C6CFDC008D179C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E78054E521C6CFDC008D179C /* LaunchScreen.storyboard */; };
 		E78054F121C6D14A008D179C /* StartScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78054F021C6D14A008D179C /* StartScreenViewController.swift */; };
 		E78054F321C6D35F008D179C /* LoginFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78054F221C6D35F008D179C /* LoginFormViewController.swift */; };
+		E789E836221414D2009E51ED /* DetailedFriendFotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E789E835221414D2009E51ED /* DetailedFriendFotoViewController.swift */; };
+		E789E8382214163E009E51ED /* DetailedFriendFotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E789E8372214163E009E51ED /* DetailedFriendFotoCell.swift */; };
 		E7A11C5921D0192D000DB879 /* MyGroupsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A11C5821D0192D000DB879 /* MyGroupsCell.swift */; };
 		E7A11C5B21D0194C000DB879 /* MyGroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A11C5A21D0194C000DB879 /* MyGroupsController.swift */; };
 		E7A135212211F0CF00506CEE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A135202211F0CF00506CEE /* NetworkService.swift */; };
@@ -62,6 +64,8 @@
 		E78054E821C6CFDC008D179C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E78054F021C6D14A008D179C /* StartScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenViewController.swift; sourceTree = "<group>"; };
 		E78054F221C6D35F008D179C /* LoginFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormViewController.swift; sourceTree = "<group>"; };
+		E789E835221414D2009E51ED /* DetailedFriendFotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedFriendFotoViewController.swift; sourceTree = "<group>"; };
+		E789E8372214163E009E51ED /* DetailedFriendFotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedFriendFotoCell.swift; sourceTree = "<group>"; };
 		E7A11C5821D0192D000DB879 /* MyGroupsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsCell.swift; sourceTree = "<group>"; };
 		E7A11C5A21D0194C000DB879 /* MyGroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsController.swift; sourceTree = "<group>"; };
 		E7A135202211F0CF00506CEE /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 				E79EC7BB22061EC400D25DDB /* Start Screen */,
 				E7D28F0421D15C54008F4475 /* Friends */,
 				E7D28F0521D15C72008F4475 /* FriendFoto */,
+				E789E8392214164B009E51ED /* DetailedFriendFoto */,
 				E7A11C5721D018DF000DB879 /* MyGroups */,
 				E702434221F03BDB00BFB542 /* News */,
 				E7D1A6D921F30C23001858C8 /* Detailed News */,
@@ -182,6 +187,15 @@
 				E7EA7DF021EA750C00D813B3 /* GradientView.swift */,
 			);
 			path = "Animation and custom controllers";
+			sourceTree = "<group>";
+		};
+		E789E8392214164B009E51ED /* DetailedFriendFoto */ = {
+			isa = PBXGroup;
+			children = (
+				E789E835221414D2009E51ED /* DetailedFriendFotoViewController.swift */,
+				E789E8372214163E009E51ED /* DetailedFriendFotoCell.swift */,
+			);
+			path = DetailedFriendFoto;
 			sourceTree = "<group>";
 		};
 		E79EC7BB22061EC400D25DDB /* Start Screen */ = {
@@ -384,8 +398,10 @@
 				E78054F121C6D14A008D179C /* StartScreenViewController.swift in Sources */,
 				E7BDE86021F9DFA7008516D4 /* NewsCollectionViewLayout.swift in Sources */,
 				E7D1A6D821F30C18001858C8 /* DetailedNewsCell.swift in Sources */,
+				E789E836221414D2009E51ED /* DetailedFriendFotoViewController.swift in Sources */,
 				E7EA7DF121EA750C00D813B3 /* GradientView.swift in Sources */,
 				E7BDE86621FF446C008516D4 /* DetailedNewsCellLayout.swift in Sources */,
+				E789E8382214163E009E51ED /* DetailedFriendFotoCell.swift in Sources */,
 				E7DB5CAE220FFF74003CBFCD /* User.swift in Sources */,
 				E7D1A6D621F30BF1001858C8 /* DetailedNewsController.swift in Sources */,
 				E78054DD21C6CFDB008D179C /* AppDelegate.swift in Sources */,

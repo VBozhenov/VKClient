@@ -1,21 +1,39 @@
 //
-//  DetailedNewsController.swift
+//  DetailedFriendFotoViewController.swift
 //  VKClient
 //
-//  Created by Vladimir Bozhenov on 19/01/2019.
+//  Created by Vladimir Bozhenov on 13/02/2019.
 //  Copyright © 2019 Vladimir Bozhenov. All rights reserved.
 //
 
 import UIKit
+import Kingfisher
 
-class DetailedNewsController: UICollectionViewController {
+//private let reuseIdentifier = "Cell"
+
+class DetailedFriendFotoViewController: UICollectionViewController {
     
-    
-    var foto = [String]()
-    
+    var userId = 0
+    var photos = [Photo]()
+    let networkService = NetworkService()
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        networkService.loadFriendsFoto(for: userId) { [weak self] photos, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            } else if let photos = photos, let self = self {
+                self.photos = photos
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -38,19 +56,25 @@ class DetailedNewsController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return foto.count
+        // #warning Incomplete implementation, return the number of items
+        return photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "News Image", for: indexPath) as! DetailedNewsCell
-        cell.detailedNewsImage.image = UIImage(named: foto[indexPath.row])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendFotoImage", for: indexPath) as! DetailedFriendFotoCell
+        cell.friendFoto.kf.setImage(with: URL(string: photos[indexPath.row].photo))
+    
+        // Configure the cell
+    
         return cell
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         cell.alpha = 0
@@ -72,6 +96,7 @@ class DetailedNewsController: UICollectionViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteriteSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+
     // MARK: UICollectionViewDelegate
 
     /*
