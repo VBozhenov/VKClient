@@ -50,12 +50,12 @@ class MyGroupsController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return searchController.isActive && !searchBarIsEmpty() ? 2 : 1
+        return isFiltering() ? 2 : 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return searchController.isActive && !searchBarIsEmpty() ? mySearchedGroups.count : groups.count
+            return isFiltering() ? mySearchedGroups.count : groups.count
         } else {
             return allSearchedGroups.count
         }
