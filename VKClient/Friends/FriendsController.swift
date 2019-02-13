@@ -56,7 +56,6 @@ class FriendsController: UITableViewController {
             return firstLetters(in: mySearchedUsers).count
         } else {
             return firstLetters(in: users).count
-
         }
     }
     
