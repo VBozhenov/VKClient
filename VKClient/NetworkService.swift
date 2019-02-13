@@ -12,6 +12,8 @@ import SwiftyJSON
 
 class NetworkService {
     
+    let dataService = DataService()
+    
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
 
@@ -33,6 +35,7 @@ class NetworkService {
                 let json = JSON(value)
                 let friends = json["response"]["items"].arrayValue.map { User(json: $0) }
                 completion?(friends, nil)
+                self.dataService.saveData(friends)
             case .failure(let error):
                 completion?(nil, error)
             }
@@ -80,6 +83,7 @@ class NetworkService {
                 let json = JSON(value)
                 let photos = json["response"]["items"].arrayValue.map { Photo(json: $0) }
                 completion?(photos, nil)
+                self.dataService.saveData(photos)
             case .failure(let error):
                 completion?(nil, error)
             }
@@ -102,6 +106,7 @@ class NetworkService {
                 let json = JSON(value)
                 let groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
                 completion?(groups, nil)
+                self.dataService.saveData(groups)
             case .failure(let error):
                 completion?(nil, error)
             }

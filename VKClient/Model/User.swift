@@ -9,14 +9,20 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
-class User {
-    var id = 0
-    var firstName = ""
-    var lastName = ""
-    var avatar = ""
+class User: Object {
+    @objc dynamic var id = 0
+    @objc dynamic var firstName = ""
+    @objc dynamic var lastName = ""
+    @objc dynamic var avatar = ""
     
-    init(json: JSON) {
+//    override static func primaryKey() -> String? {
+//        return "id"
+//    }
+    
+    convenience init(json: JSON) {
+        self.init()
         self.id = json["id"].intValue
         self.firstName = json["first_name"].stringValue
         self.lastName = json["last_name"].stringValue

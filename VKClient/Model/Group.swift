@@ -9,13 +9,19 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
-class Group {
-    var id = 0
-    var name = ""
-    var photo = ""
+class Group: Object {
+    @objc dynamic var id = 0
+    @objc dynamic var name = ""
+    @objc dynamic var photo = ""
     
-    init(json: JSON) {
+//    override static func primaryKey() -> String? {
+//        return "id"
+//    }
+    
+     convenience init(json: JSON) {
+        self.init()
         self.id = json["id"].intValue
         self.name = json["name"].stringValue
         self.photo = json["photo_100"].stringValue

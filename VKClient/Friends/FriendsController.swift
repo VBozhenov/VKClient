@@ -34,7 +34,8 @@ class FriendsController: UITableViewController {
                 print(error.localizedDescription)
                 return
             } else if let users = users, let self = self {
-                self.users = users
+                self.users = users.filter {$0.lastName != ""}
+                
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

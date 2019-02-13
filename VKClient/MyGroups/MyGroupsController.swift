@@ -34,7 +34,7 @@ class MyGroupsController: UITableViewController {
                 print(error.localizedDescription)
                 return
             } else if let groups = groups, let self = self {
-                self.groups = groups
+                self.groups = groups.filter {$0.name != ""}
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

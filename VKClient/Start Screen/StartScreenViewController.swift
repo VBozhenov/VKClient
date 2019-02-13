@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class StartScreenViewController: UIViewController {
     @IBOutlet weak var dotOne: UIImageView!
@@ -17,6 +18,16 @@ class StartScreenViewController: UIViewController {
     }
     
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
+//        deleteCookies()
+    }
+    
+    func deleteCookies() {
+        let dataStore = WKWebsiteDataStore.default()
+        dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), for: records) {
+                print("Deleted: " + records.description)
+            }
+        }
     }
     
     override func viewDidLoad() {
