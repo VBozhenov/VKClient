@@ -177,4 +177,20 @@ class NetworkService {
         }
     }
     
+//    func addLike (to object: String, withId itemID: Int, andOwnerId ownerID: Int, completion: (() -> Void)? = nil) {
+//        let path = "/method/groups.join"
+//
+//        let params: Parameters = [
+//            "access_token": Session.user.token,
+//            "type": object,
+//            "owner_id": ownerID,
+//            "item_id": itemID,
+//            "v": version
+//        ]
+//        
+//        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+//            completion?()
+//        }
+//    }
+    
 }

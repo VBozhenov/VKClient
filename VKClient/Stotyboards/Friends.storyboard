@@ -117,8 +117,8 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07e-kW-cmY">
-                                            <rect key="frame" x="98" y="141" width="39.5" height="16"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <rect key="frame" x="74.5" y="134" width="46.5" height="23"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -130,7 +130,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qe5-SQ-sJ4">
-                                            <rect key="frame" x="139.5" y="140.5" width="16.5" height="16.5"/>
+                                            <rect key="frame" x="123" y="124" width="33" height="33"/>
                                             <state key="normal" image="heartWhite"/>
                                             <connections>
                                                 <action selector="likeCellButtonPressed:" destination="JUW-g4-3Cd" eventType="touchUpInside" id="0bM-Fd-xr2"/>
@@ -143,17 +143,17 @@
                                     <constraint firstItem="IOQ-uN-SLD" firstAttribute="height" secondItem="JUW-g4-3Cd" secondAttribute="height" id="4eV-nI-wgZ"/>
                                     <constraint firstItem="qsS-2e-52L" firstAttribute="top" secondItem="JUW-g4-3Cd" secondAttribute="top" id="HoA-ji-R2v"/>
                                     <constraint firstItem="IOQ-uN-SLD" firstAttribute="top" secondItem="JUW-g4-3Cd" secondAttribute="top" constant="8" id="I94-Wn-2mf"/>
-                                    <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="height" secondItem="IOQ-uN-SLD" secondAttribute="height" multiplier="0.1" id="IZN-fK-WkY"/>
+                                    <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="height" secondItem="IOQ-uN-SLD" secondAttribute="height" multiplier="0.2" id="IZN-fK-WkY"/>
                                     <constraint firstItem="IOQ-uN-SLD" firstAttribute="leading" secondItem="JUW-g4-3Cd" secondAttribute="leading" constant="8" id="Nih-ib-jhL"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Qe5-SQ-sJ4" secondAttribute="trailing" id="T4K-Na-CHe"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="07e-kW-cmY" secondAttribute="bottom" priority="999" id="ZDk-lv-EfD"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="07e-kW-cmY" secondAttribute="bottom" id="ZDk-lv-EfD"/>
                                     <constraint firstItem="qsS-2e-52L" firstAttribute="leading" secondItem="JUW-g4-3Cd" secondAttribute="leading" id="a8U-r6-x8e"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="Qe5-SQ-sJ4" secondAttribute="bottom" id="agZ-Ol-CEx"/>
-                                    <constraint firstItem="07e-kW-cmY" firstAttribute="leading" secondItem="JUW-g4-3Cd" secondAttribute="leading" constant="98" id="eU8-0j-8DP"/>
+                                    <constraint firstItem="07e-kW-cmY" firstAttribute="leading" secondItem="JUW-g4-3Cd" secondAttribute="leading" priority="250" constant="98" id="eU8-0j-8DP"/>
                                     <constraint firstItem="qsS-2e-52L" firstAttribute="width" secondItem="IOQ-uN-SLD" secondAttribute="width" id="hpk-jm-I7a"/>
                                     <constraint firstItem="qsS-2e-52L" firstAttribute="height" secondItem="IOQ-uN-SLD" secondAttribute="height" id="kld-1t-V8p"/>
                                     <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="leading" secondItem="07e-kW-cmY" secondAttribute="trailing" priority="750" constant="2" id="ljr-bu-EgE"/>
-                                    <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="width" secondItem="IOQ-uN-SLD" secondAttribute="width" multiplier="0.1" id="yPC-i3-3Ea"/>
+                                    <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="width" secondItem="IOQ-uN-SLD" secondAttribute="width" multiplier="0.2" id="yPC-i3-3Ea"/>
                                 </constraints>
                                 <size key="customSize" width="164" height="165"/>
                                 <connections>

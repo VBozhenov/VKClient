@@ -27,7 +27,7 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
         destination.view.frame = source.view.frame
         destination.view.transform = initialRotation.concatenating(initialTranslation)
         
-        UIView.animateKeyframes(withDuration: self.transitionDuration(using: transitionContext), delay: 0, options: .calculationModePaced, animations: {
+        UIView.animateKeyframes(withDuration: self.transitionDuration(using: transitionContext), delay: 0.5, options: .calculationModePaced, animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1, animations: {
                 let translation = CGAffineTransform(translationX: -width / 2 - height / 2, y: -width / 2)
                 let rotation = CGAffineTransform(rotationAngle: .pi / 2)
