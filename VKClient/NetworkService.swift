@@ -133,7 +133,7 @@ class NetworkService {
         }
     }
     
-    func leaveGroup(with groupID: Int, completion: (([Group]?, Error?) -> Void)? = nil) {
+    func leaveGroup(with groupID: Int, completion: (() -> Void)? = nil) {
         let path = "/method/groups.leave"
         
         let params: Parameters = [
@@ -143,21 +143,13 @@ class NetworkService {
         ]
         
         Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
-            switch response.result {
-
-            case .success(let value):
-                let json = JSON(value)
-                let groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
-                completion?(groups, nil)
-            case .failure(let error):
-                completion?(nil, error)
-            }
+            completion?()
         }
     }
     
-    func joinGroup(with groupID: Int, completion: (([Group]?, Error?) -> Void)? = nil) {
+    func joinGroup(with groupID: Int, completion: (() -> Void)? = nil) {
         let path = "/method/groups.join"
-
+        
         let params: Parameters = [
             "access_token": Session.user.token,
             "group_id": groupID,
@@ -165,15 +157,7 @@ class NetworkService {
         ]
         
         Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
-            switch response.result {
-                
-            case .success(let value):
-                let json = JSON(value)
-                let groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
-                completion?(groups, nil)
-            case .failure(let error):
-                completion?(nil, error)
-            }
+                completion?()
         }
     }
     
