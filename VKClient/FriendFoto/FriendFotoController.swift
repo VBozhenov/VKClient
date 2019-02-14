@@ -59,8 +59,10 @@ class FriendFotoController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FotoCell", for: indexPath) as! FriendFotoCell
-        cell.friendFoto.kf.setImage(with: URL(string: photos[indexPath.row].photo))
-        cell.numberOfLikes.text = String(photos[indexPath.row].likes)
+        if let photo = photos[indexPath.row].photo {
+            cell.friendFoto.kf.setImage(with: URL(string: photo))
+            cell.numberOfLikes.text = String(photos[indexPath.row].likes)
+        }
         
         return cell
     }

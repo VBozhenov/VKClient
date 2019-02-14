@@ -68,8 +68,9 @@ class DetailedFriendFotoViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendFotoImage", for: indexPath) as! DetailedFriendFotoCell
-        cell.friendFoto.kf.setImage(with: URL(string: photos[indexPath.row].photo))
-    
+        if let photo = photos[indexPath.row].photo {
+            cell.friendFoto.kf.setImage(with: URL(string: photo))
+        }
         // Configure the cell
     
         return cell
