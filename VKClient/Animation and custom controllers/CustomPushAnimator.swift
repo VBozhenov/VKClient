@@ -45,8 +45,5 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
             }
             transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
         }
-        
     }
-    
-    
 }

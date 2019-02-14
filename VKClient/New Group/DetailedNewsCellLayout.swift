@@ -14,7 +14,6 @@ class DetailedNewsCellLayout: UICollectionViewLayout {
     private var totalCellsHeight: CGFloat = 0
     private var totalCellsWidth: CGFloat = 0
     
-    
     override func prepare() {
         self.cacheAttributes = [:]
         guard let collectionView = self.collectionView else {return}

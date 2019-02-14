@@ -51,30 +51,15 @@ class FriendsController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        if isFiltering() {
-            return firstLetters(in: mySearchedUsers).count
-        } else {
-            return firstLetters(in: users).count
-        }
+        return isFiltering() ? firstLetters(in: mySearchedUsers).count : firstLetters(in: users).count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if isFiltering() {
-            return filterUsers(from: mySearchedUsers, in: section).count
-        } else {
-            return filterUsers(from: users, in: section).count
-        }
+        return isFiltering() ? filterUsers(from: mySearchedUsers, in: section).count : filterUsers(from: users, in: section).count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-
-        if isFiltering() {
-            return firstLetters(in: mySearchedUsers)[section]
-        } else {
-            return firstLetters(in: users)[section]
-        }
+        return isFiltering() ? firstLetters(in: mySearchedUsers)[section] : firstLetters(in: users)[section]
     }
 
     
@@ -84,26 +69,23 @@ class FriendsController: UITableViewController {
         let friendAvatar = UIImageView()
         var filteredFriends = [User]()
         
-        if isFiltering() {
-            filteredFriends = filterUsers(from: mySearchedUsers, in: indexPath.section)
-        } else {
-            filteredFriends = filterUsers(from: users, in: indexPath.section)
-        }
+        filteredFriends = isFiltering() ? filterUsers(from: mySearchedUsers, in: indexPath.section) : filterUsers(from: users, in: indexPath.section)
+        
         cell.friendNameLabel.text = filteredFriends[indexPath.row].lastName + " " + filteredFriends[indexPath.row].firstName
-
+        
         let border = UIView()
         border.frame = cell.friendAvatar.bounds
         border.layer.cornerRadius = cell.friendAvatar.bounds.height / 2
         border.layer.masksToBounds = true
         cell.friendAvatar.addSubview(border)
-
+        
         if let avatar = filteredFriends[indexPath.row].avatar {
             friendAvatar.kf.setImage(with: URL(string: avatar))
         }
-
+        
         friendAvatar.frame = border.bounds
         border.addSubview(friendAvatar)
-
+        
         return cell
     }
     
@@ -163,11 +145,7 @@ class FriendsController: UITableViewController {
     */
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        if isFiltering() {
-            return firstLetters(in: mySearchedUsers)
-        } else {
-            return firstLetters(in: users)
-        }
+        return isFiltering() ? firstLetters(in: mySearchedUsers) : firstLetters(in: users)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -175,11 +153,7 @@ class FriendsController: UITableViewController {
             let friendFotoController = segue.destination as! FriendFotoController
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 var filteredFriends = [User]()
-                if isFiltering() {
-                    filteredFriends = filterUsers(from: mySearchedUsers ,in: indexPath.section)
-                } else {
-                    filteredFriends = filterUsers(from: users ,in: indexPath.section)
-                }
+                filteredFriends = isFiltering() ? filterUsers(from: mySearchedUsers ,in: indexPath.section) : filterUsers(from: users ,in: indexPath.section)
                 friendFotoController.friendId = filteredFriends[indexPath.row].id
             }
         }

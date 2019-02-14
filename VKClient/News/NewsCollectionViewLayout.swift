@@ -12,7 +12,6 @@ class NewsCollectionViewLayout: UICollectionViewLayout {
 
     var cacheAttributes = [IndexPath: UICollectionViewLayoutAttributes]()
     var columnsCount = 2
-//    var cellHeight: CGFloat = 128
     private var totalCellsHeight: CGFloat = 0
     
     override func prepare() {
@@ -86,11 +85,6 @@ class NewsCollectionViewLayout: UICollectionViewLayout {
                 self.totalCellsHeight = lastY
             }
         }
-        
-        
-        
-        
-        
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {

@@ -24,5 +24,5 @@ class Photo: Object {
         self.likes = json["likes"]["count"].intValue
         self.reposts = json["reposts"]["count"].intValue
     }
-
+    
 }

@@ -35,7 +35,6 @@ class NewsController: UITableViewController {
 
     let newsCollectionCell = NewsCollectionViewController()
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "News", for: indexPath) as! NewsCell
         NewsCollectionViewController.newsNumber = indexPath.row
@@ -48,7 +47,6 @@ class NewsController: UITableViewController {
         return cell
     }
     
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

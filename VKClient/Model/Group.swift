@@ -16,7 +16,7 @@ class Group: Object {
     @objc dynamic var name = ""
     @objc dynamic var photo: String? = nil
     
-     convenience init(json: JSON) {
+    convenience init(json: JSON) {
         self.init()
         self.id = json["id"].intValue
         self.name = json["name"].stringValue

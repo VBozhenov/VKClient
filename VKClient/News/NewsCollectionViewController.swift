@@ -20,14 +20,12 @@ class NewsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         collectionView.reloadData()
 
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
 //        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
-        // Do any additional setup after loading the view.
     }
 
     /*
@@ -47,9 +45,7 @@ class NewsCollectionViewController: UICollectionViewController {
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return news.newsImages[NewsCollectionViewController.newsNumber].count
     }
 

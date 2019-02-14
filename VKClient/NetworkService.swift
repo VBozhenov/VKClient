@@ -16,7 +16,7 @@ class NetworkService {
     
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
-
+    
     func loadFriends(completion: (([User]?, Error?) -> Void)? = nil) {
         let path = "/method/friends.get"
         
@@ -157,24 +157,24 @@ class NetworkService {
         ]
         
         Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
-                completion?()
+            completion?()
         }
     }
     
-//    func addLike (to object: String, withId itemID: Int, andOwnerId ownerID: Int, completion: (() -> Void)? = nil) {
-//        let path = "/method/groups.join"
-//
-//        let params: Parameters = [
-//            "access_token": Session.user.token,
-//            "type": object,
-//            "owner_id": ownerID,
-//            "item_id": itemID,
-//            "v": version
-//        ]
-//        
-//        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
-//            completion?()
-//        }
-//    }
+    //    func addLike (to object: String, withId itemID: Int, andOwnerId ownerID: Int, completion: (() -> Void)? = nil) {
+    //        let path = "/method/groups.join"
+    //
+    //        let params: Parameters = [
+    //            "access_token": Session.user.token,
+    //            "type": object,
+    //            "owner_id": ownerID,
+    //            "item_id": itemID,
+    //            "v": version
+    //        ]
+    //
+    //        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+    //            completion?()
+    //        }
+    //    }
     
 }
