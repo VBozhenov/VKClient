@@ -15,10 +15,10 @@ class StartScreenViewController: UIViewController {
     @IBOutlet weak var dotThree: UIImageView!
     
     @IBAction func loginButtonPushed(_ sender: UIButton) {
+//        deleteCookies()
     }
     
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
-//        deleteCookies()
     }
     
     func deleteCookies() {

@@ -75,14 +75,20 @@ class MyGroupsController: UITableViewController {
         if indexPath.section == 0 {
             if isFiltering() {
                 group = mySearchedGroups[indexPath.row].name
-                groupAvatar.kf.setImage(with: URL(string: mySearchedGroups[indexPath.row].photo))
+                if let photo = mySearchedGroups[indexPath.row].photo {
+                    groupAvatar.kf.setImage(with: URL(string: photo))
+                }
             } else {
                 group = groups[indexPath.row].name
-                groupAvatar.kf.setImage(with: URL(string: groups[indexPath.row].photo))
+                if let photo = groups[indexPath.row].photo {
+                    groupAvatar.kf.setImage(with: URL(string: photo))
+                }
             }
         } else {
             group = allSearchedGroups[indexPath.row].name
-            groupAvatar.kf.setImage(with: URL(string: allSearchedGroups[indexPath.row].photo))
+            if let photo = allSearchedGroups[indexPath.row].photo {
+                groupAvatar.kf.setImage(with: URL(string: photo))
+            }
         }
         cell.myGroupLabel.text = group
 

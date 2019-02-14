@@ -15,7 +15,7 @@ class User: Object {
     @objc dynamic var id = 0
     @objc dynamic var firstName = ""
     @objc dynamic var lastName = ""
-    @objc dynamic var avatar = ""
+    @objc dynamic var avatar: String? = nil
     
     convenience init(json: JSON) {
         self.init()

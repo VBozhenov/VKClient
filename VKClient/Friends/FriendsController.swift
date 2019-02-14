@@ -97,7 +97,9 @@ class FriendsController: UITableViewController {
         border.layer.masksToBounds = true
         cell.friendAvatar.addSubview(border)
 
-        friendAvatar.kf.setImage(with: URL(string: filteredFriends[indexPath.row].avatar))
+        if let avatar = filteredFriends[indexPath.row].avatar {
+            friendAvatar.kf.setImage(with: URL(string: avatar))
+        }
 
         friendAvatar.frame = border.bounds
         border.addSubview(friendAvatar)
