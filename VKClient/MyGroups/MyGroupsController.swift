@@ -112,15 +112,23 @@ class MyGroupsController: UITableViewController {
                 preferredStyle: .alert)
             let alertButtonOne = UIAlertAction(title: "ОК", style: .default) { (action:UIAlertAction) in
                 let groupId = self.allSearchedGroups[indexPath.row].id
-                self.networkService.joinGroup(with: groupId)
-                self.groups.append(self.allSearchedGroups[indexPath.row])
-                tableView.reloadData()
+                var groupsId = [Int]()
+                for group in self.groups {
+                    groupsId.append(group.id)
+                }
+                if !groupsId.contains(groupId) {
+                    self.networkService.joinGroup(with: groupId)
+                    self.groups.append(self.allSearchedGroups[indexPath.row])
+                    self.searchController.isActive = true
+                }
             }
-            let alertButtonTwo = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+
+            let alertButtonTwo = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertController.addAction(alertButtonOne)
             alertController.addAction(alertButtonTwo)
             self.present(alertController, animated: true, completion: nil)
         }
+        tableView.reloadData()
     }
     
     /*
@@ -134,11 +142,25 @@ class MyGroupsController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if editingStyle == .delete {
-                let groupId = groups.remove(at: indexPath.row).id
+                var groupId = 0
+                if isFiltering() {
+                    groupId = mySearchedGroups[indexPath.row].id
+                    for group in groups {
+                        if group.id == groupId {
+                            let index = groups.index(of: group)
+                            groups.remove(at: index!)
+                        }
+                    }
+                    mySearchedGroups.remove(at: indexPath.row)
+                } else {
+                    groupId = groups[indexPath.row].id
+                    groups.remove(at: indexPath.row)
+                }
                 networkService.leaveGroup(with: groupId)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -194,8 +216,6 @@ class MyGroupsController: UITableViewController {
         mySearchedGroups = groups.filter({( group ) -> Bool in
             return group.name.lowercased().contains(searchText.lowercased())
         })
-        
-        tableView.reloadData()
     }
     
     func isFiltering() -> Bool {
