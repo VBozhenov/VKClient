@@ -131,7 +131,6 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qe5-SQ-sJ4">
                                             <rect key="frame" x="123" y="124" width="33" height="33"/>
-                                            <state key="normal" image="heartWhite"/>
                                             <connections>
                                                 <action selector="likeCellButtonPressed:" destination="JUW-g4-3Cd" eventType="touchUpInside" id="0bM-Fd-xr2"/>
                                             </connections>
@@ -181,7 +180,7 @@
         <scene sceneID="FCc-pm-OXC">
             <objects>
                 <collectionViewController id="Kkj-4f-gQ7" customClass="DetailedFriendFotoViewController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="KBN-E8-jaE">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="KBN-E8-jaE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -217,7 +216,6 @@
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="Kkj-4f-gQ7" id="4RN-eQ-37A"/>
-                            <outlet property="delegate" destination="Kkj-4f-gQ7" id="SNV-GJ-xL0"/>
                         </connections>
                     </collectionView>
                 </collectionViewController>
@@ -247,6 +245,5 @@
     </scenes>
     <resources>
         <image name="friend" width="24" height="24"/>
-        <image name="heartWhite" width="64" height="64"/>
     </resources>
 </document>

@@ -34,19 +34,12 @@ class FriendFotoController: UICollectionViewController {
         }
     }
 
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetailedFoto" {
             let friendFotoController = segue.destination as! DetailedFriendFotoViewController
             friendFotoController.userId = friendId
         }
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-
-    // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -59,44 +52,18 @@ class FriendFotoController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FotoCell", for: indexPath) as! FriendFotoCell
         if let photo = photos[indexPath.row].photo {
+            let isLiked = networkService.isLiked("photo", withId: photos[indexPath.row].id, ownerId: friendId)
+            if isLiked {
+                cell.likeCellButton.setImage(UIImage(named: "heartRed"), for: UIControl.State.normal)
+                cell.numberOfLikes.textColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            } else {
+                cell.likeCellButton.setImage(UIImage(named: "heartWhite"), for: UIControl.State.normal)
+                cell.numberOfLikes.textColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+            }
             cell.friendFoto.kf.setImage(with: URL(string: photo))
             cell.numberOfLikes.text = String(photos[indexPath.row].likes)
         }
         
         return cell
     }
-    
-    
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }

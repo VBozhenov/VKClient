@@ -73,6 +73,7 @@
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="Jr5-zZ-DhX" id="Gi9-vg-CDt"/>
+                            <outlet property="delegate" destination="Jr5-zZ-DhX" id="S2A-AD-79k"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Groups" id="eSf-Ee-5yI">

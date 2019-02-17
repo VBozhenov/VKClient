@@ -41,12 +41,6 @@ class MyGroupsController: UITableViewController {
                 }
             }
         }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -104,94 +98,63 @@ class MyGroupsController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            let alertController = UIAlertController(
-                title: "Do you want to add \(allSearchedGroups[indexPath.row].name)?",
-                message: nil,
-                preferredStyle: .alert)
-            let alertButtonOne = UIAlertAction(title: "ОК", style: .default) { (action:UIAlertAction) in
-                let groupId = self.allSearchedGroups[indexPath.row].id
-                var groupsId = [Int]()
-                for group in self.groups {
-                    groupsId.append(group.id)
-                }
-                if !groupsId.contains(groupId) {
-                    self.networkService.joinGroup(with: groupId)
-                    self.groups.append(self.allSearchedGroups[indexPath.row])
-                    self.searchController.isActive = true
-                }
-            }
-
-            let alertButtonTwo = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            alertController.addAction(alertButtonOne)
-            alertController.addAction(alertButtonTwo)
-            self.present(alertController, animated: true, completion: nil)
-        }
-        tableView.reloadData()
-    }
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        var action = UITableViewRowAction()
+        
         if indexPath.section == 0 {
-            if editingStyle == .delete {
+            
+            action = UITableViewRowAction(style: .destructive, title: "Delete") {
+                _, indexPath in
                 var groupId = 0
-                if isFiltering() {
-                    groupId = mySearchedGroups[indexPath.row].id
-                    for group in groups {
+                if self.isFiltering() {
+                    groupId = self.mySearchedGroups[indexPath.row].id
+                    for group in self.groups {
                         if group.id == groupId {
-                            let index = groups.index(of: group)
-                            groups.remove(at: index!)
+                            let index = self.groups.index(of: group)
+                            self.groups.remove(at: index!)
                         }
                     }
-                    mySearchedGroups.remove(at: indexPath.row)
+                    self.mySearchedGroups.remove(at: indexPath.row)
                 } else {
-                    groupId = groups[indexPath.row].id
-                    groups.remove(at: indexPath.row)
+                    groupId = self.groups[indexPath.row].id
+                    self.groups.remove(at: indexPath.row)
                 }
-                networkService.leaveGroup(with: groupId)
+                self.networkService.leaveGroup(with: groupId)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
+        } else {
+            action = UITableViewRowAction(style: .default, title: "Add") {
+                _, indexPath in
+                
+                let alertController = UIAlertController(
+                    title: "Do you want to add\n \(self.allSearchedGroups[indexPath.row].name)?",
+                    message: nil,
+                    preferredStyle: .alert)
+                let alertButtonOne = UIAlertAction(title: "ОК", style: .default) { (action:UIAlertAction) in
+                    let groupId = self.allSearchedGroups[indexPath.row].id
+                    var groupsId = [Int]()
+                    for group in self.groups {
+                        groupsId.append(group.id)
+                    }
+                    if !groupsId.contains(groupId) {
+                        self.networkService.joinGroup(with: groupId)
+                        self.groups.append(self.allSearchedGroups[indexPath.row])
+                        self.searchController.isActive = true
+                    }
+                }
+                
+                let alertButtonTwo = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(alertButtonOne)
+                alertController.addAction(alertButtonTwo)
+                self.present(alertController, animated: true, completion: nil)
+            }
+            
+            action.backgroundColor = UIColor.blue
         }
-        tableView.reloadData()
+        
+        return [action]
     }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.section == 1 ? false : true
-    }
-    
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true
