@@ -16,13 +16,15 @@ class Photo: Object {
     @objc dynamic var photo: String? = nil
     @objc dynamic var likes = 0
     @objc dynamic var reposts = 0
-    
+    @objc dynamic var isliked = 0
+
     convenience init(json: JSON) {
         self.init()
         self.id = json["id"].intValue
         self.photo = json["photo_604"].stringValue
         self.likes = json["likes"]["count"].intValue
         self.reposts = json["reposts"]["count"].intValue
+        self.isliked = json["likes"]["user_likes"].intValue
     }
     
 }

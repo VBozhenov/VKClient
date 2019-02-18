@@ -132,7 +132,8 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qe5-SQ-sJ4">
                                             <rect key="frame" x="123" y="124" width="33" height="33"/>
                                             <connections>
-                                                <action selector="likeCellButtonPressed:" destination="JUW-g4-3Cd" eventType="touchUpInside" id="0bM-Fd-xr2"/>
+                                                <action selector="likeCellButtonPressed:" destination="JUW-g4-3Cd" eventType="touchUpInside" id="jmS-Bd-77s"/>
+                                                <action selector="likeCellButtonPushed:" destination="aQN-D5-AaI" eventType="touchUpInside" id="uty-g1-kVy"/>
                                             </connections>
                                         </button>
                                     </subviews>

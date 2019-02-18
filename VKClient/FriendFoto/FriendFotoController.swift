@@ -14,8 +14,19 @@ import Kingfisher
 class FriendFotoController: UICollectionViewController {
     
     var friendId = 0
+    var friendName = ""
     var photos = [Photo]()
     let networkService = NetworkService()
+    
+    @IBAction func likeCellButtonPushed(_ sender: UIButton) {
+        let buttonPosition: CGPoint = sender.convert(CGPoint.zero, to: self.collectionView)
+        guard let indexPath = self.collectionView.indexPathForItem(at: buttonPosition) else {return}
+        if photos[indexPath.row].isliked == 0 {
+            networkService.addLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
+        } else {
+            networkService.deleteLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +37,13 @@ class FriendFotoController: UICollectionViewController {
                 return
             } else if let photos = photos, let self = self {
                 self.photos = photos
-                
+
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
             }
         }
+        title = friendName
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -52,8 +64,8 @@ class FriendFotoController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FotoCell", for: indexPath) as! FriendFotoCell
         if let photo = photos[indexPath.row].photo {
-            let isLiked = networkService.isLiked("photo", withId: photos[indexPath.row].id, ownerId: friendId)
-            if isLiked {
+            let isLiked = photos[indexPath.row].isliked
+            if isLiked == 1 {
                 cell.likeCellButton.setImage(UIImage(named: "heartRed"), for: UIControl.State.normal)
                 cell.numberOfLikes.textColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
             } else {

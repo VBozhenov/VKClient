@@ -112,6 +112,7 @@ class FriendsController: UITableViewController {
                 var filteredFriends = [User]()
                 filteredFriends = isFiltering() ? filterUsers(from: mySearchedUsers ,in: indexPath.section) : filterUsers(from: users ,in: indexPath.section)
                 friendFotoController.friendId = filteredFriends[indexPath.row].id
+                friendFotoController.friendName = filteredFriends[indexPath.row].lastName + " " + filteredFriends[indexPath.row].firstName
             }
         }
     }

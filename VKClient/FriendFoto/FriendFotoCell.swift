@@ -22,22 +22,20 @@ class FriendFotoCell: UICollectionViewCell {
     }
     
     @IBAction func likeCellButtonPressed(_ sender: UIButton) {
-//        if likeCellButton.currentImage == UIImage(named: "heartWhite") {
-//            likeCellButton.setImage(UIImage(named: "heartRed"), for: UIControl.State.normal)
-//            likes += 1
-//            numberOfLikes.text = String(likes)
-//            numberOfLikes.textColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-//            animateLikeCellButtonConstraints()
-//        } else {
-//            likeCellButton.setImage(UIImage(named: "heartWhite"), for: UIControl.State.normal)
-//            likes -= 1
-//            numberOfLikes.text = String(likes)
-//            numberOfLikes.textColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
-//            animateLikeCellButtonConstraints()
-//
-//        }
+        if likeCellButton.currentImage == UIImage(named: "heartWhite") {
+            likeCellButton.setImage(UIImage(named: "heartRed"), for: UIControl.State.normal)
+            numberOfLikes.text = String(Int(numberOfLikes.text!)! + 1)
+            numberOfLikes.textColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            animateLikeCellButtonConstraints()
+        } else {
+            likeCellButton.setImage(UIImage(named: "heartWhite"), for: UIControl.State.normal)
+            numberOfLikes.text = String(Int(numberOfLikes.text!)! - 1)
+            numberOfLikes.textColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+            animateLikeCellButtonConstraints()
+
+        }
     }
-    
+        
     func animateFoto() {
         let animation = CASpringAnimation(keyPath: "transform.scale")
         animation.fromValue = 0.5

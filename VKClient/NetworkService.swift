@@ -192,36 +192,4 @@ class NetworkService {
             completion?()
         }
     }
-    
-    func isLiked (_ object: String, withId itemID: Int, ownerId: Int, completion: ((Int?, Error?) -> Void)? = nil) -> Bool {
-        
-        var liked = 0
-        let path = "/method/likes.isLiked"
-
-        let params: Parameters = [
-            "access_token": Session.user.token,
-            "type": object,
-            "owner_id": ownerId,
-            "item_id": itemID,
-            "v": version
-        ]
-
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
-            switch response.result {
-
-            case .success(let value):
-                let json = JSON(value)
-                liked = json["response"]["liked"].intValue
-                completion?(liked, nil)
-            case .failure(let error):
-                print ("error")
-                completion?(nil, error)
-            }
-        }
-
-        return liked == 1 ? true : false
-    }
-    
-    
-    
 }
