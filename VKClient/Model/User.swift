@@ -16,12 +16,16 @@ class User: Object {
     @objc dynamic var firstName = ""
     @objc dynamic var lastName = ""
     @objc dynamic var avatar: String? = nil
-    
+        
     convenience init(json: JSON) {
         self.init()
         self.id = json["id"].intValue
         self.firstName = json["first_name"].stringValue
         self.lastName = json["last_name"].stringValue
         self.avatar = json["photo_200_orig"].stringValue
+    }
+    
+    override static func primaryKey() -> String {
+        return "id"
     }
 }
