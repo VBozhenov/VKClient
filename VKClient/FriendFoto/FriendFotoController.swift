@@ -15,6 +15,7 @@ class FriendFotoController: UICollectionViewController {
     
     var friendId = 0
     var friendName = ""
+    var indexPathForPushedPhoto = IndexPath()
     var photos = [Photo]()
     let networkService = NetworkService()
     
@@ -27,6 +28,13 @@ class FriendFotoController: UICollectionViewController {
             networkService.deleteLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
         }
     }
+    
+    @IBAction func fotoButtonPushed(_ sender: UIButton) {
+        let buttonPosition: CGPoint = sender.convert(CGPoint.zero, to: self.collectionView)
+        guard let indexPath = self.collectionView.indexPathForItem(at: buttonPosition) else {return}
+        indexPathForPushedPhoto = indexPath
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +58,8 @@ class FriendFotoController: UICollectionViewController {
         if segue.identifier == "ShowDetailedFoto" {
             let friendFotoController = segue.destination as! DetailedFriendFotoViewController
             friendFotoController.userId = friendId
+            friendFotoController.indexToScrollTo = indexPathForPushedPhoto
+
         }
     }
 

@@ -13,6 +13,7 @@ class DetailedFriendFotoViewController: UICollectionViewController {
     
     var userId = 0
     var photos = [Photo]()
+    var indexToScrollTo = IndexPath()
     let networkService = NetworkService()
 
 
@@ -31,6 +32,9 @@ class DetailedFriendFotoViewController: UICollectionViewController {
                 }
             }
         }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        self.collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: true)
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
