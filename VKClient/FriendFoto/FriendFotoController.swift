@@ -20,8 +20,7 @@ class FriendFotoController: UICollectionViewController {
     let networkService = NetworkService()
     
     @IBAction func likeCellButtonPushed(_ sender: UIButton) {
-        let buttonPosition: CGPoint = sender.convert(CGPoint.zero, to: self.collectionView)
-        guard let indexPath = self.collectionView.indexPathForItem(at: buttonPosition) else {return}
+        let indexPath = getIndexPathForPushedButton(for: sender)
         if photos[indexPath.row].isliked == 0 {
             networkService.addLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
         } else {
@@ -30,9 +29,7 @@ class FriendFotoController: UICollectionViewController {
     }
     
     @IBAction func fotoButtonPushed(_ sender: UIButton) {
-        let buttonPosition: CGPoint = sender.convert(CGPoint.zero, to: self.collectionView)
-        guard let indexPath = self.collectionView.indexPathForItem(at: buttonPosition) else {return}
-        indexPathForPushedPhoto = indexPath
+        indexPathForPushedPhoto = getIndexPathForPushedButton(for: sender)
     }
     
     
@@ -87,5 +84,10 @@ class FriendFotoController: UICollectionViewController {
         }
         
         return cell
+    }
+    
+    func getIndexPathForPushedButton(for sender: UIButton) -> IndexPath {
+        let buttonPosition: CGPoint = sender.convert(CGPoint.zero, to: self.collectionView)
+        return self.collectionView.indexPathForItem(at: buttonPosition)!
     }
 }
