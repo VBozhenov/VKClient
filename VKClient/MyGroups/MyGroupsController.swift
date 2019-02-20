@@ -20,6 +20,8 @@ class MyGroupsController: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     
+    let throttler = Throttler(minimumDelay: 0.5)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -145,6 +147,7 @@ class MyGroupsController: UITableViewController {
                 }
                 
                 let alertButtonTwo = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                
                 alertController.addAction(alertButtonOne)
                 alertController.addAction(alertButtonTwo)
                 self.present(alertController, animated: true, completion: nil)
@@ -189,6 +192,8 @@ class MyGroupsController: UITableViewController {
 
 extension MyGroupsController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
+        throttler.throttle {
+            self.filterContentForSearchText(searchController.searchBar.text!)
+        }
     }
 }

@@ -15,6 +15,7 @@
 		E707E697220339710096693E /* CustomPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707E696220339710096693E /* CustomPopAnimator.swift */; };
 		E707E69922033BBB0096693E /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707E69822033BBB0096693E /* CustomNavigationController.swift */; };
 		E71F49B622145A1B00DDB835 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71F49B522145A1B00DDB835 /* DataService.swift */; };
+		E77F91C1221DE1B2006E0647 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F91C0221DE1B2006E0647 /* Throttler.swift */; };
 		E78054DD21C6CFDB008D179C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78054DC21C6CFDB008D179C /* AppDelegate.swift */; };
 		E78054E421C6CFDC008D179C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E78054E321C6CFDC008D179C /* Assets.xcassets */; };
 		E78054E721C6CFDC008D179C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E78054E521C6CFDC008D179C /* LaunchScreen.storyboard */; };
@@ -59,6 +60,7 @@
 		E707E696220339710096693E /* CustomPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimator.swift; sourceTree = "<group>"; };
 		E707E69822033BBB0096693E /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		E71F49B522145A1B00DDB835 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		E77F91C0221DE1B2006E0647 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		E78054D921C6CFDB008D179C /* VKClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E78054DC21C6CFDB008D179C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E78054E321C6CFDC008D179C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				E7A135202211F0CF00506CEE /* NetworkService.swift */,
 				E71F49B522145A1B00DDB835 /* DataService.swift */,
+				E77F91C0221DE1B2006E0647 /* Throttler.swift */,
 				E7BCA87722062C1B00FDC05A /* Stotyboards */,
 				E79EC7BB22061EC400D25DDB /* Start Screen */,
 				E7D28F0421D15C54008F4475 /* Friends */,
@@ -428,6 +431,7 @@
 				E7A11C5B21D0194C000DB879 /* MyGroupsController.swift in Sources */,
 				E702434621F03C4A00BFB542 /* NewsCell.swift in Sources */,
 				E7A11C5921D0192D000DB879 /* MyGroupsCell.swift in Sources */,
+				E77F91C1221DE1B2006E0647 /* Throttler.swift in Sources */,
 				E7D28F0721D15CA2008F4475 /* FriendFotoController.swift in Sources */,
 				E7A135212211F0CF00506CEE /* NetworkService.swift in Sources */,
 				E7D1A6DD21F651D3001858C8 /* NewsCollectionViewController.swift in Sources */,

@@ -57,12 +57,14 @@ class FriendFotoCell: UICollectionViewCell {
                        animations: {self.likeCellHeightConstraint.constant = 100
                         self.likeCellWidthConstraint.constant = 100
                         self.likeCellButton.layoutIfNeeded()
+                        self.numberOfLikes.isHidden = true
         }, completion: { _ in  UIView.animate(withDuration: 1,
                                               delay: 0,
                                               options: .curveEaseInOut,
                                               animations: {self.likeCellHeightConstraint.constant = 1
                                                 self.likeCellWidthConstraint.constant = 1
                                                 self.likeCellButton.layoutIfNeeded()
+                                                self.numberOfLikes.isHidden = false
                                                 
         })
             

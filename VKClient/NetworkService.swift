@@ -17,12 +17,13 @@ class NetworkService {
     
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
+    let token = Session.user.token
     
     func loadFriends(completion: (([User]?, Error?) -> Void)? = nil) {
         let path = "/method/friends.get"
         
         let params: Parameters = [
-            "access_token": Session.user.token,
+            "access_token": token,
             "order": "name",
             "fields": "photo_200_orig",
             "v": version
@@ -49,7 +50,7 @@ class NetworkService {
         let path = "/method/users.search"
         
         let params: Parameters = [
-            "access_token": Session.user.token,
+            "access_token": token,
             "q": searchText,
             "v": version
         ]
@@ -71,7 +72,7 @@ class NetworkService {
         let path = "/method/photos.getAll"
         
         let params: Parameters = [
-            "access_token": Session.user.token,
+            "access_token": token,
             "owner_id": id,
             "extended": 1,
             "v": version
@@ -95,7 +96,7 @@ class NetworkService {
         let path = "/method/groups.get"
         
         let params: Parameters = [
-            "access_token": Session.user.token,
+            "access_token": token,
             "extended": 1,
             "v": version
         ]
@@ -119,7 +120,7 @@ class NetworkService {
         let path = "/method/groups.search"
         
         let params: Parameters = [
-            "access_token": Session.user.token,
+            "access_token": token,
             "q": searchText,
             "v": version
         ]
@@ -141,7 +142,7 @@ class NetworkService {
         let path = "/method/groups.leave"
         
         let params: Parameters = [
-            "access_token": Session.user.token,
+            "access_token": token,
             "group_id": groupID,
             "v": version
         ]
@@ -155,7 +156,7 @@ class NetworkService {
         let path = "/method/groups.join"
         
         let params: Parameters = [
-            "access_token": Session.user.token,
+            "access_token": token,
             "group_id": groupID,
             "v": version
         ]
@@ -169,7 +170,7 @@ class NetworkService {
         let path = "/method/likes.add"
         
         let params: Parameters = [
-            "access_token": Session.user.token,
+            "access_token": token,
             "type": object,
             "owner_id": ownerID,
             "item_id": itemID,
@@ -185,7 +186,7 @@ class NetworkService {
         let path = "/method/likes.delete"
         
         let params: Parameters = [
-            "access_token": Session.user.token,
+            "access_token": token,
             "type": object,
             "owner_id": ownerID,
             "item_id": itemID,
@@ -197,3 +198,5 @@ class NetworkService {
         }
     }
 }
+
+

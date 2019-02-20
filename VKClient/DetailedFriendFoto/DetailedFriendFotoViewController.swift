@@ -16,7 +16,6 @@ class DetailedFriendFotoViewController: UICollectionViewController {
     var indexToScrollTo = IndexPath()
     let networkService = NetworkService()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +32,7 @@ class DetailedFriendFotoViewController: UICollectionViewController {
             }
         }
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: true)
     }
