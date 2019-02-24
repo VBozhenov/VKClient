@@ -7,17 +7,19 @@
 //
 
 import Foundation
-import SwiftyJSON
 import RealmSwift
 
 class DataService {
     
-    func saveData<T>(_ data: [T]) {
+    func saveData<T: Object>(_ data: [T]) {
         do {
-            let realm = try Realm()
-            realm.beginWrite()
-            realm.add(data as! [Object], update: true)
-            try realm.commitWrite()
+            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            let realm = try Realm(configuration: config)
+            let oldData = realm.objects(T.self)
+            try realm.write {
+                realm.delete(oldData)
+                realm.add(data, update: true)
+            }
             print("Realm is located at:", realm.configuration.fileURL!)
         } catch {
             print(error)

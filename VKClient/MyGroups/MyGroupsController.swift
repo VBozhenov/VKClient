@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Alamofire
 import Kingfisher
+import RealmSwift
 
 class MyGroupsController: UITableViewController {
     
@@ -43,6 +43,11 @@ class MyGroupsController: UITableViewController {
                 }
             }
         }
+        
+        let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        let realm = try! Realm(configuration: config)
+        groups = Array(realm.objects(Group.self))
+        
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

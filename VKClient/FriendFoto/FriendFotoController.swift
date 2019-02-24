@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 import Kingfisher
+import RealmSwift
 
 class FriendFotoController: UICollectionViewController {
     
@@ -48,14 +47,20 @@ class FriendFotoController: UICollectionViewController {
                 }
             }
         }
+        
+        let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        let realm = try! Realm(configuration: config)
+        photos = Array(realm.objects(Photo.self)).filter {$0.userId == friendId}
+        
         title = friendName
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetailedFoto" {
             let friendFotoController = segue.destination as! DetailedFriendFotoViewController
-            friendFotoController.userId = friendId
             friendFotoController.indexToScrollTo = indexPathForPushedPhoto
+            friendFotoController.photos = photos
+            
 
         }
     }

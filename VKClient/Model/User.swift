@@ -16,7 +16,8 @@ class User: Object {
     @objc dynamic var firstName = ""
     @objc dynamic var lastName = ""
     @objc dynamic var avatar: String? = nil
-        
+//    var photo = List<Photo>()
+    
     convenience init(json: JSON) {
         self.init()
         self.id = json["id"].intValue

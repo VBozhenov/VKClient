@@ -13,6 +13,7 @@ import RealmSwift
 
 class Photo: Object {
     @objc dynamic var id = 0
+    @objc dynamic var userId = 0
     @objc dynamic var photo: String? = nil
     @objc dynamic var likes = 0
     @objc dynamic var reposts = 0

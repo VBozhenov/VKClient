@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-import Alamofire
+//import Alamofire
 
 class LoginFormViewController: UIViewController {
 

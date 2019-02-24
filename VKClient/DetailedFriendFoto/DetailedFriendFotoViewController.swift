@@ -11,26 +11,12 @@ import Kingfisher
 
 class DetailedFriendFotoViewController: UICollectionViewController {
     
-    var userId = 0
     var photos = [Photo]()
     var indexToScrollTo = IndexPath()
-    let networkService = NetworkService()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkService.loadFriendsFoto(for: userId) { [weak self] photos, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else if let photos = photos, let self = self {
-                self.photos = photos
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            }
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

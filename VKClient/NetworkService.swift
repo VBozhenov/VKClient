@@ -36,7 +36,7 @@ class NetworkService {
             case .success(let value):
                 let json = JSON(value)
                 let friends = json["response"]["items"].arrayValue.map { User(json: $0) }
-//                self.dataService.saveData(friends)
+                self.dataService.saveData(friends)
                 completion?(friends, nil)
             case .failure(let error):
                 completion?(nil, error)
@@ -84,7 +84,10 @@ class NetworkService {
             case .success(let value):
                 let json = JSON(value)
                 let photos = json["response"]["items"].arrayValue.map { Photo(json: $0) }
-//                self.dataService.saveData(photos)
+                for photo in photos {
+                    photo.userId = id
+                }
+                self.dataService.saveData(photos)
                 completion?(photos, nil)
             case .failure(let error):
                 completion?(nil, error)
@@ -107,7 +110,7 @@ class NetworkService {
             case .success(let value):
                 let json = JSON(value)
                 let groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
-//                self.dataService.saveData(groups)
+                self.dataService.saveData(groups)
                 completion?(groups, nil)
             case .failure(let error):
                 completion?(nil, error)
