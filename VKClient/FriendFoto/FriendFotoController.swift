@@ -31,7 +31,6 @@ class FriendFotoController: UICollectionViewController {
         indexPathForPushedPhoto = getIndexPathForPushedButton(for: sender)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,8 +59,6 @@ class FriendFotoController: UICollectionViewController {
             let friendFotoController = segue.destination as! DetailedFriendFotoViewController
             friendFotoController.indexToScrollTo = indexPathForPushedPhoto
             friendFotoController.photos = photos
-            
-
         }
     }
 

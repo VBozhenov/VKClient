@@ -143,8 +143,8 @@ class FriendsController: UITableViewController {
         mySearchedUsers = users.filter({( name ) -> Bool in
             return name.lastName.lowercased().contains(searchText.lowercased()) || name.firstName.lowercased().contains(searchText.lowercased())
         })
-        tableView.reloadData()
         
+        tableView.reloadData()
     }
     
     func isFiltering() -> Bool {

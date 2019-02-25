@@ -47,7 +47,6 @@ class MyGroupsController: UITableViewController {
         let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
         let realm = try! Realm(configuration: config)
         groups = Array(realm.objects(Group.self))
-        
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,6 +90,7 @@ class MyGroupsController: UITableViewController {
                 groupAvatar.kf.setImage(with: URL(string: photo))
             }
         }
+        
         cell.myGroupLabel.text = group
 
         let border = UIView()
@@ -192,7 +192,6 @@ class MyGroupsController: UITableViewController {
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
-    
 }
 
 extension MyGroupsController: UISearchResultsUpdating {
