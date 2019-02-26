@@ -17,6 +17,7 @@ class FriendsController: UITableViewController {
     var allSearchedUsers = [User]()
     
     let networkService = NetworkService()
+    let dataService = DataService()
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -35,6 +36,8 @@ class FriendsController: UITableViewController {
                 return
             } else if let users = users, let self = self {
                 self.users = users.filter {$0.lastName != ""}
+                
+                self.dataService.saveData(users)
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

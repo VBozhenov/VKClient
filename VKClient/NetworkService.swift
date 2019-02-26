@@ -12,9 +12,7 @@ import SwiftyJSON
 import RealmSwift
 
 class NetworkService {
-    
-    let dataService = DataService()
-    
+        
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
     let token = Session.user.token
@@ -36,7 +34,6 @@ class NetworkService {
             case .success(let value):
                 let json = JSON(value)
                 let friends = json["response"]["items"].arrayValue.map { User(json: $0) }
-                self.dataService.saveData(friends)
                 completion?(friends, nil)
             case .failure(let error):
                 completion?(nil, error)
@@ -87,7 +84,6 @@ class NetworkService {
                 for photo in photos {
                     photo.userId = id
                 }
-                self.dataService.saveData(photos)
                 completion?(photos, nil)
             case .failure(let error):
                 completion?(nil, error)
@@ -110,7 +106,6 @@ class NetworkService {
             case .success(let value):
                 let json = JSON(value)
                 let groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
-                self.dataService.saveData(groups)
                 completion?(groups, nil)
             case .failure(let error):
                 completion?(nil, error)

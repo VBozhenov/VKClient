@@ -11,13 +11,14 @@ import RealmSwift
 
 class DataService {
     
-    func saveData<T: Object>(_ data: [T]) {
+    func saveData<T: Object>(_ data: [T],
+                             config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                             update: Bool = true ) {
         do {
-            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
             let realm = try Realm(configuration: config)
-            let oldData = realm.objects(T.self)
+//            let oldData = realm.objects(T.self)
             try realm.write {
-                realm.delete(oldData)
+//                realm.delete(oldData)
                 realm.add(data, update: true)
             }
             print("Realm is located at:", realm.configuration.fileURL!)

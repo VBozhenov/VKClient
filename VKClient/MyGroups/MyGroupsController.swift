@@ -17,6 +17,7 @@ class MyGroupsController: UITableViewController {
     var allSearchedGroups = [Group]()
     
     let networkService = NetworkService()
+    let dataService = DataService()
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -37,6 +38,7 @@ class MyGroupsController: UITableViewController {
                 return
             } else if let groups = groups, let self = self {
                 self.groups = groups.filter {$0.name != ""}
+                self.dataService.saveData(groups)
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

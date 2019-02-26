@@ -16,7 +16,9 @@ class FriendFotoController: UICollectionViewController {
     var friendName = ""
     var indexPathForPushedPhoto = IndexPath()
     var photos = [Photo]()
+    
     let networkService = NetworkService()
+    let dataService = DataService()
     
     @IBAction func likeCellButtonPushed(_ sender: UIButton) {
         let indexPath = getIndexPathForPushedButton(for: sender)
@@ -40,6 +42,7 @@ class FriendFotoController: UICollectionViewController {
                 return
             } else if let photos = photos, let self = self {
                 self.photos = photos
+                self.dataService.saveData(photos)
 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
