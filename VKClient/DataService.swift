@@ -13,13 +13,13 @@ class DataService {
     
     func saveData<T: Object>(_ data: [T],
                              config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                             update: Bool = true ) {
+                             update: Bool = true) {
         do {
             let realm = try Realm(configuration: config)
 //            let oldData = realm.objects(T.self)
             try realm.write {
 //                realm.delete(oldData)
-                realm.add(data, update: true)
+                realm.add(data, update: update)
             }
             print("Realm is located at:", realm.configuration.fileURL!)
         } catch {

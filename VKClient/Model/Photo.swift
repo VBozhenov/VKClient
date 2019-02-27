@@ -18,6 +18,8 @@ class Photo: Object {
     @objc dynamic var likes = 0
     @objc dynamic var reposts = 0
     @objc dynamic var isliked = 0
+//    var user = LinkingObjects(fromType: User.self, property: "photos")
+
 
     convenience init(json: JSON) {
         self.init()

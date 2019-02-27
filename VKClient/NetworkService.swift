@@ -72,6 +72,7 @@ class NetworkService {
             "access_token": token,
             "owner_id": id,
             "extended": 1,
+            "count": 200,
             "v": version
         ]
         

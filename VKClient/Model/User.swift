@@ -16,7 +16,7 @@ class User: Object {
     @objc dynamic var firstName = ""
     @objc dynamic var lastName = ""
     @objc dynamic var avatar: String? = nil
-//    var photos = List<Photo>()
+    let photos = List<Photo>()
     
     convenience init(json: JSON) {
         self.init()
@@ -24,6 +24,7 @@ class User: Object {
         self.firstName = json["first_name"].stringValue
         self.lastName = json["last_name"].stringValue
         self.avatar = json["photo_200_orig"].stringValue
+//        self.photos.append(objectsIn: photos)
     }
     
     override static func primaryKey() -> String {
