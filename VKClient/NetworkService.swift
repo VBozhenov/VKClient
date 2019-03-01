@@ -12,6 +12,8 @@ import SwiftyJSON
 import RealmSwift
 
 class NetworkService {
+    
+    let dataService = DataService()
         
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
@@ -65,30 +67,33 @@ class NetworkService {
         }
     }
     
-    func loadFriendsFoto(for id: Int, completion: (([Photo]?, Error?) -> Void)? = nil) {
+    func loadFriendsFoto(for userId: Int, completion: (([Photo]?, Error?) -> Void)? = nil) {
         let path = "/method/photos.getAll"
         
         let params: Parameters = [
             "access_token": token,
-            "owner_id": id,
+            "owner_id": userId,
             "extended": 1,
             "count": 200,
             "v": version
         ]
+        var photos = [Photo]()
         
         Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
             switch response.result {
                 
             case .success(let value):
                 let json = JSON(value)
-                let photos = json["response"]["items"].arrayValue.map { Photo(json: $0) }
+                photos = json["response"]["items"].arrayValue.map { Photo(json: $0) }
                 for photo in photos {
-                    photo.userId = id
+                    photo.userId = userId
                 }
                 completion?(photos, nil)
             case .failure(let error):
                 completion?(nil, error)
             }
+            
+            self.dataService.savePhoto(photos, userId: userId)
         }
     }
     

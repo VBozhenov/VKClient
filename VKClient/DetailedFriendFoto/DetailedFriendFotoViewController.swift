@@ -8,10 +8,11 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class DetailedFriendFotoViewController: UICollectionViewController {
     
-    var photos = [Photo]()
+    var photos: List<Photo>!
     var indexToScrollTo = IndexPath()
     
     override func viewDidLoad() {

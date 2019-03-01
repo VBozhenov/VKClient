@@ -37,7 +37,8 @@ class FriendsController: UITableViewController {
             } else if let users = users?.filter({$0.lastName != ""}),
                 let self = self {
 
-                self.dataService.saveData(users)
+//                self.dataService.saveData(users)
+                self.dataService.saveUsers(users)
             }
         }
         
