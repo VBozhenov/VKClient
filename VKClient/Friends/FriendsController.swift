@@ -14,6 +14,8 @@ class FriendsController: UITableViewController {
     
     var users: Results<User>?
     var mySearchedUsers: Results<User>?
+    var filteredFriends: Results<User>?
+
     
     let networkService = NetworkService()
     let dataService = DataService()
@@ -37,7 +39,6 @@ class FriendsController: UITableViewController {
             } else if let users = users?.filter({$0.lastName != ""}),
                 let self = self {
 
-//                self.dataService.saveData(users)
                 self.dataService.saveUsers(users)
             }
         }
@@ -103,7 +104,6 @@ class FriendsController: UITableViewController {
             
             friendAvatar.frame = border.bounds
             border.addSubview(friendAvatar)
-//        }
         return cell
     }
     
@@ -141,7 +141,6 @@ class FriendsController: UITableViewController {
         if segue.identifier == "ShowFoto" {
             let friendFotoController = segue.destination as! FriendFotoController
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                var filteredFriends: Results<User>
                 if isFiltering() {
                     guard let mySearchedUsers = mySearchedUsers else { return }
                     filteredFriends = filterUsers(from: mySearchedUsers ,in: indexPath.section)
@@ -149,6 +148,7 @@ class FriendsController: UITableViewController {
                     guard let users = users else { return }
                     filteredFriends = filterUsers(from: users ,in: indexPath.section)
                 }
+                guard let filteredFriends = self.filteredFriends else { return }
                 friendFotoController.friendId = filteredFriends[indexPath.row].id
                 friendFotoController.friendName = filteredFriends[indexPath.row].lastName + " " + filteredFriends[indexPath.row].firstName
             }

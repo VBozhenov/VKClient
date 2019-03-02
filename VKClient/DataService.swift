@@ -23,7 +23,7 @@ class DataService {
             }
             print("Realm is located at:", realm.configuration.fileURL!)
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
     
@@ -37,7 +37,7 @@ class DataService {
             try realm.write {
                 realm.delete(oldUsersPhotos)
                 realm.delete(oldUsersFriendsList)
-                realm.add(users)
+                realm.add(users, update: update)
             }
             print("Realm is located at:", realm.configuration.fileURL!)
         } catch {
@@ -47,8 +47,7 @@ class DataService {
     
     func savePhoto(_ photos: [Photo],
                    userId: Int,
-                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                   update: Bool = true) {
+                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
         do {
             let realm = try Realm(configuration: config)
             guard let user = realm.object(ofType: User.self, forPrimaryKey: userId) else { return }
@@ -59,7 +58,7 @@ class DataService {
             }
             
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
 

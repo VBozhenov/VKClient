@@ -133,6 +133,7 @@ class MyGroupsController: UITableViewController {
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         } else {
+            
             action = UITableViewRowAction(style: .default, title: "Add") {
                 _, indexPath in
                 

@@ -85,15 +85,15 @@ class NetworkService {
             case .success(let value):
                 let json = JSON(value)
                 photos = json["response"]["items"].arrayValue.map { Photo(json: $0) }
-                for photo in photos {
-                    photo.userId = userId
-                }
+//                for photo in photos {
+//                    photo.userId = userId
+//                }
                 completion?(photos, nil)
             case .failure(let error):
                 completion?(nil, error)
             }
             
-            self.dataService.savePhoto(photos, userId: userId)
+//            self.dataService.savePhoto(photos, userId: userId)
         }
     }
     
