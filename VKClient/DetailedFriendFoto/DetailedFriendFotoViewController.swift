@@ -12,7 +12,7 @@ import RealmSwift
 
 class DetailedFriendFotoViewController: UICollectionViewController {
     
-    var photos: List<Photo>!
+    var photos: Results<Photo>!
     var indexToScrollTo = IndexPath()
     
     override func viewDidLoad() {

@@ -16,9 +16,7 @@ class DataService {
                              update: Bool = true) {
         do {
             let realm = try Realm(configuration: config)
-//            let oldData = realm.objects(T.self)
             try realm.write {
-//                realm.delete(oldData)
                 realm.add(data, update: update)
             }
             print("Realm is located at:", realm.configuration.fileURL!)
@@ -51,12 +49,9 @@ class DataService {
         do {
             let realm = try Realm(configuration: config)
             guard let user = realm.object(ofType: User.self, forPrimaryKey: userId) else { return }
-            let oldPhotos = user.photos
             try realm.write {
-            realm.delete(oldPhotos)
-            user.photos.append(objectsIn: photos)
+                user.photos.append(objectsIn: photos)
             }
-            
         } catch {
             print(error.localizedDescription)
         }

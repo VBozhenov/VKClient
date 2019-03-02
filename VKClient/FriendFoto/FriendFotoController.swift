@@ -15,7 +15,7 @@ class FriendFotoController: UICollectionViewController {
     var friendId = 0
     var friendName = ""
     var indexPathForPushedPhoto = IndexPath()
-    var photos: List<Photo>?
+    var photos: Results<Photo>?
     
     let networkService = NetworkService()
     let dataService = DataService()
@@ -26,11 +26,11 @@ class FriendFotoController: UICollectionViewController {
     
     @IBAction func likeCellButtonPushed(_ sender: UIButton) {
         let indexPath = getIndexPathForPushedButton(for: sender)
-        guard let photos = photos else {return}
+        guard let photos = photos else { return }
         if photos[indexPath.row].isliked == 0 {
             networkService.addLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
             let realm = try! Realm(configuration: config)
-            let photo = realm.object(ofType: Photo.self, forPrimaryKey: photos[indexPath.row].id)
+            let photo = realm.object(ofType: Photo.self, forPrimaryKey: photos[indexPath.row].uuid)
             try! realm.write {
                 photo?.isliked += 1
                 photo?.likes += 1
@@ -38,7 +38,7 @@ class FriendFotoController: UICollectionViewController {
         } else {
             networkService.deleteLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
             let realm = try! Realm(configuration: config)
-            let photo = realm.object(ofType: Photo.self, forPrimaryKey: photos[indexPath.row].id)
+            let photo = realm.object(ofType: Photo.self, forPrimaryKey: photos[indexPath.row].uuid)
             try! realm.write {
                 photo?.isliked -= 1
                 photo?.likes -= 1
@@ -59,10 +59,6 @@ class FriendFotoController: UICollectionViewController {
                 return
             } else if let photos = photos, let self = self {
                 self.dataService.savePhoto(photos, userId: self.friendId)
-
-                //                DispatchQueue.main.async {
-                //                    self.collectionView.reloadData()
-                //                }
             }
         }
         pairTableAndRealm()
@@ -76,10 +72,6 @@ class FriendFotoController: UICollectionViewController {
             friendFotoController.indexToScrollTo = indexPathForPushedPhoto
             friendFotoController.photos = photos
         }
-    }
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -112,22 +104,15 @@ class FriendFotoController: UICollectionViewController {
     }
     
     func pairTableAndRealm() {
-        guard let realm = try? Realm(), let user = realm.object(ofType: User.self, forPrimaryKey: friendId) else { return }
         
-        photos = user.photos
-//        guard let photos = photos else {return}
-        
+        photos = try! Realm().objects(Photo.self).filter("userId == %@", friendId)
+
         notificationToken = photos?.observe { [weak self] (changes: RealmCollectionChange) in
             guard let collectionView = self?.collectionView else { return }
             switch changes {
             case .initial:
                 collectionView.reloadData()
             case .update:
-//                collectionView.performBatchUpdates({
-//                    collectionView.insertItems(at: insertions.map({ IndexPath(row: $0, section: 0) }))
-//                    collectionView.deleteItems(at: deletions.map({ IndexPath(row: $0, section: 0)}))
-//                    collectionView.reloadItems(at: modifications.map({ IndexPath(row: $0, section: 0) }))
-//                }, completion: nil)
                 collectionView.reloadData()
             case .error(let error):
                 fatalError("\(error)")
