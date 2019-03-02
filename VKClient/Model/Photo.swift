@@ -31,8 +31,8 @@ class Photo: Object {
         self.isliked = json["likes"]["user_likes"].intValue
     }
     
-//    override static func primaryKey() -> String {
-//        return "id"
-//    }
+    override static func primaryKey() -> String {
+        return "id"
+    }
     
 }

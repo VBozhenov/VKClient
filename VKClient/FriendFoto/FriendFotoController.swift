@@ -30,20 +30,18 @@ class FriendFotoController: UICollectionViewController {
         if photos[indexPath.row].isliked == 0 {
             networkService.addLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
             let realm = try! Realm(configuration: config)
-//            let photo = realm.object(ofType: Photo.self, forPrimaryKey: photos[indexPath.row].id)
-            let photo = realm.objects(Photo.self)[indexPath.row]
+            let photo = realm.object(ofType: Photo.self, forPrimaryKey: photos[indexPath.row].id)
             try! realm.write {
-                photo.isliked += 1
-                photo.likes += 1
+                photo?.isliked += 1
+                photo?.likes += 1
             }
         } else {
             networkService.deleteLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
             let realm = try! Realm(configuration: config)
-//            let photo = realm.object(ofType: Photo.self, forPrimaryKey: photos[indexPath.row].id)
-            let photo = realm.objects(Photo.self)[indexPath.row]
+            let photo = realm.object(ofType: Photo.self, forPrimaryKey: photos[indexPath.row].id)
             try! realm.write {
-                photo.isliked -= 1
-                photo.likes -= 1
+                photo?.isliked -= 1
+                photo?.likes -= 1
             }
         }
     }
