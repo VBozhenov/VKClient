@@ -12,12 +12,13 @@ import RealmSwift
 
 class MyGroupsController: UITableViewController {
     
-    var groups = [Group]()
-    var mySearchedGroups = [Group]()
+    var groups: Results<Group>?
+    var mySearchedGroups: Results<Group>?
     var allSearchedGroups = [Group]()
     
     let networkService = NetworkService()
     let dataService = DataService()
+    var notificationToken: NotificationToken?
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -36,19 +37,13 @@ class MyGroupsController: UITableViewController {
             if let error = error {
                 print(error.localizedDescription)
                 return
-            } else if let groups = groups, let self = self {
-                self.groups = groups.filter {$0.name != ""}
-                self.dataService.saveData(groups)
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+            } else if let groups = groups?.filter ({$0.name != ""}),
+                let self = self {
+                self.dataService.saveGroups(groups)
             }
         }
         
-        let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-        let realm = try! Realm(configuration: config)
-        groups = Array(realm.objects(Group.self))
+        pairTableAndRealm()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,7 +52,13 @@ class MyGroupsController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return isFiltering() ? mySearchedGroups.count : groups.count
+            if isFiltering() {
+                guard let mySearchedGroups = mySearchedGroups else { return 0}
+                return mySearchedGroups.count
+            } else {
+                guard let groups = groups else { return 0}
+                return groups.count
+            }
         } else {
             return allSearchedGroups.count
         }
@@ -76,11 +77,13 @@ class MyGroupsController: UITableViewController {
         
         if indexPath.section == 0 {
             if isFiltering() {
+                guard let mySearchedGroups = mySearchedGroups else { return UITableViewCell() }
                 group = mySearchedGroups[indexPath.row].name
                 if let photo = mySearchedGroups[indexPath.row].photo {
                     groupAvatar.kf.setImage(with: URL(string: photo))
                 }
             } else {
+                guard let groups = groups else { return UITableViewCell() }
                 group = groups[indexPath.row].name
                 if let photo = groups[indexPath.row].photo {
                     groupAvatar.kf.setImage(with: URL(string: photo))
@@ -117,17 +120,13 @@ class MyGroupsController: UITableViewController {
                 _, indexPath in
                 var groupId = 0
                 if self.isFiltering() {
-                    groupId = self.mySearchedGroups[indexPath.row].id
-                    for group in self.groups {
-                        if group.id == groupId {
-                            let index = self.groups.index(of: group)
-                            self.groups.remove(at: index!)
-                        }
-                    }
-                    self.mySearchedGroups.remove(at: indexPath.row)
+                    guard let mySearchedGroups = self.mySearchedGroups else { return }
+                    groupId = mySearchedGroups[indexPath.row].id
+                    self.dataService.deleteGroup(groupId: groupId)
                 } else {
-                    groupId = self.groups[indexPath.row].id
-                    self.groups.remove(at: indexPath.row)
+                    guard let groups = self.groups else { return }
+                    groupId = groups[indexPath.row].id
+                    self.dataService.deleteGroup(groupId: groupId)
                 }
                 self.networkService.leaveGroup(with: groupId)
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -143,13 +142,10 @@ class MyGroupsController: UITableViewController {
                     preferredStyle: .alert)
                 let alertButtonOne = UIAlertAction(title: "ОК", style: .default) { (action:UIAlertAction) in
                     let groupId = self.allSearchedGroups[indexPath.row].id
-                    var groupsId = [Int]()
-                    for group in self.groups {
-                        groupsId.append(group.id)
-                    }
+                    let groupsId = [Int]()
                     if !groupsId.contains(groupId) {
                         self.networkService.joinGroup(with: groupId)
-                        self.groups.append(self.allSearchedGroups[indexPath.row])
+                        self.dataService.addGroup(group: self.allSearchedGroups[indexPath.row])
                         self.searchController.isActive = true
                     }
                 }
@@ -187,13 +183,29 @@ class MyGroupsController: UITableViewController {
             }
         }
         
-        mySearchedGroups = groups.filter({( group ) -> Bool in
-            return group.name.lowercased().contains(searchText.lowercased())
-        })
+        mySearchedGroups = groups?.filter("name CONTAINS %@", searchText)
     }
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
+    }
+    
+    func pairTableAndRealm() {
+        guard let realm = try? Realm() else { return }
+        groups = realm.objects(Group.self)
+        notificationToken = groups?.observe ({ [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+                self?.updateSearchResults(for: (self?.searchController)!)
+            case .update:
+                tableView.reloadData()
+                self?.updateSearchResults(for: (self?.searchController)!)
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        })
     }
 }
 

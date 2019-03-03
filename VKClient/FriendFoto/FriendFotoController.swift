@@ -21,28 +21,16 @@ class FriendFotoController: UICollectionViewController {
     let dataService = DataService()
     
     var notificationToken: NotificationToken?
-    
-    let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-    
+        
     @IBAction func likeCellButtonPushed(_ sender: UIButton) {
         let indexPath = getIndexPathForPushedButton(for: sender)
         guard let photos = photos else { return }
         if photos[indexPath.row].isliked == 0 {
             networkService.addLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
-            let realm = try! Realm(configuration: config)
-            let photo = realm.object(ofType: Photo.self, forPrimaryKey: photos[indexPath.row].uuid)
-            try! realm.write {
-                photo?.isliked += 1
-                photo?.likes += 1
-            }
+            dataService.addLike(photoPrimaryKey: photos[indexPath.row].uuid)
         } else {
             networkService.deleteLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
-            let realm = try! Realm(configuration: config)
-            let photo = realm.object(ofType: Photo.self, forPrimaryKey: photos[indexPath.row].uuid)
-            try! realm.write {
-                photo?.isliked -= 1
-                photo?.likes -= 1
-            }
+            dataService.deleteLike(photoPrimaryKey: photos[indexPath.row].uuid)
         }
     }
     
