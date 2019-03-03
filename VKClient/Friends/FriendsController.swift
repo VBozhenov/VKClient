@@ -41,9 +41,17 @@ class FriendsController: UITableViewController {
 
                 self.dataService.saveUsers(users)
             }
-        }
+        }        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         pairTableAndRealm()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        notificationToken?.invalidate()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

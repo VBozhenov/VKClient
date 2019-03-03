@@ -125,7 +125,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qsS-2e-52L">
                                             <rect key="frame" x="0.0" y="0.0" width="164" height="165"/>
                                             <connections>
-                                                <action selector="fotoButtonPushed:" destination="aQN-D5-AaI" eventType="touchUpInside" id="uQt-uX-R81"/>
+                                                <action selector="fotoButtonPushed:" destination="aQN-D5-AaI" eventType="touchUpInside" id="FR5-B1-JGg"/>
                                                 <action selector="fotoPressed:" destination="JUW-g4-3Cd" eventType="touchUpInside" id="L4e-ES-ipH"/>
                                                 <segue destination="Kkj-4f-gQ7" kind="show" identifier="ShowDetailedFoto" id="JdM-b5-vc8"/>
                                             </connections>
@@ -134,7 +134,6 @@
                                             <rect key="frame" x="123" y="124" width="33" height="33"/>
                                             <connections>
                                                 <action selector="likeCellButtonPressed:" destination="JUW-g4-3Cd" eventType="touchUpInside" id="jmS-Bd-77s"/>
-                                                <action selector="likeCellButtonPushed:" destination="aQN-D5-AaI" eventType="touchUpInside" id="uty-g1-kVy"/>
                                             </connections>
                                         </button>
                                     </subviews>

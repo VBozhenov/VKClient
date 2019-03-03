@@ -41,6 +41,7 @@
 		E7D28F0921D15CBC008F4475 /* FriendFotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D28F0821D15CBC008F4475 /* FriendFotoCell.swift */; };
 		E7D28F0B21D15CF5008F4475 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D28F0A21D15CF5008F4475 /* FriendsController.swift */; };
 		E7D28F0D21D15D0E008F4475 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D28F0C21D15D0E008F4475 /* FriendsCell.swift */; };
+		E7D41110222C548100F349DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7D4110F222C548100F349DD /* GoogleService-Info.plist */; };
 		E7DB5CAE220FFF74003CBFCD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB5CAD220FFF74003CBFCD /* User.swift */; };
 		E7DB5CB022100082003CBFCD /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB5CAF22100082003CBFCD /* Photo.swift */; };
 		E7DB5CB222100107003CBFCD /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB5CB122100107003CBFCD /* Group.swift */; };
@@ -88,6 +89,7 @@
 		E7D28F0821D15CBC008F4475 /* FriendFotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFotoCell.swift; sourceTree = "<group>"; };
 		E7D28F0A21D15CF5008F4475 /* FriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		E7D28F0C21D15D0E008F4475 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
+		E7D4110F222C548100F349DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7DB5CAD220FFF74003CBFCD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E7DB5CAF22100082003CBFCD /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E7DB5CB122100107003CBFCD /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				E78054DC21C6CFDB008D179C /* AppDelegate.swift */,
 				E78054E521C6CFDC008D179C /* LaunchScreen.storyboard */,
 				E78054E821C6CFDC008D179C /* Info.plist */,
+				E7D4110F222C548100F349DD /* GoogleService-Info.plist */,
 			);
 			path = VKClient;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				E7BCA87D2206353600FDC05A /* Main.storyboard in Resources */,
 				E78054E721C6CFDC008D179C /* LaunchScreen.storyboard in Resources */,
 				E78054E421C6CFDC008D179C /* Assets.xcassets in Resources */,
+				E7D41110222C548100F349DD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,20 +379,36 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-VKClient/Pods-VKClient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

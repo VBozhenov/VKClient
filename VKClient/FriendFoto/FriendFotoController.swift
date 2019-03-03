@@ -21,18 +21,6 @@ class FriendFotoController: UICollectionViewController {
     let dataService = DataService()
     
     var notificationToken: NotificationToken?
-        
-    @IBAction func likeCellButtonPushed(_ sender: UIButton) {
-        let indexPath = getIndexPathForPushedButton(for: sender)
-        guard let photos = photos else { return }
-        if photos[indexPath.row].isliked == 0 {
-            networkService.addLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
-            dataService.addLike(photoPrimaryKey: photos[indexPath.row].uuid)
-        } else {
-            networkService.deleteLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: friendId)
-            dataService.deleteLike(photoPrimaryKey: photos[indexPath.row].uuid)
-        }
-    }
     
     @IBAction func fotoButtonPushed(_ sender: UIButton) {
         indexPathForPushedPhoto = getIndexPathForPushedButton(for: sender)
@@ -49,11 +37,20 @@ class FriendFotoController: UICollectionViewController {
                 self.dataService.savePhoto(photos, userId: self.friendId)
             }
         }
-        pairTableAndRealm()
         
         title = friendName
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        pairTableAndRealm()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        notificationToken?.invalidate()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetailedFoto" {
             let friendFotoController = segue.destination as! DetailedFriendFotoViewController
@@ -79,8 +76,19 @@ class FriendFotoController: UICollectionViewController {
                 cell.likeCellButton.setImage(UIImage(named: "heartWhite"), for: UIControl.State.normal)
                 cell.numberOfLikes.textColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
             }
+            
             cell.friendFoto.kf.setImage(with: URL(string: photo))
             cell.numberOfLikes.text = String(photos[indexPath.row].likes)
+        }
+        
+        cell.buttonHandler = {
+            if photos[indexPath.row].isliked == 0 {
+                self.networkService.addLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
+                self.dataService.addLike(photoPrimaryKey: photos[indexPath.row].uuid)
+            } else {
+                self.networkService.deleteLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
+                self.dataService.deleteLike(photoPrimaryKey: photos[indexPath.row].uuid)
+            }
         }
         
         return cell

@@ -10,6 +10,7 @@ import UIKit
 
 class FriendFotoCell: UICollectionViewCell {
     
+    var buttonHandler:(()->())?
     
     @IBOutlet weak var friendFoto: UIImageView!
     @IBOutlet weak var likeCellButton: UIButton!
@@ -22,7 +23,8 @@ class FriendFotoCell: UICollectionViewCell {
     }
     
     @IBAction func likeCellButtonPressed(_ sender: UIButton) {
-            animateLikeCellButtonConstraints()
+        buttonHandler?()
+//        animateLikeCellButtonConstraints()
     }
         
     func animateFoto() {

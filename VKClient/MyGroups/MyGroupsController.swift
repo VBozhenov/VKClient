@@ -42,8 +42,16 @@ class MyGroupsController: UITableViewController {
                 self.dataService.saveGroups(groups)
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         pairTableAndRealm()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        notificationToken?.invalidate()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,10 +61,10 @@ class MyGroupsController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             if isFiltering() {
-                guard let mySearchedGroups = mySearchedGroups else { return 0}
+                guard let mySearchedGroups = mySearchedGroups else { return 0 }
                 return mySearchedGroups.count
             } else {
-                guard let groups = groups else { return 0}
+                guard let groups = groups else { return 0 }
                 return groups.count
             }
         } else {
