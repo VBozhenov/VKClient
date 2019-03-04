@@ -9,6 +9,8 @@
 import UIKit
 import Kingfisher
 import RealmSwift
+import FirebaseDatabase
+import FirebaseAuth
 
 class MyGroupsController: UITableViewController {
     
@@ -19,6 +21,9 @@ class MyGroupsController: UITableViewController {
     let networkService = NetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
+    
+    private var firebaseUsers = [FirebaseUser]()
+    private let ref = Database.database().reference(withPath: "users")
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -153,8 +158,10 @@ class MyGroupsController: UITableViewController {
                     let groupsId = [Int]()
                     if !groupsId.contains(groupId) {
                         self.networkService.joinGroup(with: groupId)
-                        self.dataService.addGroup(group: self.allSearchedGroups[indexPath.row])
+                        let groupAdded = self.allSearchedGroups[indexPath.row]
+                        self.dataService.addGroup(group: groupAdded)
                         self.searchController.isActive = true
+                        self.addedGroupsHistoryToFirebase(group: groupAdded)
                     }
                 }
                 
@@ -215,12 +222,24 @@ class MyGroupsController: UITableViewController {
             }
         })
     }
+    
+    func addedGroupsHistoryToFirebase (group: Group) {
+        self.ref.child("\(String(Session.user.userID))/groupsAdded").updateChildValues([String(group.id): group.name])
+    }
+    
+    func addedSearchHistoryToFirebase (searchText: String) {
+        self.ref.child("\(String(Session.user.userID))/searchHistory").updateChildValues([String(format: "%0.f", Date().timeIntervalSince1970): searchText])
+    }
+    
 }
 
 extension MyGroupsController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         throttler.throttle {
             self.filterContentForSearchText(searchController.searchBar.text!)
+            if self.isFiltering() && (searchController.searchBar.text!.count > 3) {
+                self.addedSearchHistoryToFirebase(searchText: searchController.searchBar.text!)
+            }
         }
     }
 }

@@ -49,14 +49,11 @@ class FriendsController: UITableViewController {
         
         Auth.auth().signInAnonymously() { (authResult, error) in
             let user = authResult?.user
-            let isAnonymous = user?.isAnonymous  // true
+//            _ = user?.isAnonymous  // true
             guard let uid = user?.uid else { return }
             let firebaseUser = FirebaseUser(uid: uid, vkUserId: Session.user.userID)
             let firebaseUserRef = self.ref.child(String(Session.user.userID))
-            firebaseUserRef.setValue(firebaseUser.toAnyObject())
-            print(isAnonymous!)
-            print(uid)
-            print(firebaseUserRef)
+            firebaseUserRef.updateChildValues(firebaseUser.toAnyObject())
         }
         
         ref.observe(.value, with: { snapshot in
