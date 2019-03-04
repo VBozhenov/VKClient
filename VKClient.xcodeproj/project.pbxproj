@@ -15,6 +15,7 @@
 		E707E697220339710096693E /* CustomPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707E696220339710096693E /* CustomPopAnimator.swift */; };
 		E707E69922033BBB0096693E /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707E69822033BBB0096693E /* CustomNavigationController.swift */; };
 		E71F49B622145A1B00DDB835 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71F49B522145A1B00DDB835 /* DataService.swift */; };
+		E7707F75222D4DB300DEAC4D /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7707F74222D4DB300DEAC4D /* FirebaseUser.swift */; };
 		E77F91C1221DE1B2006E0647 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F91C0221DE1B2006E0647 /* Throttler.swift */; };
 		E78054DD21C6CFDB008D179C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78054DC21C6CFDB008D179C /* AppDelegate.swift */; };
 		E78054E421C6CFDC008D179C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E78054E321C6CFDC008D179C /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 		E707E696220339710096693E /* CustomPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimator.swift; sourceTree = "<group>"; };
 		E707E69822033BBB0096693E /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		E71F49B522145A1B00DDB835 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		E7707F74222D4DB300DEAC4D /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
 		E77F91C0221DE1B2006E0647 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		E78054D921C6CFDB008D179C /* VKClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E78054DC21C6CFDB008D179C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				E7DB5CAF22100082003CBFCD /* Photo.swift */,
 				E7DB5CAD220FFF74003CBFCD /* User.swift */,
 				E7E66588220779940071B5C9 /* Session.swift */,
+				E7707F74222D4DB300DEAC4D /* FirebaseUser.swift */,
 				E702434721F0F70600BFB542 /* News.swift */,
 			);
 			path = Model;
@@ -423,6 +426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E78054F321C6D35F008D179C /* LoginFormViewController.swift in Sources */,
+				E7707F75222D4DB300DEAC4D /* FirebaseUser.swift in Sources */,
 				E7E66589220779940071B5C9 /* Session.swift in Sources */,
 				E7D1A6DB21F64C05001858C8 /* NewsCollectionViewCell.swift in Sources */,
 				E78054F121C6D14A008D179C /* StartScreenViewController.swift in Sources */,

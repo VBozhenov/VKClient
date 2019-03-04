@@ -9,14 +9,18 @@
 import UIKit
 import Kingfisher
 import RealmSwift
+import FirebaseDatabase
+import FirebaseAuth
 
 class FriendsController: UITableViewController {
     
     var users: Results<User>?
     var mySearchedUsers: Results<User>?
     var filteredFriends: Results<User>?
-
     
+    private var firebaseUsers = [FirebaseUser]()
+    private let ref = Database.database().reference(withPath: "users")
+        
     let networkService = NetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
@@ -41,7 +45,30 @@ class FriendsController: UITableViewController {
 
                 self.dataService.saveUsers(users)
             }
-        }        
+        }
+        
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            let user = authResult?.user
+            let isAnonymous = user?.isAnonymous  // true
+            guard let uid = user?.uid else { return }
+            let firebaseUser = FirebaseUser(uid: uid, vkUserId: Session.user.userID)
+            let firebaseUserRef = self.ref.child(String(Session.user.userID))
+            firebaseUserRef.setValue(firebaseUser.toAnyObject())
+            print(isAnonymous!)
+            print(uid)
+            print(firebaseUserRef)
+        }
+        
+        ref.observe(.value, with: { snapshot in
+            var firebaseUsers: [FirebaseUser] = []
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                    let firebaseUser = FirebaseUser(snapshot: snapshot) {
+                    firebaseUsers.append(firebaseUser)
+                }
+            }
+            self.firebaseUsers = firebaseUsers
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {

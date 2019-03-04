@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-//import Alamofire
 
 class LoginFormViewController: UIViewController {
 
@@ -37,7 +36,6 @@ class LoginFormViewController: UIViewController {
         let request = URLRequest(url: urlComponents.url!)
         
         webView.load(request)
-        
     }
 }
 

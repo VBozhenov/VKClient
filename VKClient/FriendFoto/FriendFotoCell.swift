@@ -24,7 +24,7 @@ class FriendFotoCell: UICollectionViewCell {
     
     @IBAction func likeCellButtonPressed(_ sender: UIButton) {
         buttonHandler?()
-//        animateLikeCellButtonConstraints()
+        animateLikeCellButtonConstraints()
     }
         
     func animateFoto() {

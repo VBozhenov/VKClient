@@ -108,8 +108,12 @@ class FriendFotoController: UICollectionViewController {
             switch changes {
             case .initial:
                 collectionView.reloadData()
-            case .update:
-                collectionView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                collectionView.performBatchUpdates({
+                    collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
+                    collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: 0) })
+                    collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: 0) })
+                })
             case .error(let error):
                 fatalError("\(error)")
             }
