@@ -198,7 +198,7 @@ class MyGroupsController: UITableViewController {
             }
         }
         
-        mySearchedGroups = groups?.filter("name CONTAINS %@", searchText)
+        mySearchedGroups = groups?.filter("name CONTAINS[cd] %@", searchText)
     }
     
     func isFiltering() -> Bool {
