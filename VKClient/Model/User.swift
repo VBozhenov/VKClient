@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 import SwiftyJSON
 import RealmSwift
 
@@ -24,7 +23,6 @@ class User: Object {
         self.firstName = json["first_name"].stringValue
         self.lastName = json["last_name"].stringValue
         self.avatar = json["photo_200_orig"].stringValue
-//        self.photos.append(objectsIn: photos)
     }
     
     override static func primaryKey() -> String {

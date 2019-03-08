@@ -126,9 +126,9 @@
 				E7DB5CB122100107003CBFCD /* Group.swift */,
 				E7DB5CAF22100082003CBFCD /* Photo.swift */,
 				E7DB5CAD220FFF74003CBFCD /* User.swift */,
+				E702434721F0F70600BFB542 /* News.swift */,
 				E7E66588220779940071B5C9 /* Session.swift */,
 				E7707F74222D4DB300DEAC4D /* FirebaseUser.swift */,
-				E702434721F0F70600BFB542 /* News.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

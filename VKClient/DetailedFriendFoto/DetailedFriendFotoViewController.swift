@@ -18,8 +18,8 @@ class DetailedFriendFotoViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
+    override func viewWillAppear(_ animated: Bool) {
         self.collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: true)
     }
 
