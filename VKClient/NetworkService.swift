@@ -130,6 +130,8 @@ class NetworkService {
             case .success(let value):
                 let json = JSON(value)
                 groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
+                print(Session.user.token)
+
                 completion?(groups, nil)
             case .failure(let error):
                 completion?(nil, error)
@@ -194,6 +196,31 @@ class NetworkService {
         
         Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
             completion?()
+        }
+    }
+    
+    func loadNews(completion: (([News]?, Error?) -> Void)? = nil) {
+        let path = "/method/newsfeed.get"
+        
+        let params: Parameters = [
+            "access_token": token,
+//            "filters": "post,photo",
+            "v": version
+        ]
+        
+        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+            
+            switch response.result {
+                
+            case .success(let value):
+                let json = JSON(value)
+                let news = json["response"]["items"].arrayValue.map { News(json: $0) }
+                print(news)
+                completion?(news, nil)
+            case .failure(let error):
+                completion?(nil, error)
+            }
+            
         }
     }
 }

@@ -106,4 +106,19 @@ class DataService {
             photo?.likes -= 1
         }
     }
+    
+    func saveNews(_ news: [News],
+                    config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                    update: Bool = true)  {
+        do {
+            let realm = try Realm(configuration: config)
+            let oldNews = realm.objects(News.self)
+            try realm.write {
+                realm.delete(oldNews)
+                realm.add(news, update: update)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }

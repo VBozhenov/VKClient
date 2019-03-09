@@ -1,14 +1,14 @@
 //
-//  DetailedNewsCellLayout.swift
+//  DetailedFriendFotoCellLayout.swift
 //  VKClient
 //
-//  Created by Vladimir Bozhenov on 28/01/2019.
+//  Created by Vladimir Bozhenov on 09/03/2019.
 //  Copyright © 2019 Vladimir Bozhenov. All rights reserved.
 //
 
 import UIKit
 
-class DetailedNewsCellLayout: UICollectionViewLayout {
+class DetailedFriendFotoCellLayout: UICollectionViewLayout {
     
     var cacheAttributes = [IndexPath: UICollectionViewLayoutAttributes]()
     private var totalCellsHeight: CGFloat = 0
@@ -47,6 +47,4 @@ class DetailedNewsCellLayout: UICollectionViewLayout {
     override var collectionViewContentSize: CGSize {
         return CGSize(width: self.totalCellsWidth, height: self.totalCellsHeight)
     }
-    
-    
 }

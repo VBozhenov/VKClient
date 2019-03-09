@@ -9,8 +9,8 @@
 import UIKit
 import Kingfisher
 import RealmSwift
-import FirebaseDatabase
-import FirebaseAuth
+//import FirebaseDatabase
+//import FirebaseAuth
 
 class FriendsController: UITableViewController {
     
@@ -18,9 +18,9 @@ class FriendsController: UITableViewController {
     var mySearchedUsers: Results<User>?
     var filteredFriends: Results<User>?
     
-    private var firebaseUsers = [FirebaseUser]()
-    private let ref = Database.database().reference(withPath: "users")
-        
+//    private var firebaseUsers = [FirebaseUser]()
+//    private let ref = Database.database().reference(withPath: "users")
+    
     let networkService = NetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
@@ -47,25 +47,25 @@ class FriendsController: UITableViewController {
             }
         }
         
-        Auth.auth().signInAnonymously() { (authResult, error) in
-            let user = authResult?.user
-//            _ = user?.isAnonymous  // true
-            guard let uid = user?.uid else { return }
-            let firebaseUser = FirebaseUser(uid: uid, vkUserId: Session.user.userID)
-            let firebaseUserRef = self.ref.child(String(Session.user.userID))
-            firebaseUserRef.updateChildValues(firebaseUser.toAnyObject())
-        }
-        
-        ref.observe(.value, with: { snapshot in
-            var firebaseUsers: [FirebaseUser] = []
-            for child in snapshot.children {
-                if let snapshot = child as? DataSnapshot,
-                    let firebaseUser = FirebaseUser(snapshot: snapshot) {
-                    firebaseUsers.append(firebaseUser)
-                }
-            }
-            self.firebaseUsers = firebaseUsers
-        })
+//        Auth.auth().signInAnonymously() { (authResult, error) in
+//            let user = authResult?.user
+////            _ = user?.isAnonymous  // true
+//            guard let uid = user?.uid else { return }
+//            let firebaseUser = FirebaseUser(uid: uid, vkUserId: Session.user.userID)
+//            let firebaseUserRef = self.ref.child(String(Session.user.userID))
+//            firebaseUserRef.updateChildValues(firebaseUser.toAnyObject())
+//        }
+//        
+//        ref.observe(.value, with: { snapshot in
+//            var firebaseUsers: [FirebaseUser] = []
+//            for child in snapshot.children {
+//                if let snapshot = child as? DataSnapshot,
+//                    let firebaseUser = FirebaseUser(snapshot: snapshot) {
+//                    firebaseUsers.append(firebaseUser)
+//                }
+//            }
+//            self.firebaseUsers = firebaseUsers
+//        })
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -185,7 +185,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="C1l-2V-rsy" customClass="DetailedNewsCellLayout" customModule="VKClient" customModuleProvider="target">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="C1l-2V-rsy" customClass="DetailedFriendFotoCellLayout" customModule="VKClient" customModuleProvider="target">
                             <size key="itemSize" width="287" height="267"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -245,6 +245,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="friend" width="24" height="24"/>
+        <image name="friend" width="28" height="30"/>
     </resources>
 </document>
