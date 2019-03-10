@@ -130,8 +130,6 @@ class NetworkService {
             case .success(let value):
                 let json = JSON(value)
                 groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
-                print(Session.user.token)
-
                 completion?(groups, nil)
             case .failure(let error):
                 completion?(nil, error)
@@ -199,12 +197,12 @@ class NetworkService {
         }
     }
     
-    func loadNews(completion: (([News]?, Error?) -> Void)? = nil) {
+    func loadNews(completion: (([News]?, [News]?, [News]?, Error?) -> Void)? = nil) {
         let path = "/method/newsfeed.get"
         
         let params: Parameters = [
             "access_token": token,
-//            "filters": "post,photo",
+            "filters": "post,photo",
             "v": version
         ]
         
@@ -215,10 +213,11 @@ class NetworkService {
             case .success(let value):
                 let json = JSON(value)
                 let news = json["response"]["items"].arrayValue.map { News(json: $0) }
-                print(news)
-                completion?(news, nil)
+                let owners = json["response"]["profiles"].arrayValue.map { News(json: $0) }
+                let groups = json["response"]["groups"].arrayValue.map { News(json: $0) }
+                completion?(news, owners, groups, nil)
             case .failure(let error):
-                completion?(nil, error)
+                completion?(nil, nil, nil, error)
             }
             
         }

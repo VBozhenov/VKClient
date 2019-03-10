@@ -19,6 +19,8 @@ class NewsCell: UITableViewCell {
     @IBOutlet weak var watchedLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var ownersPhoto: UIImageView!
+    @IBOutlet weak var ownersName: UILabel!
+    @IBOutlet weak var newsPhotoImage: UIImageView!
     
     @IBAction func likeButtonPushed(_ sender: UIButton) {
         if likeButton.currentImage == UIImage(named: "heartWhite") {

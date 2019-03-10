@@ -107,9 +107,25 @@ class DataService {
         }
     }
     
-    func saveNews(_ news: [News],
+    func saveNews(_ news: [News], _ owners: [News], _ groups: [News],
                     config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                     update: Bool = true)  {
+        for oneNews in news {
+            for user in owners {
+                if user.userId == oneNews.ownerId {
+                    oneNews.ownerPhoto = user.ownerPhoto
+                    oneNews.userName = user.userName
+                    oneNews.userId = user.userId
+                }
+            }
+            for group in groups {
+                if ("-" + group.userId) == oneNews.ownerId {
+                    oneNews.ownerPhoto = group.ownerPhoto
+                    oneNews.groupName = group.groupName
+                    oneNews.userId = group.userId
+                }
+            }
+        }
         do {
             let realm = try Realm(configuration: config)
             let oldNews = realm.objects(News.self)

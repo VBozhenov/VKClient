@@ -18,15 +18,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="News" rowHeight="572" id="NQG-WL-bla" customClass="NewsCell" customModule="VKClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="572"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="News" rowHeight="575" id="NQG-WL-bla" customClass="NewsCell" customModule="VKClient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="575"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NQG-WL-bla" id="d7m-48-0hG" customClass="NewsCell" customModule="VKClient" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="571.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="574.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrY-g8-TDA">
-                                            <rect key="frame" x="8" y="68" width="359" height="36.5"/>
+                                            <rect key="frame" x="8" y="93.5" width="359" height="14"/>
                                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -39,26 +39,37 @@
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gOn-lc-Fr9">
-                                            <rect key="frame" x="8" y="112.5" width="359" height="359"/>
+                                            <rect key="frame" x="8" y="115.5" width="359" height="359"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" secondItem="gOn-lc-Fr9" secondAttribute="width" multiplier="1:1" id="W7r-Rn-2gv"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWi-BJ-Wvg">
+                                            <rect key="frame" x="66" y="22.5" width="301" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="mrY-g8-TDA" secondAttribute="trailing" constant="8" id="0Fl-cE-slv"/>
                                         <constraint firstAttribute="bottom" secondItem="gOn-lc-Fr9" secondAttribute="bottom" constant="100" id="9op-5o-g3y"/>
+                                        <constraint firstItem="mrY-g8-TDA" firstAttribute="top" secondItem="xEY-8Q-SZb" secondAttribute="bottom" constant="35.5" id="JmV-33-f1r"/>
                                         <constraint firstItem="xEY-8Q-SZb" firstAttribute="top" secondItem="d7m-48-0hG" secondAttribute="top" constant="8" id="M9d-tK-tal"/>
+                                        <constraint firstItem="fWi-BJ-Wvg" firstAttribute="centerY" secondItem="xEY-8Q-SZb" secondAttribute="centerY" id="OhY-jb-MXV"/>
                                         <constraint firstItem="mrY-g8-TDA" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="X1y-Hn-G6h"/>
                                         <constraint firstItem="gOn-lc-Fr9" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="fWE-Y0-GkY"/>
                                         <constraint firstItem="xEY-8Q-SZb" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="i18-Id-5wS"/>
-                                        <constraint firstItem="mrY-g8-TDA" firstAttribute="top" secondItem="xEY-8Q-SZb" secondAttribute="bottom" constant="10" id="sxR-jg-TXZ"/>
+                                        <constraint firstItem="fWi-BJ-Wvg" firstAttribute="leading" secondItem="xEY-8Q-SZb" secondAttribute="trailing" constant="8" id="k4T-VL-gfu"/>
+                                        <constraint firstAttribute="trailing" secondItem="fWi-BJ-Wvg" secondAttribute="trailing" constant="8" id="tcS-A5-ONn"/>
                                         <constraint firstAttribute="trailing" secondItem="gOn-lc-Fr9" secondAttribute="trailing" constant="8" id="vtv-eY-9f2"/>
                                         <constraint firstItem="gOn-lc-Fr9" firstAttribute="top" secondItem="mrY-g8-TDA" secondAttribute="bottom" constant="8" id="wuo-OV-Jkj"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="newsPhotoImage" destination="gOn-lc-Fr9" id="Jti-Gg-un0"/>
                                     <outlet property="newsText" destination="mrY-g8-TDA" id="yog-bd-23P"/>
+                                    <outlet property="ownersName" destination="fWi-BJ-Wvg" id="Hpd-Qo-reb"/>
                                     <outlet property="ownersPhoto" destination="xEY-8Q-SZb" id="sO9-eF-5zY"/>
                                 </connections>
                             </tableViewCell>

@@ -20,14 +20,16 @@ class NewsController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        networkService.loadNews() { [weak self] news, error in
+
+        networkService.loadNews() { [weak self] news, owners, groups, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
-            } else if let news = news?.filter({$0.ownerId != "" && $0.text != ""}),
+            } else if let news = news?.filter({$0.text != ""}),
+                let owners = owners?.filter({$0.ownerPhoto != ""}),
+                let groups = groups,
                 let self = self {
-                self.dataService.saveNews(news)
+                self.dataService.saveNews(news, owners, groups)
             }
         }
     }
@@ -51,7 +53,11 @@ class NewsController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "News", for: indexPath) as! NewsCell
         guard let news = news else { return UITableViewCell() }
+        cell.frame.size.height = cell.ownersPhoto.frame.height * 2 + cell.newsText.frame.height * 2 + 100
         cell.newsText.text = news[indexPath.row].text
+        cell.ownersPhoto.kf.setImage(with: URL(string: news[indexPath.row].ownerPhoto))
+        cell.ownersName.text = Int(news[indexPath.row].ownerId)! > 0 ? news[indexPath.row].userName : news[indexPath.row].groupName
+        cell.newsPhotoImage.kf.setImage(with: URL(string: news[indexPath.row].newsPhoto))
         
         return cell
     }
