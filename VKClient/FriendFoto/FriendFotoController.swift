@@ -99,9 +99,9 @@ class FriendFotoController: UICollectionViewController {
         return self.collectionView.indexPathForItem(at: buttonPosition)!
     }
     
-    func pairTableAndRealm() {
+    func pairTableAndRealm(config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
         
-        photos = try! Realm().objects(Photo.self).filter("userId == %@", friendId)
+        photos = try! Realm(configuration: config).objects(Photo.self).filter("userId == %@", friendId)
 
         notificationToken = photos?.observe { [weak self] (changes: RealmCollectionChange) in
             guard let collectionView = self?.collectionView else { return }

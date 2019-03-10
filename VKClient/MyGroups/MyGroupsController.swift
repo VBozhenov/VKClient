@@ -205,8 +205,8 @@ class MyGroupsController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty()
     }
     
-    func pairTableAndRealm() {
-        guard let realm = try? Realm() else { return }
+    func pairTableAndRealm(config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
+        guard let realm = try? Realm(configuration: config) else { return }
         groups = realm.objects(Group.self)
         notificationToken = groups?.observe ({ [weak self] (changes: RealmCollectionChange) in
             guard let tableView = self?.tableView else { return }
