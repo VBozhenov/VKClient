@@ -73,6 +73,9 @@
                                                     <state key="normal" title="999" image="heartWhite">
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="likeButtonPushed:" destination="NQG-WL-bla" eventType="touchUpInside" id="h5k-lQ-GLx"/>
+                                                    </connections>
                                                 </button>
                                                 <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9W-8G-GfB">
                                                     <rect key="frame" x="65" y="0.0" width="56" height="22"/>
@@ -80,6 +83,9 @@
                                                     <state key="normal" title="999" image="comment">
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="commentButtonPushed:" destination="NQG-WL-bla" eventType="touchUpInside" id="GRs-Tm-7Zu"/>
+                                                    </connections>
                                                 </button>
                                                 <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tF-sw-LDr">
                                                     <rect key="frame" x="130" y="0.0" width="56" height="22"/>
@@ -87,32 +93,58 @@
                                                     <state key="normal" title="999" image="share">
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="shareButtonPushed:" destination="NQG-WL-bla" eventType="touchUpInside" id="yIR-Ki-7IZ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view" translatesAutoresizingMaskIntoConstraints="NO" id="0DS-Oo-g6p">
+                                            <rect key="frame" x="297.5" y="478.5" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="1CR-8l-zsD"/>
+                                                <constraint firstAttribute="width" secondItem="0DS-Oo-g6p" secondAttribute="height" multiplier="1:1" id="BXm-uZ-pdi"/>
+                                                <constraint firstAttribute="height" constant="30" id="TO6-Ly-nHC"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PTa-Hz-ekd">
+                                            <rect key="frame" x="335.5" y="482.5" width="31.5" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="mrY-g8-TDA" secondAttribute="trailing" constant="8" id="0Fl-cE-slv"/>
+                                        <constraint firstItem="PTa-Hz-ekd" firstAttribute="centerY" secondItem="4tF-sw-LDr" secondAttribute="centerY" id="7kM-N1-39a"/>
                                         <constraint firstAttribute="bottom" secondItem="gOn-lc-Fr9" secondAttribute="bottom" constant="100" id="9op-5o-g3y"/>
                                         <constraint firstItem="mrY-g8-TDA" firstAttribute="top" secondItem="xEY-8Q-SZb" secondAttribute="bottom" constant="35.5" id="JmV-33-f1r"/>
                                         <constraint firstItem="xEY-8Q-SZb" firstAttribute="top" secondItem="d7m-48-0hG" secondAttribute="top" constant="8" id="M9d-tK-tal"/>
                                         <constraint firstItem="OuK-59-aWz" firstAttribute="top" secondItem="gOn-lc-Fr9" secondAttribute="bottom" constant="8" id="MsT-fx-7Oj"/>
                                         <constraint firstItem="fWi-BJ-Wvg" firstAttribute="centerY" secondItem="xEY-8Q-SZb" secondAttribute="centerY" id="OhY-jb-MXV"/>
+                                        <constraint firstItem="0DS-Oo-g6p" firstAttribute="centerY" secondItem="4tF-sw-LDr" secondAttribute="centerY" id="S1T-9X-WYT"/>
                                         <constraint firstItem="mrY-g8-TDA" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="X1y-Hn-G6h"/>
                                         <constraint firstItem="OuK-59-aWz" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="YUf-g7-9Xc"/>
+                                        <constraint firstAttribute="trailing" secondItem="PTa-Hz-ekd" secondAttribute="trailing" constant="8" id="c18-RV-Dax"/>
                                         <constraint firstItem="gOn-lc-Fr9" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="fWE-Y0-GkY"/>
                                         <constraint firstItem="xEY-8Q-SZb" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="i18-Id-5wS"/>
                                         <constraint firstItem="fWi-BJ-Wvg" firstAttribute="leading" secondItem="xEY-8Q-SZb" secondAttribute="trailing" constant="8" id="k4T-VL-gfu"/>
+                                        <constraint firstItem="PTa-Hz-ekd" firstAttribute="height" secondItem="4tF-sw-LDr" secondAttribute="height" id="k6S-fN-vHC"/>
                                         <constraint firstAttribute="trailing" secondItem="fWi-BJ-Wvg" secondAttribute="trailing" constant="8" id="tcS-A5-ONn"/>
+                                        <constraint firstItem="PTa-Hz-ekd" firstAttribute="leading" secondItem="0DS-Oo-g6p" secondAttribute="trailing" constant="8" id="te6-00-g4M"/>
                                         <constraint firstAttribute="trailing" secondItem="gOn-lc-Fr9" secondAttribute="trailing" constant="8" id="vtv-eY-9f2"/>
                                         <constraint firstItem="gOn-lc-Fr9" firstAttribute="top" secondItem="mrY-g8-TDA" secondAttribute="bottom" constant="8" id="wuo-OV-Jkj"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="commentButton" destination="q9W-8G-GfB" id="xPY-o4-Mm6"/>
+                                    <outlet property="likeButton" destination="yzG-C2-HAI" id="jdF-mb-TSv"/>
                                     <outlet property="newsPhotoImage" destination="gOn-lc-Fr9" id="Jti-Gg-un0"/>
                                     <outlet property="newsText" destination="mrY-g8-TDA" id="yog-bd-23P"/>
                                     <outlet property="ownersName" destination="fWi-BJ-Wvg" id="Hpd-Qo-reb"/>
                                     <outlet property="ownersPhoto" destination="xEY-8Q-SZb" id="sO9-eF-5zY"/>
+                                    <outlet property="sharedButton" destination="4tF-sw-LDr" id="ntX-it-PYI"/>
+                                    <outlet property="watchedLabel" destination="PTa-Hz-ekd" id="bkc-Hn-oy6"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -159,5 +191,6 @@
         <image name="heartWhite" width="22" height="22"/>
         <image name="news" width="24" height="24"/>
         <image name="share" width="22" height="22"/>
+        <image name="view" width="44" height="44"/>
     </resources>
 </document>

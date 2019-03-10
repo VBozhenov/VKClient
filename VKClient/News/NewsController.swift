@@ -71,6 +71,11 @@ class NewsController: UITableViewController {
         ownersPhoto.frame = border.bounds
         border.addSubview(ownersPhoto)
         
+        cell.likeButton.setTitle(String(news[indexPath.row].likesCount), for: .normal)
+        cell.commentButton.setTitle(String(news[indexPath.row].commentsCount), for: .normal)
+        cell.sharedButton.setTitle(String(news[indexPath.row].repostsCount), for: .normal)
+        cell.watchedLabel.text = String(news[indexPath.row].views)
+        
         return cell
     }
     
