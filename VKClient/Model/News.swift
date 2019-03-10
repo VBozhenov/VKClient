@@ -33,7 +33,7 @@ class News: Object {
         self.ownerPhoto = json["photo_50"].stringValue
         self.text = json["text"].stringValue
         self.newsPhoto = json["attachments"][0]["photo"]["photo_604"].stringValue
-        self.userName = json["last_name"].stringValue + json["first_name"].stringValue
+        self.userName = json["last_name"].stringValue + " " + json["first_name"].stringValue
         self.groupName = json["name"].stringValue
         self.userId = json["id"].stringValue
         self.likesCount = json["likes"]["count"].intValue

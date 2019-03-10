@@ -52,12 +52,24 @@ class NewsController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "News", for: indexPath) as! NewsCell
+        
+        let ownersPhoto = UIImageView()
+        
         guard let news = news else { return UITableViewCell() }
-        cell.frame.size.height = cell.ownersPhoto.frame.height * 2 + cell.newsText.frame.height * 2 + 100
+        cell.frame.size.height = 600
         cell.newsText.text = news[indexPath.row].text
-        cell.ownersPhoto.kf.setImage(with: URL(string: news[indexPath.row].ownerPhoto))
         cell.ownersName.text = Int(news[indexPath.row].ownerId)! > 0 ? news[indexPath.row].userName : news[indexPath.row].groupName
         cell.newsPhotoImage.kf.setImage(with: URL(string: news[indexPath.row].newsPhoto))
+        ownersPhoto.kf.setImage(with: URL(string: news[indexPath.row].ownerPhoto))
+
+        let border = UIView()
+        border.frame = cell.ownersPhoto.bounds
+        border.layer.cornerRadius = cell.ownersPhoto.bounds.height / 2
+        border.layer.masksToBounds = true
+        cell.ownersPhoto.addSubview(border)
+        
+        ownersPhoto.frame = border.bounds
+        border.addSubview(ownersPhoto)
         
         return cell
     }
