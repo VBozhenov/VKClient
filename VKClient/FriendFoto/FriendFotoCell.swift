@@ -41,12 +41,16 @@ class FriendFotoCell: UICollectionViewCell {
     
     func animateLikeCellButtonConstraints() {
         UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       options: .curveEaseInOut,
                        animations: {
                         self.likeCellConstraint.forEach { $0.isActive.toggle() }
                         self.likeCellButton.layoutIfNeeded()
                         self.numberOfLikes.isHidden = true
         }, completion: { _ in UIView.animate(withDuration: 0.5,
-                                            animations: {
+                                             delay: 0,
+                                             options: .curveEaseInOut,
+                                             animations: {
                                                 self.likeCellConstraint.forEach { $0.isActive.toggle() }
                                                 self.likeCellButton.layoutIfNeeded()
                                                 self.numberOfLikes.isHidden = false
