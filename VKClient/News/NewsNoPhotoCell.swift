@@ -43,4 +43,24 @@ class NewsNoPhotoCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
+    func configure(_ news: News, cell: NewsNoPhotoCell) {
+        
+        let ownerPhoto = UIImageView()
+
+        ownerPhoto.kf.setImage(with: URL(string: news.ownerPhoto))
+        ownersName.text = Int(news.ownerId)! > 0 ? news.userName : news.groupName
+        newsText.text = news.text
+        likeButton.setTitle(String(news.likesCount), for: .normal)
+        commentButton.setTitle(String(news.commentsCount), for: .normal)
+        sharedButton.setTitle(String(news.repostsCount), for: .normal)
+        watchedLabel.text = String(news.views)
+        
+        let border = UIView()
+        border.frame = cell.ownersPhoto.bounds
+        border.layer.cornerRadius = cell.ownersPhoto.bounds.height / 2
+        border.layer.masksToBounds = true
+        cell.ownersPhoto.addSubview(border)
+        ownerPhoto.frame = border.bounds
+        border.addSubview(ownerPhoto)
+    }
 }
