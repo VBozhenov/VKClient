@@ -145,11 +145,13 @@
                                     <constraint firstItem="IOQ-uN-SLD" firstAttribute="top" secondItem="JUW-g4-3Cd" secondAttribute="top" constant="8" id="I94-Wn-2mf"/>
                                     <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="height" secondItem="IOQ-uN-SLD" secondAttribute="height" multiplier="0.2" id="IZN-fK-WkY"/>
                                     <constraint firstItem="IOQ-uN-SLD" firstAttribute="leading" secondItem="JUW-g4-3Cd" secondAttribute="leading" constant="8" id="Nih-ib-jhL"/>
+                                    <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="centerY" secondItem="JUW-g4-3Cd" secondAttribute="centerY" priority="750" id="PWb-pr-e4V"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Qe5-SQ-sJ4" secondAttribute="trailing" id="T4K-Na-CHe"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="07e-kW-cmY" secondAttribute="bottom" id="ZDk-lv-EfD"/>
                                     <constraint firstItem="qsS-2e-52L" firstAttribute="leading" secondItem="JUW-g4-3Cd" secondAttribute="leading" id="a8U-r6-x8e"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="Qe5-SQ-sJ4" secondAttribute="bottom" id="agZ-Ol-CEx"/>
                                     <constraint firstItem="07e-kW-cmY" firstAttribute="leading" secondItem="JUW-g4-3Cd" secondAttribute="leading" priority="250" constant="98" id="eU8-0j-8DP"/>
+                                    <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="centerX" secondItem="JUW-g4-3Cd" secondAttribute="centerX" priority="750" id="hVc-mh-d6U"/>
                                     <constraint firstItem="qsS-2e-52L" firstAttribute="width" secondItem="IOQ-uN-SLD" secondAttribute="width" id="hpk-jm-I7a"/>
                                     <constraint firstItem="qsS-2e-52L" firstAttribute="height" secondItem="IOQ-uN-SLD" secondAttribute="height" id="kld-1t-V8p"/>
                                     <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="leading" secondItem="07e-kW-cmY" secondAttribute="trailing" priority="750" constant="2" id="ljr-bu-EgE"/>
@@ -160,9 +162,11 @@
                                     <outlet property="FriendFoto" destination="IOQ-uN-SLD" id="Mun-0w-j4w"/>
                                     <outlet property="friendFoto" destination="IOQ-uN-SLD" id="4Kw-Rh-qqs"/>
                                     <outlet property="likeCellButton" destination="Qe5-SQ-sJ4" id="xro-bA-Owe"/>
-                                    <outlet property="likeCellHeightConstraint" destination="IZN-fK-WkY" id="t1l-es-A4m"/>
-                                    <outlet property="likeCellWidthConstraint" destination="yPC-i3-3Ea" id="SFe-Xg-hrO"/>
                                     <outlet property="numberOfLikes" destination="07e-kW-cmY" id="NX5-Vd-aaI"/>
+                                    <outletCollection property="likeCellConstraint" destination="yPC-i3-3Ea" collectionClass="NSMutableArray" id="f6I-FT-Erq"/>
+                                    <outletCollection property="likeCellConstraint" destination="IZN-fK-WkY" collectionClass="NSMutableArray" id="daT-Nh-yIh"/>
+                                    <outletCollection property="likeCellConstraint" destination="agZ-Ol-CEx" collectionClass="NSMutableArray" id="dnQ-fd-fgW"/>
+                                    <outletCollection property="likeCellConstraint" destination="T4K-Na-CHe" collectionClass="NSMutableArray" id="b7I-xp-KVE"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

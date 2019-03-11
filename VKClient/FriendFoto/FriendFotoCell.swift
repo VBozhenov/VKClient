@@ -15,8 +15,8 @@ class FriendFotoCell: UICollectionViewCell {
     @IBOutlet weak var friendFoto: UIImageView!
     @IBOutlet weak var likeCellButton: UIButton!
     @IBOutlet weak var numberOfLikes: UILabel!
-    @IBOutlet weak var likeCellHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var likeCellWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var likeCellConstraint: [NSLayoutConstraint]!
+//    @IBOutlet weak var likeCellWidthConstraint: NSLayoutConstraint!
     
     @IBAction func fotoPressed(_ sender: UIButton) {
         animateFoto()
@@ -24,9 +24,10 @@ class FriendFotoCell: UICollectionViewCell {
     
     @IBAction func likeCellButtonPressed(_ sender: UIButton) {
         buttonHandler?()
+        likeCellConstraint.forEach { $0.isActive.toggle() }
         animateLikeCellButtonConstraints()
     }
-        
+    
     func animateFoto() {
         let animation = CASpringAnimation(keyPath: "transform.scale")
         animation.fromValue = 0.5
@@ -41,23 +42,29 @@ class FriendFotoCell: UICollectionViewCell {
     }
     
     func animateLikeCellButtonConstraints() {
-        self.likeCellButton.layoutIfNeeded()
-        UIView.animate(withDuration: 1,
-                       delay: 0,
-                       options: .curveEaseInOut,
-                       animations: {self.likeCellHeightConstraint.constant = 100
-                        self.likeCellWidthConstraint.constant = 100
-                        self.likeCellButton.layoutIfNeeded()
-                        self.numberOfLikes.isHidden = true
-        }, completion: { _ in  UIView.animate(withDuration: 1,
-                                              delay: 0,
-                                              options: .curveEaseInOut,
-                                              animations: {self.likeCellHeightConstraint.constant = 1
-                                                self.likeCellWidthConstraint.constant = 1
-                                                self.likeCellButton.layoutIfNeeded()
-                                                self.numberOfLikes.isHidden = false
-                                                
-        })
-        })
+        UIView.animate(withDuration: 0.5,
+                       animations: {
+                        self.likeCellButton.layoutIfNeeded
+                        self.numberOfLikes.isHidden = true)}
+
+//        self.likeCellButton.layoutIfNeeded()
+//        UIView.animate(withDuration: 1,
+//                       delay: 0,
+//                       options: .curveEaseInOut,
+//                       animations: {
+////                        self.likeCellHeightConstraint.constant = 100
+////                        self.likeCellWidthConstraint.constant = 100
+//                        self.likeCellButton.layoutIfNeeded()
+//                        self.numberOfLikes.isHidden = true
+//        }, completion: { _ in  UIView.animate(withDuration: 1,
+//                                              delay: 0,
+//                                              options: .curveEaseInOut,
+//                                              animations: {
+////                                                self.likeCellHeightConstraint.constant = 1
+////                                                self.likeCellWidthConstraint.constant = 1
+//                                                self.likeCellButton.layoutIfNeeded()
+//                                                self.numberOfLikes.isHidden = false
+//        })
+//        })
     }
 }
