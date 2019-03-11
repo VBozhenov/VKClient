@@ -16,7 +16,6 @@ class FriendFotoCell: UICollectionViewCell {
     @IBOutlet weak var likeCellButton: UIButton!
     @IBOutlet weak var numberOfLikes: UILabel!
     @IBOutlet var likeCellConstraint: [NSLayoutConstraint]!
-//    @IBOutlet weak var likeCellWidthConstraint: NSLayoutConstraint!
     
     @IBAction func fotoPressed(_ sender: UIButton) {
         animateFoto()
@@ -24,7 +23,6 @@ class FriendFotoCell: UICollectionViewCell {
     
     @IBAction func likeCellButtonPressed(_ sender: UIButton) {
         buttonHandler?()
-        likeCellConstraint.forEach { $0.isActive.toggle() }
         animateLikeCellButtonConstraints()
     }
     
@@ -44,27 +42,15 @@ class FriendFotoCell: UICollectionViewCell {
     func animateLikeCellButtonConstraints() {
         UIView.animate(withDuration: 0.5,
                        animations: {
-                        self.likeCellButton.layoutIfNeeded
-                        self.numberOfLikes.isHidden = true)}
-
-//        self.likeCellButton.layoutIfNeeded()
-//        UIView.animate(withDuration: 1,
-//                       delay: 0,
-//                       options: .curveEaseInOut,
-//                       animations: {
-////                        self.likeCellHeightConstraint.constant = 100
-////                        self.likeCellWidthConstraint.constant = 100
-//                        self.likeCellButton.layoutIfNeeded()
-//                        self.numberOfLikes.isHidden = true
-//        }, completion: { _ in  UIView.animate(withDuration: 1,
-//                                              delay: 0,
-//                                              options: .curveEaseInOut,
-//                                              animations: {
-////                                                self.likeCellHeightConstraint.constant = 1
-////                                                self.likeCellWidthConstraint.constant = 1
-//                                                self.likeCellButton.layoutIfNeeded()
-//                                                self.numberOfLikes.isHidden = false
-//        })
-//        })
+                        self.likeCellConstraint.forEach { $0.isActive.toggle() }
+                        self.likeCellButton.layoutIfNeeded()
+                        self.numberOfLikes.isHidden = true
+        }, completion: { _ in UIView.animate(withDuration: 0.5,
+                                            animations: {
+                                                self.likeCellConstraint.forEach { $0.isActive.toggle() }
+                                                self.likeCellButton.layoutIfNeeded()
+                                                self.numberOfLikes.isHidden = false
+        })
+        })
     }
 }
