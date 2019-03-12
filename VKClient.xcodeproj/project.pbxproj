@@ -29,6 +29,7 @@
 		E7A11C5B21D0194C000DB879 /* MyGroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A11C5A21D0194C000DB879 /* MyGroupsController.swift */; };
 		E7A135212211F0CF00506CEE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A135202211F0CF00506CEE /* NetworkService.swift */; };
 		E7AE481F2203706900AE346A /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE481E2203706900AE346A /* CustomInteractiveTransition.swift */; };
+		E7B3BD6822379BDC003B68F3 /* NewsCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B3BD6722379BDC003B68F3 /* NewsCellProtocol.swift */; };
 		E7BCA87322062BE700FDC05A /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BCA87222062BE700FDC05A /* Groups.storyboard */; };
 		E7BCA879220634F700FDC05A /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BCA878220634F700FDC05A /* Friends.storyboard */; };
 		E7BCA87B2206352100FDC05A /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BCA87A2206352100FDC05A /* News.storyboard */; };
@@ -75,6 +76,7 @@
 		E7A11C5A21D0194C000DB879 /* MyGroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsController.swift; sourceTree = "<group>"; };
 		E7A135202211F0CF00506CEE /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E7AE481E2203706900AE346A /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
+		E7B3BD6722379BDC003B68F3 /* NewsCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellProtocol.swift; sourceTree = "<group>"; };
 		E7BCA87222062BE700FDC05A /* Groups.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Groups.storyboard; sourceTree = "<group>"; };
 		E7BCA878220634F700FDC05A /* Friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		E7BCA87A2206352100FDC05A /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
@@ -131,9 +133,10 @@
 			isa = PBXGroup;
 			children = (
 				E702434321F03C3000BFB542 /* NewsController.swift */,
-				E7EA3C2922370C0900F8915B /* ConigureNewsCell.swift */,
 				E702434521F03C4A00BFB542 /* NewsCell.swift */,
 				E7EA3C272236F90700F8915B /* NewsNoPhotoCell.swift */,
+				E7EA3C2922370C0900F8915B /* ConigureNewsCell.swift */,
+				E7B3BD6722379BDC003B68F3 /* NewsCellProtocol.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -159,9 +162,7 @@
 		E78054DB21C6CFDB008D179C /* VKClient */ = {
 			isa = PBXGroup;
 			children = (
-				E7A135202211F0CF00506CEE /* NetworkService.swift */,
-				E71F49B522145A1B00DDB835 /* DataService.swift */,
-				E77F91C0221DE1B2006E0647 /* Throttler.swift */,
+				E7B3BD692237A232003B68F3 /* Services */,
 				E7BCA87722062C1B00FDC05A /* Stotyboards */,
 				E79EC7BB22061EC400D25DDB /* Start Screen */,
 				E7D28F0421D15C54008F4475 /* Friends */,
@@ -171,6 +172,7 @@
 				E702434221F03BDB00BFB542 /* News */,
 				E702434121F03B6B00BFB542 /* Model */,
 				E789E83422140ED3009E51ED /* Animation and custom controllers */,
+				E77F91C0221DE1B2006E0647 /* Throttler.swift */,
 				E78054E321C6CFDC008D179C /* Assets.xcassets */,
 				E78054DC21C6CFDB008D179C /* AppDelegate.swift */,
 				E78054E521C6CFDC008D179C /* LaunchScreen.storyboard */,
@@ -219,6 +221,15 @@
 				E7A11C5821D0192D000DB879 /* MyGroupsCell.swift */,
 			);
 			path = MyGroups;
+			sourceTree = "<group>";
+		};
+		E7B3BD692237A232003B68F3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E7A135202211F0CF00506CEE /* NetworkService.swift */,
+				E71F49B522145A1B00DDB835 /* DataService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		E7BCA87722062C1B00FDC05A /* Stotyboards */ = {
@@ -391,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7B3BD6822379BDC003B68F3 /* NewsCellProtocol.swift in Sources */,
 				E78054F321C6D35F008D179C /* LoginFormViewController.swift in Sources */,
 				E7707F75222D4DB300DEAC4D /* FirebaseUser.swift in Sources */,
 				E7E66589220779940071B5C9 /* Session.swift in Sources */,

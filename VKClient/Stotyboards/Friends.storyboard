@@ -158,7 +158,7 @@
                                     <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="centerX" secondItem="JUW-g4-3Cd" secondAttribute="centerX" priority="750" id="hVc-mh-d6U"/>
                                     <constraint firstItem="qsS-2e-52L" firstAttribute="width" secondItem="IOQ-uN-SLD" secondAttribute="width" id="hpk-jm-I7a"/>
                                     <constraint firstItem="qsS-2e-52L" firstAttribute="height" secondItem="IOQ-uN-SLD" secondAttribute="height" id="kld-1t-V8p"/>
-                                    <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="leading" secondItem="07e-kW-cmY" secondAttribute="trailing" priority="750" constant="2" id="ljr-bu-EgE"/>
+                                    <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="leading" secondItem="07e-kW-cmY" secondAttribute="trailing" constant="2" id="ljr-bu-EgE"/>
                                     <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="width" secondItem="IOQ-uN-SLD" secondAttribute="width" multiplier="0.2" id="yPC-i3-3Ea"/>
                                 </constraints>
                                 <size key="customSize" width="164" height="165"/>
@@ -171,6 +171,7 @@
                                     <outletCollection property="likeCellConstraint" destination="IZN-fK-WkY" collectionClass="NSMutableArray" id="daT-Nh-yIh"/>
                                     <outletCollection property="likeCellConstraint" destination="agZ-Ol-CEx" collectionClass="NSMutableArray" id="dnQ-fd-fgW"/>
                                     <outletCollection property="likeCellConstraint" destination="T4K-Na-CHe" collectionClass="NSMutableArray" id="b7I-xp-KVE"/>
+                                    <outletCollection property="likeCellConstraint" destination="ljr-bu-EgE" collectionClass="NSMutableArray" id="tNx-NU-ytM"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
