@@ -53,10 +53,9 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gOn-lc-Fr9">
-                                            <rect key="frame" x="87.5" y="119.5" width="200" height="200"/>
+                                            <rect key="frame" x="8" y="119.5" width="359" height="200"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="OId-Tt-dOc"/>
-                                                <constraint firstAttribute="height" secondItem="gOn-lc-Fr9" secondAttribute="width" multiplier="1:1" id="W7r-Rn-2gv"/>
+                                                <constraint firstAttribute="height" constant="200" id="Z7W-S3-pRJ"/>
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="OuK-59-aWz">
@@ -119,6 +118,8 @@
                                         <constraint firstItem="gOn-lc-Fr9" firstAttribute="centerX" secondItem="d7m-48-0hG" secondAttribute="centerX" id="0CQ-Qz-HWq"/>
                                         <constraint firstAttribute="trailing" secondItem="mrY-g8-TDA" secondAttribute="trailing" constant="8" id="0Fl-cE-slv"/>
                                         <constraint firstItem="PTa-Hz-ekd" firstAttribute="centerY" secondItem="4tF-sw-LDr" secondAttribute="centerY" id="7kM-N1-39a"/>
+                                        <constraint firstItem="gOn-lc-Fr9" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="8jF-6L-h2N"/>
+                                        <constraint firstAttribute="trailing" secondItem="gOn-lc-Fr9" secondAttribute="trailing" constant="8" id="8lz-mN-deG"/>
                                         <constraint firstItem="OuK-59-aWz" firstAttribute="top" secondItem="gOn-lc-Fr9" secondAttribute="bottom" constant="8" id="BZD-CN-M3z"/>
                                         <constraint firstItem="gOn-lc-Fr9" firstAttribute="top" secondItem="mrY-g8-TDA" secondAttribute="bottom" constant="10" id="Ggi-sv-hFk"/>
                                         <constraint firstItem="mrY-g8-TDA" firstAttribute="top" secondItem="xEY-8Q-SZb" secondAttribute="bottom" constant="8" id="JmV-33-f1r"/>
