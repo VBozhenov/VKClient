@@ -111,7 +111,6 @@ class FriendsController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as! FriendsCell
         
-        let friendAvatar = UIImageView()
         var filteredFriends: Results<User>
         
         if isFiltering() {
@@ -123,19 +122,12 @@ class FriendsController: UITableViewController {
         }
         
             cell.friendNameLabel.text = filteredFriends[indexPath.row].lastName + " " + filteredFriends[indexPath.row].firstName
-            
-            let border = UIView()
-            border.frame = cell.friendAvatar.bounds
-            border.layer.cornerRadius = cell.friendAvatar.bounds.height / 2
-            border.layer.masksToBounds = true
-            cell.friendAvatar.addSubview(border)
-            
+
             if let avatar = filteredFriends[indexPath.row].avatar {
-                friendAvatar.kf.setImage(with: URL(string: avatar))
+                RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: avatar,
+                                                       destinationAvatar: cell.friendAvatar)
             }
-            
-            friendAvatar.frame = border.bounds
-            border.addSubview(friendAvatar)
+        
         return cell
     }
     

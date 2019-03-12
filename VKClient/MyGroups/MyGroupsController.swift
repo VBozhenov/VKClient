@@ -86,39 +86,32 @@ class MyGroupsController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroups", for: indexPath) as! MyGroupsCell
         
         let group: String
-        let groupAvatar = UIImageView()
         
         if indexPath.section == 0 {
             if isFiltering() {
                 guard let mySearchedGroups = mySearchedGroups else { return UITableViewCell() }
                 group = mySearchedGroups[indexPath.row].name
                 if let photo = mySearchedGroups[indexPath.row].photo {
-                    groupAvatar.kf.setImage(with: URL(string: photo))
+                    RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: photo,
+                                                           destinationAvatar: cell.myGroupAvatar)
                 }
             } else {
                 guard let groups = groups else { return UITableViewCell() }
                 group = groups[indexPath.row].name
                 if let photo = groups[indexPath.row].photo {
-                    groupAvatar.kf.setImage(with: URL(string: photo))
+                    RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: photo,
+                                                           destinationAvatar: cell.myGroupAvatar)
                 }
             }
         } else {
             group = allSearchedGroups[indexPath.row].name
             if let photo = allSearchedGroups[indexPath.row].photo {
-                groupAvatar.kf.setImage(with: URL(string: photo))
+                RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: photo,
+                                                       destinationAvatar: cell.myGroupAvatar)
             }
         }
         
         cell.myGroupLabel.text = group
-
-        let border = UIView()
-        border.frame = cell.myGroupAvatar.bounds
-        border.layer.cornerRadius = cell.myGroupAvatar.bounds.height / 2
-        border.layer.masksToBounds = true
-        cell.myGroupAvatar.addSubview(border)
-
-        groupAvatar.frame = border.bounds
-        border.addSubview(groupAvatar)
         
         return cell
     }
