@@ -13,7 +13,7 @@ class DataService {
     
     func saveUsers(_ users: [User],
                    config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                   update: Bool = true)  {
+                   update: Bool = true) {
         do {
             let realm = try Realm(configuration: config)
             let oldUsersFriendsList = realm.objects(User.self)
@@ -31,21 +31,26 @@ class DataService {
     
     func savePhoto(_ photos: [Photo],
                    userId: Int,
-                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
+                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                   update: Bool = true) {
         do {
             let realm = try Realm(configuration: config)
             guard let user = realm.object(ofType: User.self, forPrimaryKey: userId) else { return }
             try realm.write {
-                user.photos.append(objectsIn: photos)
+                for photo in photos {
+                    if realm.object(ofType: Photo.self, forPrimaryKey: photo.photo) == nil {
+                        user.photos.append(photo)
+                    }
+                }
             }
         } catch {
             print(error.localizedDescription)
         }
     }
-
+    
     func saveGroups(_ groups: [Group],
-                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                   update: Bool = true)  {
+                    config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                    update: Bool = true) {
         do {
             let realm = try Realm(configuration: config)
             let oldGroups = realm.objects(Group.self)
@@ -73,8 +78,8 @@ class DataService {
     }
     
     func addGroup(group: Group,
-                     config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                     update: Bool = true)  {
+                  config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                  update: Bool = true)  {
         do {
             let realm = try Realm(configuration: config)
             try realm.write {
@@ -97,8 +102,8 @@ class DataService {
     }
     
     func deleteLike(photoPrimaryKey: String,
-                 config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                 update: Bool = true) {
+                    config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                    update: Bool = true) {
         let realm = try! Realm(configuration: config)
         let photo = realm.object(ofType: Photo.self, forPrimaryKey: photoPrimaryKey)
         try! realm.write {
@@ -108,8 +113,8 @@ class DataService {
     }
     
     func saveNews(_ news: [News], _ owners: [News], _ groups: [News],
-                    config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                    update: Bool = true)  {
+                  config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                  update: Bool = true)  {
         for oneNews in news {
             for user in owners {
                 if user.userId == oneNews.ownerId {

@@ -181,7 +181,7 @@ class FriendsController: UITableViewController {
     
     func filterUsers (from users: Results<User>, in section: Int) -> Results<User> {
         let key = firstLetters(in: users)[section]
-        return users.filter("lastName BEGINSWITH %@", key)
+        return users.filter("lastName BEGINSWITH[cd] %@", key)
     }
  
     func firstLetters (in users: Results<User>) -> [String] {

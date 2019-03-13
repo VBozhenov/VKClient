@@ -11,7 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 class Photo: Object {
-    @objc dynamic var uuid = ""
+//    @objc dynamic var uuid = ""
     @objc dynamic var id = 0
     @objc dynamic var userId = 0
     @objc dynamic var photo: String? = nil
@@ -29,10 +29,10 @@ class Photo: Object {
         self.likes = json["likes"]["count"].intValue
         self.reposts = json["reposts"]["count"].intValue
         self.isliked = json["likes"]["user_likes"].intValue
-        self.uuid = NSUUID().uuidString
+//        self.uuid = NSUUID().uuidString
     }
     
     override static func primaryKey() -> String {
-        return "uuid"
+        return "photo"
     }
 }
