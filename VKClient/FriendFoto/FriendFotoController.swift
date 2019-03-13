@@ -38,7 +38,6 @@ class FriendFotoController: UICollectionViewController {
             }
         }
         
-        collectionView.reloadData()
         title = friendName
     }
 
