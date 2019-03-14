@@ -179,9 +179,7 @@ class MyGroupsController: UITableViewController {
                 let self = self {
                 self.allSearchedGroups = groups
                 
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                self.tableView.reloadData()
             }
         }
         
