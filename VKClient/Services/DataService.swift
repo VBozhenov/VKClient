@@ -142,4 +142,19 @@ class DataService {
             print(error.localizedDescription)
         }
     }
+    
+    func saveMessages(_ messages: [Message],
+                    config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                    update: Bool = true) {
+        do {
+            let realm = try Realm(configuration: config)
+            let oldMessades = realm.objects(Message.self)
+            try realm.write {
+                realm.delete(oldMessades)
+                realm.add(messages, update: update)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }

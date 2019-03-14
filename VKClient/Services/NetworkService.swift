@@ -222,4 +222,30 @@ class NetworkService {
             
         }
     }
+    
+    func loadMessages(completion: (([Message]?, [Message]?, Error?) -> Void)? = nil) {
+        let path = "/method/messages.getConversations"
+        
+        let params: Parameters = [
+//            "extended": "1",
+            "v": version
+            ]
+        
+        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+            
+            switch response.result {
+                
+            case .success(let value):
+                let json = JSON(value)
+                let messages = json["response"]["items"].arrayValue.map { Message(json: $0) }
+                let users = json["response"]["profiles"].arrayValue.map { Message(json: $0) }
+                completion?(messages, users, nil)
+                print(value)
+                print(messages)
+                print(users)
+            case .failure(let error):
+                completion?(nil, nil, error)
+            }
+        }
+    }
 }

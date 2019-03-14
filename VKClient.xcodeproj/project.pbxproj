@@ -15,7 +15,6 @@
 		E707E697220339710096693E /* CustomPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707E696220339710096693E /* CustomPopAnimator.swift */; };
 		E707E69922033BBB0096693E /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707E69822033BBB0096693E /* CustomNavigationController.swift */; };
 		E71F49B622145A1B00DDB835 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71F49B522145A1B00DDB835 /* DataService.swift */; };
-		E7707F75222D4DB300DEAC4D /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7707F74222D4DB300DEAC4D /* FirebaseUser.swift */; };
 		E778E4CE2233A7CA0055A226 /* DetailedFriendFotoCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E778E4CD2233A7CA0055A226 /* DetailedFriendFotoCellLayout.swift */; };
 		E77F91C1221DE1B2006E0647 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F91C0221DE1B2006E0647 /* Throttler.swift */; };
 		E78054DD21C6CFDB008D179C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78054DC21C6CFDB008D179C /* AppDelegate.swift */; };
@@ -40,6 +39,10 @@
 		E7D28F0B21D15CF5008F4475 /* FriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D28F0A21D15CF5008F4475 /* FriendsController.swift */; };
 		E7D28F0D21D15D0E008F4475 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D28F0C21D15D0E008F4475 /* FriendsCell.swift */; };
 		E7D41110222C548100F349DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7D4110F222C548100F349DD /* GoogleService-Info.plist */; };
+		E7D55865223A35AA0064465B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D55864223A35AA0064465B /* Message.swift */; };
+		E7D55867223A39E90064465B /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D55866223A39E90064465B /* MessagesController.swift */; };
+		E7D5586A223A3AC00064465B /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D55869223A3AC00064465B /* Messages.storyboard */; };
+		E7D5586C223A3DB80064465B /* MessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5586B223A3DB80064465B /* MessagesCell.swift */; };
 		E7DB5CAE220FFF74003CBFCD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB5CAD220FFF74003CBFCD /* User.swift */; };
 		E7DB5CB022100082003CBFCD /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB5CAF22100082003CBFCD /* Photo.swift */; };
 		E7DB5CB222100107003CBFCD /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB5CB122100107003CBFCD /* Group.swift */; };
@@ -61,7 +64,6 @@
 		E707E696220339710096693E /* CustomPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimator.swift; sourceTree = "<group>"; };
 		E707E69822033BBB0096693E /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		E71F49B522145A1B00DDB835 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		E7707F74222D4DB300DEAC4D /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
 		E778E4CD2233A7CA0055A226 /* DetailedFriendFotoCellLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedFriendFotoCellLayout.swift; sourceTree = "<group>"; };
 		E77F91C0221DE1B2006E0647 /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		E78054D921C6CFDB008D179C /* VKClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,10 @@
 		E7D28F0A21D15CF5008F4475 /* FriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsController.swift; sourceTree = "<group>"; };
 		E7D28F0C21D15D0E008F4475 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		E7D4110F222C548100F349DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E7D55864223A35AA0064465B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		E7D55866223A39E90064465B /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
+		E7D55869223A3AC00064465B /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
+		E7D5586B223A3DB80064465B /* MessagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesCell.swift; sourceTree = "<group>"; };
 		E7DB5CAD220FFF74003CBFCD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E7DB5CAF22100082003CBFCD /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E7DB5CB122100107003CBFCD /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -121,12 +127,12 @@
 		E702434121F03B6B00BFB542 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E7E66588220779940071B5C9 /* Session.swift */,
 				E7DB5CB122100107003CBFCD /* Group.swift */,
 				E7DB5CAF22100082003CBFCD /* Photo.swift */,
 				E7DB5CAD220FFF74003CBFCD /* User.swift */,
 				E702434721F0F70600BFB542 /* News.swift */,
-				E7E66588220779940071B5C9 /* Session.swift */,
-				E7707F74222D4DB300DEAC4D /* FirebaseUser.swift */,
+				E7D55864223A35AA0064465B /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -172,6 +178,7 @@
 				E789E8392214164B009E51ED /* DetailedFriendFoto */,
 				E7A11C5721D018DF000DB879 /* MyGroups */,
 				E702434221F03BDB00BFB542 /* News */,
+				E7D55868223A39F90064465B /* Messages */,
 				E702434121F03B6B00BFB542 /* Model */,
 				E789E83422140ED3009E51ED /* Animation, custom controllers, layouts */,
 				E77F91C0221DE1B2006E0647 /* Throttler.swift */,
@@ -242,6 +249,7 @@
 				E7BCA878220634F700FDC05A /* Friends.storyboard */,
 				E7BCA87222062BE700FDC05A /* Groups.storyboard */,
 				E7BCA87A2206352100FDC05A /* News.storyboard */,
+				E7D55869223A3AC00064465B /* Messages.storyboard */,
 			);
 			path = Stotyboards;
 			sourceTree = "<group>";
@@ -262,6 +270,15 @@
 				E7D28F0821D15CBC008F4475 /* FriendFotoCell.swift */,
 			);
 			path = FriendFoto;
+			sourceTree = "<group>";
+		};
+		E7D55868223A39F90064465B /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				E7D55866223A39E90064465B /* MessagesController.swift */,
+				E7D5586B223A3DB80064465B /* MessagesCell.swift */,
+			);
+			path = Messages;
 			sourceTree = "<group>";
 		};
 		FB5F5AD2459DC4963F0C310D /* Pods */ = {
@@ -335,6 +352,7 @@
 			files = (
 				E7BCA87322062BE700FDC05A /* Groups.storyboard in Resources */,
 				E7BCA87B2206352100FDC05A /* News.storyboard in Resources */,
+				E7D5586A223A3AC00064465B /* Messages.storyboard in Resources */,
 				E7BCA879220634F700FDC05A /* Friends.storyboard in Resources */,
 				E7BCA87D2206353600FDC05A /* Main.storyboard in Resources */,
 				E78054E721C6CFDC008D179C /* LaunchScreen.storyboard in Resources */,
@@ -407,11 +425,11 @@
 			files = (
 				E7B3BD6822379BDC003B68F3 /* NewsCellProtocol.swift in Sources */,
 				E78054F321C6D35F008D179C /* LoginFormViewController.swift in Sources */,
-				E7707F75222D4DB300DEAC4D /* FirebaseUser.swift in Sources */,
 				E7E66589220779940071B5C9 /* Session.swift in Sources */,
 				E78054F121C6D14A008D179C /* StartScreenViewController.swift in Sources */,
 				E789E836221414D2009E51ED /* DetailedFriendFotoViewController.swift in Sources */,
 				E7EA7DF121EA750C00D813B3 /* GradientView.swift in Sources */,
+				E7D55865223A35AA0064465B /* Message.swift in Sources */,
 				E789E8382214163E009E51ED /* DetailedFriendFotoCell.swift in Sources */,
 				E7DB5CAE220FFF74003CBFCD /* User.swift in Sources */,
 				E778E4CE2233A7CA0055A226 /* DetailedFriendFotoCellLayout.swift in Sources */,
@@ -434,6 +452,8 @@
 				E7A11C5B21D0194C000DB879 /* MyGroupsController.swift in Sources */,
 				E702434621F03C4A00BFB542 /* NewsCell.swift in Sources */,
 				E7A11C5921D0192D000DB879 /* MyGroupsCell.swift in Sources */,
+				E7D55867223A39E90064465B /* MessagesController.swift in Sources */,
+				E7D5586C223A3DB80064465B /* MessagesCell.swift in Sources */,
 				E77F91C1221DE1B2006E0647 /* Throttler.swift in Sources */,
 				E7D28F0721D15CA2008F4475 /* FriendFotoController.swift in Sources */,
 				E7A135212211F0CF00506CEE /* NetworkService.swift in Sources */,

@@ -25,7 +25,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBD-vM-AtB">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBD-vM-AtB">
                                             <rect key="frame" x="8" y="8" width="313" height="28"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -136,6 +136,7 @@
                                                 <constraint firstAttribute="height" priority="990" constant="66" id="8R8-ZT-Yka"/>
                                                 <constraint firstAttribute="width" priority="990" constant="66" id="oet-cN-qwQ"/>
                                             </constraints>
+                                            <state key="normal" image="heartRed"/>
                                             <connections>
                                                 <action selector="likeCellButtonPressed:" destination="JUW-g4-3Cd" eventType="touchUpInside" id="jmS-Bd-77s"/>
                                             </connections>
@@ -255,5 +256,6 @@
     </scenes>
     <resources>
         <image name="friend" width="28" height="30"/>
+        <image name="heartRed" width="22" height="22"/>
     </resources>
 </document>

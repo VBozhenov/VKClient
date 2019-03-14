@@ -144,6 +144,7 @@
                         <segue destination="mT0-tm-ibu" kind="relationship" relationship="viewControllers" id="cs2-2S-NQ1"/>
                         <segue destination="m9h-Wj-aav" kind="relationship" relationship="viewControllers" id="mig-NR-iID"/>
                         <segue destination="W1V-8k-5ha" kind="relationship" relationship="viewControllers" id="VaX-R5-sC9"/>
+                        <segue destination="xuH-wz-SV2" kind="relationship" relationship="viewControllers" id="JYp-co-CRi"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OMX-xu-an0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -168,7 +169,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYt-I2-2FZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3320" y="26"/>
+            <point key="canvasLocation" x="3318" y="-126"/>
         </scene>
         <!--News-->
         <scene sceneID="4Wx-bs-xt2">
@@ -178,13 +179,23 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9uX-h8-LUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3328" y="314"/>
+            <point key="canvasLocation" x="3307" y="122"/>
+        </scene>
+        <!--Messages-->
+        <scene sceneID="aXl-PQ-UEU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Messages" id="xuH-wz-SV2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="wNE-XW-LqE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Pf-Ny-gZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3329" y="282"/>
         </scene>
     </scenes>
     <resources>
         <image name="circled-dot" width="1200" height="1200"/>
-        <image name="friend" width="24" height="24"/>
-        <image name="group" width="5.7600002288818359" height="5.7600002288818359"/>
-        <image name="news" width="24" height="24"/>
+        <image name="friend" width="28" height="30"/>
+        <image name="group" width="36" height="26"/>
+        <image name="news" width="30" height="25"/>
     </resources>
 </document>
