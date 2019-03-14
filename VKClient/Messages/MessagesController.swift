@@ -14,14 +14,14 @@ class MessagesController: UITableViewController {
     
     var messages: Results<Message>?
     
-    let networkService = NetworkService()
+    let messagesNetworkService = MessagesNetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkService.loadMessages() { [weak self] messages, users, error in
+        messagesNetworkService.loadMessages() { [weak self] messages, users, error in
             if let error = error {
                 print(error.localizedDescription)
                 return

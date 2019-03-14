@@ -17,7 +17,8 @@ class FriendFotoController: UICollectionViewController {
     var indexPathForPushedPhoto = IndexPath()
     var photos: Results<Photo>?
     
-    let networkService = NetworkService()
+    let utilityNetworkService = UtilityNetworkService()
+    let friendsNetworkService = FriendsNetworkService()
     let dataService = DataService()
     
     var notificationToken: NotificationToken?
@@ -29,7 +30,7 @@ class FriendFotoController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkService.loadFriendsFoto(for: friendId) { [weak self] photos, error in
+        friendsNetworkService.loadFriendsFoto(for: friendId) { [weak self] photos, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -83,10 +84,10 @@ class FriendFotoController: UICollectionViewController {
         
         cell.buttonHandler = {
             if photos[indexPath.row].isliked == 0 {
-                self.networkService.addLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
+                self.utilityNetworkService.addLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
                 self.dataService.addLike(photoPrimaryKey: photos[indexPath.row].photo!)
             } else {
-                self.networkService.deleteLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
+                self.utilityNetworkService.deleteLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
                 self.dataService.deleteLike(photoPrimaryKey: photos[indexPath.row].photo!)
             }
         }

@@ -14,7 +14,7 @@ class NewsController: UITableViewController {
     
     var news: Results<News>?
     
-    let networkService = NetworkService()
+    let newsNetworkService = NewsNetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
 
@@ -23,7 +23,7 @@ class NewsController: UITableViewController {
         
         tableView.estimatedRowHeight = 300
 
-        networkService.loadNews() { [weak self] news, owners, groups, error in
+        newsNetworkService.loadNews() { [weak self] news, owners, groups, error in
             if let error = error {
                 print(error.localizedDescription)
                 return

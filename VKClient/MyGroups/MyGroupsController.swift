@@ -9,8 +9,6 @@
 import UIKit
 import Kingfisher
 import RealmSwift
-//import FirebaseDatabase
-//import FirebaseAuth
 
 class MyGroupsController: UITableViewController {
     
@@ -18,12 +16,9 @@ class MyGroupsController: UITableViewController {
     var mySearchedGroups: Results<Group>?
     var allSearchedGroups = [Group]()
     
-    let networkService = NetworkService()
+    let groupsNetworkService = GroupsNetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
-    
-//    private var firebaseUsers = [FirebaseUser]()
-//    private let ref = Database.database().reference(withPath: "users")
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -38,7 +33,7 @@ class MyGroupsController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        networkService.loadGroups() { [weak self] groups, error in
+        groupsNetworkService.loadGroups() { [weak self] groups, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -134,7 +129,7 @@ class MyGroupsController: UITableViewController {
                     groupId = groups[indexPath.row].id
                     self.dataService.deleteGroup(groupId: groupId)
                 }
-                self.networkService.leaveGroup(with: groupId)
+                self.groupsNetworkService.leaveGroup(with: groupId)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         } else {
@@ -150,11 +145,10 @@ class MyGroupsController: UITableViewController {
                     let groupId = self.allSearchedGroups[indexPath.row].id
                     let groupsId = [Int]()
                     if !groupsId.contains(groupId) {
-                        self.networkService.joinGroup(with: groupId)
+                        self.groupsNetworkService.joinGroup(with: groupId)
                         let groupAdded = self.allSearchedGroups[indexPath.row]
                         self.dataService.addGroup(group: groupAdded)
                         self.searchController.isActive = true
-//                        self.addedGroupsHistoryToFirebase(group: groupAdded)
                     }
                 }
                 
@@ -177,7 +171,7 @@ class MyGroupsController: UITableViewController {
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         
-        networkService.searchGroups(searchText) { [weak self] groups, error in
+        groupsNetworkService.searchGroups(searchText) { [weak self] groups, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -215,24 +209,12 @@ class MyGroupsController: UITableViewController {
             }
         })
     }
-    
-//    func addedGroupsHistoryToFirebase (group: Group) {
-//        self.ref.child("\(String(Session.user.userID))/groupsAdded").updateChildValues([String(group.id): group.name])
-//    }
-//
-//    func addedSearchHistoryToFirebase (searchText: String) {
-//        self.ref.child("\(String(Session.user.userID))/searchHistory").updateChildValues([String(format: "%0.f", Date().timeIntervalSince1970): searchText])
-//    }
-    
 }
 
 extension MyGroupsController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         throttler.throttle {
             self.filterContentForSearchText(searchController.searchBar.text!)
-//            if self.isFiltering() && (searchController.searchBar.text!.count > 3) {
-//                self.addedSearchHistoryToFirebase(searchText: searchController.searchBar.text!)
-//            }
         }
     }
 }
