@@ -20,7 +20,7 @@ class NewsCell: UITableViewCell, NewsCellProtocol {
     @IBOutlet weak var ownersPhoto: UIImageView!
     @IBOutlet weak var ownersName: UILabel!
     @IBOutlet weak var newsPhotoImage: UIImageView!
-    
+
     @IBAction func likeButtonPushed(_ sender: UIButton) {
         ConigureNewsCell.likeButtonPushed(likeButton: likeButton, numberOfLikes: &numberOfLikes)
     }

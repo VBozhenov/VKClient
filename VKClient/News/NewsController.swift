@@ -13,7 +13,6 @@ import Kingfisher
 class NewsController: UITableViewController {
     
     var news: Results<News>?
-    
     let newsNetworkService = NewsNetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
@@ -58,15 +57,11 @@ class NewsController: UITableViewController {
 
         if news[indexPath.row].newsPhoto.isEmpty {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsNoPhoto") as? NewsNoPhotoCell else { return UITableViewCell() }
-
             ConigureNewsCell.configure(news[indexPath.row], cell: cell)
-
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "News") as? NewsCell else { return UITableViewCell() }
-
             ConigureNewsCell.configure(news[indexPath.row], cell: cell)
-            
             return cell
         }
     }
