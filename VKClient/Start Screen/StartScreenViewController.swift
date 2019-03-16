@@ -13,6 +13,8 @@ class StartScreenViewController: UIViewController {
     @IBOutlet weak var dotOne: UIImageView!
     @IBOutlet weak var dotTwo: UIImageView!
     @IBOutlet weak var dotThree: UIImageView!
+    @IBOutlet weak var heading: UILabel!
+    @IBOutlet weak var logInButton: UIButton!
     
     @IBAction func loginButtonPushed(_ sender: UIButton) {
 //        deleteCookies()
@@ -31,6 +33,14 @@ class StartScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 1) {
+            self.heading.center.y += self.view.bounds.height
+            self.logInButton.center.x += self.view.bounds.width
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

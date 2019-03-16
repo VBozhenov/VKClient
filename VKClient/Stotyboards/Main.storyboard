@@ -102,6 +102,8 @@
                         <outlet property="dotOne" destination="98Z-dL-fsf" id="xjV-UJ-Gh4"/>
                         <outlet property="dotThree" destination="cbY-0m-yP8" id="Cxe-Sk-bVV"/>
                         <outlet property="dotTwo" destination="QnT-xl-ywP" id="cI9-JA-LGn"/>
+                        <outlet property="heading" destination="DQw-uE-pgn" id="h43-H7-6oM"/>
+                        <outlet property="logInButton" destination="tNm-jG-eaI" id="adl-np-DSg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
