@@ -36,11 +36,16 @@ class StartScreenViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        UIView.animate(withDuration: 1) {
-            self.heading.center.y += self.view.bounds.height
-            self.logInButton.center.x += self.view.bounds.width
-        }
-        
+        UIView.animate(withDuration: 1,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 0.0,
+                       options: [],
+                       animations: {
+                        self.heading.center.y += self.view.bounds.height
+                        self.logInButton.center.x += self.view.bounds.width
+        },
+                       completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,7 +60,8 @@ class StartScreenViewController: UIViewController {
     func animationDotOne() {
         UIView.animate(withDuration: duration,
                        delay: delay,
-                       animations: {self.dotOne.alpha = self.alphaStart
+                       animations: {
+                        self.dotOne.alpha = self.alphaStart
                         self.dotOne.alpha = self.alphaEnd},
                        completion: { _ in self.animationDotTwo() }
         )
