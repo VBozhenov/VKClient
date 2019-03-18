@@ -25,13 +25,11 @@ class ConigureNewsCell {
         RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news.ownerPhoto,
                                                destinationAvatar: cell.ownersPhoto)
         
-        let isLiked = news.isliked
-        if isLiked == 1 {
+        if news.isliked == 1 {
             cell.likeButton.setImage(UIImage(named: "heartRed"), for: UIControl.State.normal)
         } else {
             cell.likeButton.setImage(UIImage(named: "heartWhite"), for: UIControl.State.normal)
         }
-        cell.likeButton.setTitle(String(news.likesCount), for: .normal)
     }
     
     static func likeButtonPushed(likeButton: UIButton, numberOfLikes: inout Int) {

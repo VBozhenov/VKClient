@@ -43,9 +43,6 @@ class News: Object {
         self.repostsCount = json["reposts"]["count"].intValue
         self.userReposted = json["reposts"]["user_reposted"].intValue
         self.views = json["views"]["count"].intValue
-        
-//        self.uuid = NSUUID().uuidString
-        
     }
     override static func primaryKey() -> String {
         return "postId"
