@@ -14,6 +14,7 @@ class NewsController: UITableViewController {
     
     var news: Results<News>?
     let newsNetworkService = NewsNetworkService()
+    let utilityNetworkService = UtilityNetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
 
@@ -62,6 +63,16 @@ class NewsController: UITableViewController {
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "News") as? NewsCell else { return UITableViewCell() }
             ConigureNewsCell.configure(news[indexPath.row], cell: cell)
+
+            cell.buttonHandler = {
+                if news[indexPath.row].isliked == 0 {
+                    self.utilityNetworkService.addLike(to: "post", withId: news[indexPath.row].postId, andOwnerId: news[indexPath.row].ownerId)
+                    self.dataService.addLike(photoPrimaryKey: String(news[indexPath.row].postId))
+                } else {
+                    self.utilityNetworkService.deleteLike(to: "post", withId: news[indexPath.row].postId, andOwnerId: news[indexPath.row].ownerId)
+                    self.dataService.deleteLike(photoPrimaryKey: String(news[indexPath.row].postId))
+                }
+            }
             return cell
         }
     }

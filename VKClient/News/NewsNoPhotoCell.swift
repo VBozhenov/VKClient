@@ -10,6 +10,7 @@ import UIKit
 
 class NewsNoPhotoCell: UITableViewCell, NewsCellProtocol {
     
+    var buttonHandler:(()->())?
     var numberOfLikes = 0
 
     @IBOutlet weak var ownersPhoto: UIImageView!
@@ -22,6 +23,7 @@ class NewsNoPhotoCell: UITableViewCell, NewsCellProtocol {
     var newsPhotoImage: UIImageView!
     
     @IBAction func likeButtoPushed(_ sender: UIButton) {
+        buttonHandler?()
         ConigureNewsCell.likeButtonPushed(likeButton: likeButton, numberOfLikes: &numberOfLikes)
     }
     

@@ -124,7 +124,7 @@ class DataService {
                 }
             }
             for group in groups {
-                if ("-" + group.userId) == oneNews.ownerId {
+                if (-group.userId) == oneNews.ownerId {
                     oneNews.ownerPhoto = group.ownerPhoto
                     oneNews.groupName = group.groupName
                     oneNews.userId = group.userId

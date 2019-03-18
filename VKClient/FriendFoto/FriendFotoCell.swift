@@ -23,7 +23,7 @@ class FriendFotoCell: UICollectionViewCell {
     
     @IBAction func likeCellButtonPressed(_ sender: UIButton) {
         buttonHandler?()
-        animateLikeCellButtonConstraints()
+        animateLikeCellButton()
     }
     
     func animateFoto() {
@@ -57,7 +57,7 @@ class FriendFotoCell: UICollectionViewCell {
 //        })
 //        })
 //    }
-    func animateLikeCellButtonConstraints() {
+    func animateLikeCellButton() {
         let originalCenter = likeCellButton.center
         UIView.animateKeyframes(withDuration: 1,
                                 delay: 0,

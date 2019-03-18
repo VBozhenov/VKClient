@@ -12,7 +12,7 @@ class ConigureNewsCell {
     
     static func configure(_ news: News, cell: NewsCellProtocol) {
 
-        cell.ownersName.text = Int(news.ownerId)! > 0 ? news.userName : news.groupName
+        cell.ownersName.text = news.ownerId > 0 ? news.userName : news.groupName
         cell.newsText.text = news.text
         cell.likeButton.setTitle(String(news.likesCount), for: .normal)
         cell.commentButton.setTitle(String(news.commentsCount), for: .normal)
@@ -24,15 +24,44 @@ class ConigureNewsCell {
 
         RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news.ownerPhoto,
                                                destinationAvatar: cell.ownersPhoto)
+        
+        let isLiked = news.isliked
+        if isLiked == 1 {
+            cell.likeButton.setImage(UIImage(named: "heartRed"), for: UIControl.State.normal)
+        } else {
+            cell.likeButton.setImage(UIImage(named: "heartWhite"), for: UIControl.State.normal)
+        }
+        cell.likeButton.setTitle(String(news.likesCount), for: .normal)
     }
     
     static func likeButtonPushed(likeButton: UIButton, numberOfLikes: inout Int) {
+        
+        animateButton(likeButton)
+        
         if likeButton.currentImage == UIImage(named: "heartWhite") {
             likeButton.setImage(UIImage(named: "heartRed"), for: UIControl.State.normal)
-            numberOfLikes += 1
+            likeButton.setTitle(String(Int((likeButton.titleLabel?.text)!)! + 1), for: .normal)
         } else {
             likeButton.setImage(UIImage(named: "heartWhite"), for: UIControl.State.normal)
-            numberOfLikes -= 1
+            likeButton.setTitle(String(Int((likeButton.titleLabel?.text)!)! - 1), for: .normal)
         }
+    }
+    
+    static func animateButton(_ button: UIButton) {
+        let originalCenter = button.center
+        UIView.animateKeyframes(withDuration: 0.5,
+                                delay: 0,
+                                animations: {
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0,
+                                                       relativeDuration: 0.45,
+                                                       animations: {
+                                                        button.center.y -= 20
+                                    })
+                                    UIView.addKeyframe(withRelativeStartTime: 0.5,
+                                                       relativeDuration: 0.45) {
+                                                        button.center = originalCenter
+                                    }
+        },
+                                completion: nil)
     }
 }
