@@ -39,22 +39,39 @@ class FriendFotoCell: UICollectionViewCell {
         self.friendFoto.layer.add(animation, forKey: nil)
     }
     
+//    func animateLikeCellButtonConstraints() {
+//        UIView.animate(withDuration: 1,
+//                       delay: 0,
+//                       options: .curveEaseInOut,
+//                       animations: {
+//                        self.likeCellConstraint.forEach { $0.isActive.toggle() }
+//                        self.likeCellButton.layoutIfNeeded()
+//                        self.numberOfLikes.isHidden = true
+//        }, completion: { _ in UIView.animate(withDuration: 1,
+//                                             delay: 0,
+//                                             options: .curveEaseInOut,
+//                                             animations: {
+//                                                self.likeCellConstraint.forEach { $0.isActive.toggle() }
+//                                                self.likeCellButton.layoutIfNeeded()
+//                                                self.numberOfLikes.isHidden = false
+//        })
+//        })
+//    }
     func animateLikeCellButtonConstraints() {
-        UIView.animate(withDuration: 1,
-                       delay: 0,
-                       options: .curveEaseInOut,
-                       animations: {
-                        self.likeCellConstraint.forEach { $0.isActive.toggle() }
-                        self.likeCellButton.layoutIfNeeded()
-                        self.numberOfLikes.isHidden = true
-        }, completion: { _ in UIView.animate(withDuration: 1,
-                                             delay: 0,
-                                             options: .curveEaseInOut,
-                                             animations: {
-                                                self.likeCellConstraint.forEach { $0.isActive.toggle() }
-                                                self.likeCellButton.layoutIfNeeded()
-                                                self.numberOfLikes.isHidden = false
-        })
-        })
+        let originalCenter = likeCellButton.center
+        UIView.animateKeyframes(withDuration: 1,
+                                delay: 0,
+                                animations: {
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0,
+                                                       relativeDuration: 0.45,
+                                                       animations: {
+                                                        self.likeCellButton.center = self.friendFoto.center
+                                    })
+                                    UIView.addKeyframe(withRelativeStartTime: 0.5,
+                                                       relativeDuration: 0.45) {
+                                                        self.likeCellButton.center = originalCenter
+                                    }
+        },
+                                completion: nil)
     }
 }

@@ -117,7 +117,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07e-kW-cmY">
-                                            <rect key="frame" x="74.5" y="134" width="46.5" height="23"/>
+                                            <rect key="frame" x="74.5" y="129" width="46.5" height="23"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -152,7 +152,7 @@
                                     <constraint firstItem="IOQ-uN-SLD" firstAttribute="leading" secondItem="JUW-g4-3Cd" secondAttribute="leading" constant="8" id="Nih-ib-jhL"/>
                                     <constraint firstItem="Qe5-SQ-sJ4" firstAttribute="centerY" secondItem="JUW-g4-3Cd" secondAttribute="centerY" priority="750" id="PWb-pr-e4V"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Qe5-SQ-sJ4" secondAttribute="trailing" id="T4K-Na-CHe"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="07e-kW-cmY" secondAttribute="bottom" id="ZDk-lv-EfD"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="07e-kW-cmY" secondAttribute="bottom" constant="5" id="ZDk-lv-EfD"/>
                                     <constraint firstItem="qsS-2e-52L" firstAttribute="leading" secondItem="JUW-g4-3Cd" secondAttribute="leading" id="a8U-r6-x8e"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="Qe5-SQ-sJ4" secondAttribute="bottom" id="agZ-Ol-CEx"/>
                                     <constraint firstItem="07e-kW-cmY" firstAttribute="leading" secondItem="JUW-g4-3Cd" secondAttribute="leading" priority="250" constant="98" id="eU8-0j-8DP"/>
