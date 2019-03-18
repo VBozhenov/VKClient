@@ -59,19 +59,17 @@ class NewsController: UITableViewController {
         if news[indexPath.row].newsPhoto.isEmpty {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsNoPhoto") as? NewsNoPhotoCell else { return UITableViewCell() }
             ConigureNewsCell.configure(news[indexPath.row], cell: cell)
+            
+            cell.buttonHandler = {
+                self.likeAddDelete(news[indexPath.row])
+            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "News") as? NewsCell else { return UITableViewCell() }
             ConigureNewsCell.configure(news[indexPath.row], cell: cell)
 
             cell.buttonHandler = {
-                if news[indexPath.row].isliked == 0 {
-                    self.utilityNetworkService.addLike(to: "post", withId: news[indexPath.row].postId, andOwnerId: news[indexPath.row].ownerId)
-                    self.dataService.addLike(photoPrimaryKey: String(news[indexPath.row].postId))
-                } else {
-                    self.utilityNetworkService.deleteLike(to: "post", withId: news[indexPath.row].postId, andOwnerId: news[indexPath.row].ownerId)
-                    self.dataService.deleteLike(photoPrimaryKey: String(news[indexPath.row].postId))
-                }
+                self.likeAddDelete(news[indexPath.row])
             }
             return cell
         }
@@ -91,5 +89,15 @@ class NewsController: UITableViewController {
                 fatalError("\(error)")
             }
         })
+    }
+    
+    func likeAddDelete(_ news: News) {
+        if news.isliked == 0 {
+            self.utilityNetworkService.addLike(to: "post", withId: news.postId, andOwnerId: news.ownerId)
+            self.dataService.addLikeForNews(newsPrimaryKey: news.postId)
+        } else {
+            self.utilityNetworkService.deleteLike(to: "post", withId: news.postId, andOwnerId: news.ownerId)
+            self.dataService.deleteLikeForNews(newsPrimaryKey: news.postId)
+        }
     }
 }

@@ -90,7 +90,7 @@ class DataService {
         }
     }
     
-    func addLike(photoPrimaryKey: String,
+    func addLikeForPhoto(photoPrimaryKey: String,
                  config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                  update: Bool = true) {
         let realm = try! Realm(configuration: config)
@@ -101,7 +101,7 @@ class DataService {
         }
     }
     
-    func deleteLike(photoPrimaryKey: String,
+    func deleteLikeForPhoto(photoPrimaryKey: String,
                     config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                     update: Bool = true) {
         let realm = try! Realm(configuration: config)
@@ -155,6 +155,28 @@ class DataService {
             }
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func addLikeForNews(newsPrimaryKey: Int,
+                         config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                         update: Bool = true) {
+        let realm = try! Realm(configuration: config)
+        let oneNews = realm.object(ofType: News.self, forPrimaryKey: newsPrimaryKey)
+        try! realm.write {
+            oneNews?.isliked += 1
+            oneNews?.likesCount += 1
+        }
+    }
+    
+    func deleteLikeForNews(newsPrimaryKey: Int,
+                            config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                            update: Bool = true) {
+        let realm = try! Realm(configuration: config)
+        let oneNews = realm.object(ofType: News.self, forPrimaryKey: newsPrimaryKey)
+        try! realm.write {
+            oneNews?.isliked -= 1
+            oneNews?.likesCount -= 1
         }
     }
 }

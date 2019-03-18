@@ -85,10 +85,10 @@ class FriendFotoController: UICollectionViewController {
         cell.buttonHandler = {
             if photos[indexPath.row].isliked == 0 {
                 self.utilityNetworkService.addLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
-                self.dataService.addLike(photoPrimaryKey: photos[indexPath.row].photo!)
+                self.dataService.addLikeForPhoto(photoPrimaryKey: photos[indexPath.row].photo!)
             } else {
                 self.utilityNetworkService.deleteLike(to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
-                self.dataService.deleteLike(photoPrimaryKey: photos[indexPath.row].photo!)
+                self.dataService.deleteLikeForPhoto(photoPrimaryKey: photos[indexPath.row].photo!)
             }
         }
         
