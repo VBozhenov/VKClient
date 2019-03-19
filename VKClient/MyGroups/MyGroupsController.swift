@@ -129,7 +129,7 @@ class MyGroupsController: UITableViewController {
                     groupId = groups[indexPath.row].id
                     self.dataService.deleteGroup(groupId: groupId)
                 }
-                self.groupsNetworkService.leaveGroup(with: groupId)
+                self.groupsNetworkService.groupLeaveJoin(action: .leaveGroup, with: groupId)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         } else {
@@ -145,7 +145,7 @@ class MyGroupsController: UITableViewController {
                     let groupId = self.allSearchedGroups[indexPath.row].id
                     let groupsId = [Int]()
                     if !groupsId.contains(groupId) {
-                        self.groupsNetworkService.joinGroup(with: groupId)
+                        self.groupsNetworkService.groupLeaveJoin(action: .joinGroup, with: groupId)
                         let groupAdded = self.allSearchedGroups[indexPath.row]
                         self.dataService.addGroup(group: groupAdded)
                         self.searchController.isActive = true

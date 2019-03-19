@@ -9,8 +9,10 @@
 import Foundation
 
 enum GetAction: String {
-    case add = "/method/likes.add"
-    case delete = "/method/likes.delete"
+    case addLike = "/method/likes.add"
+    case deleteLike = "/method/likes.delete"
+    case leaveGroup = "/method/groups.leave"
+    case joinGroup = "/method/groups.join"
 }
 
 enum SaveAction {

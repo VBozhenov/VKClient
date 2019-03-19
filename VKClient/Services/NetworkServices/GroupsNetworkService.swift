@@ -65,22 +65,8 @@ class GroupsNetworkService {
         }
     }
     
-    func leaveGroup(with groupID: Int, completion: (() -> Void)? = nil) {
-        let path = "/method/groups.leave"
-        
-        let params: Parameters = [
-            "access_token": token,
-            "group_id": groupID,
-            "v": version
-        ]
-        
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
-            completion?()
-        }
-    }
-    
-    func joinGroup(with groupID: Int, completion: (() -> Void)? = nil) {
-        let path = "/method/groups.join"
+    func groupLeaveJoin(action: GetAction, with groupID: Int, completion: (() -> Void)? = nil) {
+        let path = action.rawValue
         
         let params: Parameters = [
             "access_token": token,

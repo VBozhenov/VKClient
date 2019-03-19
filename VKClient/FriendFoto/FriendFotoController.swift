@@ -84,11 +84,11 @@ class FriendFotoController: UICollectionViewController {
         
         cell.buttonHandler = {
             if photos[indexPath.row].isliked == 0 {
-                self.utilityNetworkService.likeAddDelete(action: .add, to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
+                self.utilityNetworkService.likeAddDelete(action: .addLike, to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
 //                self.dataService.addLikeForPhoto(photoPrimaryKey: photos[indexPath.row].photo!)
                 self.dataService.likeAddDeleteForPhoto(action: .add, primaryKey: photos[indexPath.row].photo!)
             } else {
-                self.utilityNetworkService.likeAddDelete(action: .delete, to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
+                self.utilityNetworkService.likeAddDelete(action: .deleteLike, to: "photo", withId: photos[indexPath.row].id, andOwnerId: self.friendId)
 //                self.dataService.deleteLikeForPhoto(photoPrimaryKey: photos[indexPath.row].photo!)
                 self.dataService.likeAddDeleteForPhoto(action: .delete, primaryKey: photos[indexPath.row].photo!)
 
