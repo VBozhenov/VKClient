@@ -93,11 +93,11 @@ class NewsController: UITableViewController {
     
     func likeAddDelete(_ news: News) {
         if news.isliked == 0 {
-            self.utilityNetworkService.addLike(to: "post", withId: news.postId, andOwnerId: news.ownerId)
-            self.dataService.addLikeForNews(newsPrimaryKey: news.postId)
+            self.utilityNetworkService.likeAddDelete(action: .add, to: "post", withId: news.postId, andOwnerId: news.ownerId)
+            self.dataService.likeAddDeleteForNews(action: .add, primaryKey: news.postId)
         } else {
-            self.utilityNetworkService.deleteLike(to: "post", withId: news.postId, andOwnerId: news.ownerId)
-            self.dataService.deleteLikeForNews(newsPrimaryKey: news.postId)
+            self.utilityNetworkService.likeAddDelete(action: .delete ,to: "post", withId: news.postId, andOwnerId: news.ownerId)
+            self.dataService.likeAddDeleteForNews(action: .delete, primaryKey: news.postId)
         }
     }
 }

@@ -48,6 +48,23 @@ class DataService {
         }
     }
     
+    func likeAddDeleteForPhoto(action: SaveAction,
+                               primaryKey: String,
+                               config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                               update: Bool = true) {
+        let realm = try! Realm(configuration: config)
+        let object = realm.object(ofType: Photo.self, forPrimaryKey: primaryKey)
+        try! realm.write {
+            if action == .add {
+                object?.isliked += 1
+                object?.likes += 1
+            } else {
+                object?.isliked -= 1
+                object?.likes -= 1
+            }
+        }
+    }
+    
     func saveGroups(_ groups: [Group],
                     config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                     update: Bool = true) {
@@ -89,29 +106,7 @@ class DataService {
             print(error.localizedDescription)
         }
     }
-    
-    func addLikeForPhoto(photoPrimaryKey: String,
-                 config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                 update: Bool = true) {
-        let realm = try! Realm(configuration: config)
-        let photo = realm.object(ofType: Photo.self, forPrimaryKey: photoPrimaryKey)
-        try! realm.write {
-            photo?.isliked += 1
-            photo?.likes += 1
-        }
-    }
-    
-    func deleteLikeForPhoto(photoPrimaryKey: String,
-                    config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                    update: Bool = true) {
-        let realm = try! Realm(configuration: config)
-        let photo = realm.object(ofType: Photo.self, forPrimaryKey: photoPrimaryKey)
-        try! realm.write {
-            photo?.isliked -= 1
-            photo?.likes -= 1
-        }
-    }
-    
+ 
     func saveNews(_ news: [News], _ owners: [News], _ groups: [News],
                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                   update: Bool = true)  {
@@ -143,9 +138,27 @@ class DataService {
         }
     }
     
+    func likeAddDeleteForNews(action: SaveAction,
+                              primaryKey: Int,
+                              config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                              update: Bool = true) {
+        let realm = try! Realm(configuration: config)
+        let object = realm.object(ofType: News.self, forPrimaryKey: primaryKey)
+        try! realm.write {
+            if action == .add {
+                object?.isliked += 1
+                object?.likes += 1
+            } else {
+                object?.isliked -= 1
+                object?.likes -= 1
+            }
+        }
+    }
+    
+    
     func saveMessages(_ messages: [Message],
-                    config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                    update: Bool = true) {
+                      config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                      update: Bool = true) {
         do {
             let realm = try Realm(configuration: config)
             let oldMessades = realm.objects(Message.self)
@@ -155,28 +168,6 @@ class DataService {
             }
         } catch {
             print(error.localizedDescription)
-        }
-    }
-    
-    func addLikeForNews(newsPrimaryKey: Int,
-                         config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                         update: Bool = true) {
-        let realm = try! Realm(configuration: config)
-        let oneNews = realm.object(ofType: News.self, forPrimaryKey: newsPrimaryKey)
-        try! realm.write {
-            oneNews?.isliked += 1
-            oneNews?.likesCount += 1
-        }
-    }
-    
-    func deleteLikeForNews(newsPrimaryKey: Int,
-                            config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                            update: Bool = true) {
-        let realm = try! Realm(configuration: config)
-        let oneNews = realm.object(ofType: News.self, forPrimaryKey: newsPrimaryKey)
-        try! realm.write {
-            oneNews?.isliked -= 1
-            oneNews?.likesCount -= 1
         }
     }
 }

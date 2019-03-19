@@ -14,7 +14,7 @@ class ConigureNewsCell {
 
         cell.ownersName.text = news.ownerId > 0 ? news.userName : news.groupName
         cell.newsText.text = news.text
-        cell.likeButton.setTitle(String(news.likesCount), for: .normal)
+        cell.likeButton.setTitle(String(news.likes), for: .normal)
         cell.commentButton.setTitle(String(news.commentsCount), for: .normal)
         cell.sharedButton.setTitle(String(news.repostsCount), for: .normal)
         cell.watchedLabel.text = String(news.views)

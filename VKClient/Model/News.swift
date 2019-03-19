@@ -20,7 +20,7 @@ class News: Object {
     @objc dynamic var userId = 0
     @objc dynamic var text = ""
     @objc dynamic var newsPhoto = ""
-    @objc dynamic var likesCount = 0
+    @objc dynamic var likes = 0
     @objc dynamic var isliked = 0
     @objc dynamic var commentsCount = 0
     @objc dynamic var repostsCount = 0
@@ -37,7 +37,7 @@ class News: Object {
         self.userName = json["last_name"].stringValue + " " + json["first_name"].stringValue
         self.groupName = json["name"].stringValue
         self.userId = json["id"].intValue
-        self.likesCount = json["likes"]["count"].intValue
+        self.likes = json["likes"]["count"].intValue
         self.isliked = json["likes"]["user_likes"].intValue
         self.commentsCount = json["comments"]["count"].intValue
         self.repostsCount = json["reposts"]["count"].intValue

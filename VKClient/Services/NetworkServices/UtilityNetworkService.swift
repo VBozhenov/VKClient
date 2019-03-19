@@ -19,24 +19,40 @@ class UtilityNetworkService {
     let version = "5.68"
     let token = Session.user.token
 
-    func addLike (to object: String, withId itemID: Int, andOwnerId ownerID: Int, completion: (() -> Void)? = nil) {
-        let path = "/method/likes.add"
-        
-        let params: Parameters = [
-            "access_token": token,
-            "type": object,
-            "owner_id": ownerID,
-            "item_id": itemID,
-            "v": version
-        ]
-        
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
-            completion?()
-        }
-    }
+//    func addLike (to object: String, withId itemID: Int, andOwnerId ownerID: Int, completion: (() -> Void)? = nil) {
+//        let path = "/method/likes.add"
+//
+//        let params: Parameters = [
+//            "access_token": token,
+//            "type": object,
+//            "owner_id": ownerID,
+//            "item_id": itemID,
+//            "v": version
+//        ]
+//
+//        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+//            completion?()
+//        }
+//    }
     
-    func deleteLike (to object: String, withId itemID: Int, andOwnerId ownerID: Int, completion: (() -> Void)? = nil) {
-        let path = "/method/likes.delete"
+//    func deleteLike (to object: String, withId itemID: Int, andOwnerId ownerID: Int, completion: (() -> Void)? = nil) {
+//        let path = "/method/likes.delete"
+//
+//        let params: Parameters = [
+//            "access_token": token,
+//            "type": object,
+//            "owner_id": ownerID,
+//            "item_id": itemID,
+//            "v": version
+//        ]
+//
+//        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+//            completion?()
+//        }
+//    }
+    
+    func likeAddDelete (action: GetAction, to object: String, withId itemID: Int, andOwnerId ownerID: Int, completion: (() -> Void)? = nil) {
+        let path = action.rawValue
         
         let params: Parameters = [
             "access_token": token,
@@ -51,3 +67,4 @@ class UtilityNetworkService {
         }
     }
 }
+
