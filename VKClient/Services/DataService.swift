@@ -107,22 +107,28 @@ class DataService {
         }
     }
  
+    let newsQ = DispatchQueue(label: "newsQueue", qos: .userInitiated, attributes: .concurrent)
     func saveNews(_ news: [News], _ owners: [News], _ groups: [News],
                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                   update: Bool = true)  {
+        let dispatchGroup = DispatchGroup()
         for oneNews in news {
             for user in owners {
-                if user.userId == oneNews.ownerId {
-                    oneNews.ownerPhoto = user.ownerPhoto
-                    oneNews.userName = user.userName
-                    oneNews.userId = user.userId
+                newsQ.async(group: dispatchGroup) {
+                    if user.userId == oneNews.ownerId {
+                        oneNews.ownerPhoto = user.ownerPhoto
+                        oneNews.userName = user.userName
+                        oneNews.userId = user.userId
+                    }
                 }
             }
             for group in groups {
-                if (-group.userId) == oneNews.ownerId {
-                    oneNews.ownerPhoto = group.ownerPhoto
-                    oneNews.groupName = group.groupName
-                    oneNews.userId = group.userId
+                newsQ.async(group: dispatchGroup) {
+                    if (-group.userId) == oneNews.ownerId {
+                        oneNews.ownerPhoto = group.ownerPhoto
+                        oneNews.groupName = group.groupName
+                        oneNews.userId = group.userId
+                    }
                 }
             }
         }
