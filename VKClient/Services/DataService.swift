@@ -68,16 +68,16 @@ class DataService {
     func saveGroups(_ groups: [Group],
                     config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                     update: Bool = true) {
-        do {
-            let realm = try Realm(configuration: config)
-            let oldGroups = realm.objects(Group.self)
-            try realm.write {
-                realm.delete(oldGroups)
-                realm.add(groups, update: update)
-            }
-        } catch {
-            print(error.localizedDescription)
+        //        do {
+        let realm = try! Realm(configuration: config)
+        let oldGroups = realm.objects(Group.self)
+        try! realm.write {
+            realm.delete(oldGroups)
+            realm.add(groups, update: update)
         }
+        //        } catch {
+        //            print(error.localizedDescription)
+        //        }
     }
     
     func deleteGroup(groupId: Int,

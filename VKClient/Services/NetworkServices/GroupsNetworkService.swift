@@ -29,7 +29,7 @@ class GroupsNetworkService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
             switch response.result {
                 
             case .success(let value):
@@ -74,7 +74,7 @@ class GroupsNetworkService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
             completion?()
         }
     }

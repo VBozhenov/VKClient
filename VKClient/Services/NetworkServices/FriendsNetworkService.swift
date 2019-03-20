@@ -29,7 +29,7 @@ class FriendsNetworkService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
             
             switch response.result {
                 
@@ -54,7 +54,7 @@ class FriendsNetworkService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
             switch response.result {
                 
             case .success(let value):
@@ -79,7 +79,7 @@ class FriendsNetworkService {
         ]
         var photos = [Photo]()
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON { response in
+        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
             switch response.result {
                 
             case .success(let value):

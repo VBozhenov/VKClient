@@ -29,21 +29,24 @@ class News: Object {
     
     convenience init(json: JSON) {
         self.init()
-        self.postId = json["post_id"].intValue
-        self.ownerId = json["source_id"].intValue
-        self.ownerPhoto = json["photo_50"].stringValue
-        self.text = json["text"].stringValue
-        self.newsPhoto = json["attachments"][0]["photo"]["photo_604"].stringValue
-        self.userName = json["last_name"].stringValue + " " + json["first_name"].stringValue
-        self.groupName = json["name"].stringValue
-        self.userId = json["id"].intValue
-        self.likes = json["likes"]["count"].intValue
-        self.isliked = json["likes"]["user_likes"].intValue
-        self.commentsCount = json["comments"]["count"].intValue
-        self.repostsCount = json["reposts"]["count"].intValue
-        self.userReposted = json["reposts"]["user_reposted"].intValue
-        self.views = json["views"]["count"].intValue
+        DispatchQueue.global().sync {
+            self.postId = json["post_id"].intValue
+            self.ownerId = json["source_id"].intValue
+            self.ownerPhoto = json["photo_50"].stringValue
+            self.text = json["text"].stringValue
+            self.newsPhoto = json["attachments"][0]["photo"]["photo_604"].stringValue
+            self.userName = json["last_name"].stringValue + " " + json["first_name"].stringValue
+            self.groupName = json["name"].stringValue
+            self.userId = json["id"].intValue
+            self.likes = json["likes"]["count"].intValue
+            self.isliked = json["likes"]["user_likes"].intValue
+            self.commentsCount = json["comments"]["count"].intValue
+            self.repostsCount = json["reposts"]["count"].intValue
+            self.userReposted = json["reposts"]["user_reposted"].intValue
+            self.views = json["views"]["count"].intValue
+        }
     }
+    
     override static func primaryKey() -> String {
         return "postId"
     }
