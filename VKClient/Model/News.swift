@@ -26,6 +26,7 @@ class News: Object {
     @objc dynamic var repostsCount = 0
     @objc dynamic var userReposted = 0
     @objc dynamic var views = 0
+    @objc dynamic var nextFrom = ""
     
     convenience init(json: JSON) {
         self.init()
@@ -44,6 +45,7 @@ class News: Object {
             self.repostsCount = json["reposts"]["count"].intValue
             self.userReposted = json["reposts"]["user_reposted"].intValue
             self.views = json["views"]["count"].intValue
+            self.nextFrom = json.stringValue
         }
     }
     

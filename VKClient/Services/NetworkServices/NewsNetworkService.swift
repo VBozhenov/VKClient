@@ -17,12 +17,13 @@ class NewsNetworkService {
     let version = "5.68"
     let token = Session.user.token
     
-    func loadNews(completion: (([News]?, [News]?, [News]?, Error?) -> Void)? = nil) {
+    func loadNews(startFrom: String = "", completion: (([News]?, [News]?, [News]?, String?, Error?) -> Void)? = nil) {
         let path = "/method/newsfeed.get"
         
         let params: Parameters = [
             "access_token": token,
             "filters": "post,photo",
+            "start_from": startFrom,
             "v": version
         ]
         
@@ -35,9 +36,10 @@ class NewsNetworkService {
                 let news = json["response"]["items"].arrayValue.map { News(json: $0) }
                 let owners = json["response"]["profiles"].arrayValue.map { News(json: $0) }
                 let groups = json["response"]["groups"].arrayValue.map { News(json: $0) }
-                completion?(news, owners, groups, nil)
+                let nextFrom = json["response"]["next_from"].stringValue
+                completion?(news, owners, groups, nextFrom, nil)
             case .failure(let error):
-                completion?(nil, nil, nil, error)
+                completion?(nil, nil, nil, nil, error)
             }
             
         }

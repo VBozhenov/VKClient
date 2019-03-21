@@ -99,15 +99,16 @@ class NewsController: UITableViewController {
     }
     
     func loadNews() {
-        newsNetworkService.loadNews() { [weak self] news, owners, groups, error in
+        newsNetworkService.loadNews() { [weak self] news, owners, groups, nextFrom ,error in
             if let error = error {
                 print(error.localizedDescription)
                 return
             } else if let news = news?.filter({$0.text != ""}),
                 let owners = owners?.filter({$0.ownerPhoto != ""}),
                 let groups = groups,
+                let nextFrom = nextFrom,
                 let self = self {
-                self.dataService.saveNews(news, owners, groups)
+                self.dataService.saveNews(news, owners, groups, nextFrom)
             }
         }
     }
