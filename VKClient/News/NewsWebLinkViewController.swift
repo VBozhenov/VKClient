@@ -17,7 +17,8 @@ class NewsWebLinkViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        webView.load(URLRequest(url: URL(string: "https://www.yandex.ru")!))
+        if webURL != "" {
+            webView.load(URLRequest(url: URL(string: webURL)!))
+        }
     }
 }

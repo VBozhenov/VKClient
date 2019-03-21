@@ -25,6 +25,8 @@ class NewsController: UITableViewController {
         super.viewDidLoad()
         
         tableView.estimatedRowHeight = 300
+        tableView.rowHeight = UITableView.automaticDimension
+        
         activityIndicator.isHidden = true
         
         loadNews()
@@ -32,7 +34,6 @@ class NewsController: UITableViewController {
         refreshControl?.attributedTitle = NSAttributedString(string: "Идет обновление...")
         refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         tableView.tableFooterView?.isHidden = true
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,14 +75,24 @@ class NewsController: UITableViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showWebPage" {
-            let newsWebLinkViewController = segue.destination as! NewsWebLinkViewController
-            if let indexPath = tableView.indexPathForSelectedRow, let news = news {
-                if news[indexPath.row].url != "" {
-                    newsWebLinkViewController.webURL = news[indexPath.row].url
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if let news = news,
+            let indexPath = tableView.indexPathForSelectedRow {
+            if identifier == "showWebPage" {
+                if news[indexPath.row].url == "" {
+                    return false
                 }
             }
+        }
+        return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let news = news,
+            let indexPath = tableView.indexPathForSelectedRow else { return }
+        if segue.identifier == "showWebPage"  {
+            let newsWebLinkViewController = segue.destination as! NewsWebLinkViewController
+            newsWebLinkViewController.webURL = news[indexPath.row].url
         } else { return }
     }
     
@@ -122,7 +133,6 @@ class NewsController: UITableViewController {
                 let nextFrom = nextFrom,
                 let self = self {
                 self.dataService.saveNews(news, owners, groups, nextFrom)
-                self.nextFrom = nextFrom
             }
         }
     }
@@ -141,4 +151,19 @@ class NewsController: UITableViewController {
             }
         }
     }
+    
+    
+    
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//        
+//        if offsetY > contentHeight - scrollView.frame.size.height {
+//            
+//            loadNews(from: news?.last?.nextFrom ?? "")
+//            
+//            self.tableView.reloadData()
+//        }
+//    }
 }
