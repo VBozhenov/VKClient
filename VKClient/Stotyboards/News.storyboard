@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -150,6 +151,7 @@
                                     <outlet property="ownersPhoto" destination="xEY-8Q-SZb" id="sO9-eF-5zY"/>
                                     <outlet property="sharedButton" destination="4tF-sw-LDr" id="eoX-vC-Ft1"/>
                                     <outlet property="watchedLabel" destination="PTa-Hz-ekd" id="YHn-DV-X4c"/>
+                                    <segue destination="Phz-l1-FAP" kind="show" identifier="showWebPage" id="g4S-Zd-A2I"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsNoPhoto" rowHeight="140" id="9N5-bK-JyP" customClass="NewsNoPhotoCell" customModule="VKClient" customModuleProvider="target">
@@ -265,6 +267,7 @@
                                     <outlet property="ownersPhoto" destination="1Ev-HL-NmX" id="9MN-vK-YpM"/>
                                     <outlet property="sharedButton" destination="eFd-5Y-Ds3" id="xj7-Rh-8gn"/>
                                     <outlet property="watchedLabel" destination="fWa-Jz-8fa" id="jrF-gY-fYe"/>
+                                    <segue destination="Phz-l1-FAP" kind="show" identifier="showWebPage" id="ZiP-jd-TvG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -288,6 +291,40 @@
                 <exit id="3Z4-7r-YsI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3588" y="1532.3838080959522"/>
+        </scene>
+        <!--News Web Link View Controller-->
+        <scene sceneID="dUd-bM-9OV">
+            <objects>
+                <viewController id="Phz-l1-FAP" customClass="NewsWebLinkViewController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="722-jP-PBc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RI0-hi-WIw">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="weD-7D-37T" firstAttribute="trailing" secondItem="RI0-hi-WIw" secondAttribute="trailing" id="0I8-Mi-7xx"/>
+                            <constraint firstItem="RI0-hi-WIw" firstAttribute="top" secondItem="weD-7D-37T" secondAttribute="top" id="UCC-mo-khL"/>
+                            <constraint firstItem="weD-7D-37T" firstAttribute="bottom" secondItem="RI0-hi-WIw" secondAttribute="bottom" id="Wck-Ec-BKP"/>
+                            <constraint firstItem="RI0-hi-WIw" firstAttribute="leading" secondItem="weD-7D-37T" secondAttribute="leading" id="dSu-Hs-dWA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="weD-7D-37T"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="RI0-hi-WIw" id="TZ6-28-rEZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VLH-Of-FHn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4535" y="1532"/>
         </scene>
         <!--News-->
         <scene sceneID="D3x-va-noa">
@@ -316,4 +353,7 @@
         <image name="share" width="22" height="22"/>
         <image name="view" width="44" height="44"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ZiP-jd-TvG"/>
+    </inferredMetricsTieBreakers>
 </document>

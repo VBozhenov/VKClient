@@ -24,10 +24,8 @@ class Message: Object {
     
     convenience init(json: JSON) {
         self.init()
-        DispatchQueue.global().sync {
-            self.userId = json["conversation"]["peer"]["id"].intValue
-            self.text = json["last_message"]["text"].stringValue
-            self.unreadCount = json["conversation"]["unread_count"].intValue
-        }
+        self.userId = json["conversation"]["peer"]["id"].intValue
+        self.text = json["last_message"]["text"].stringValue
+        self.unreadCount = json["conversation"]["unread_count"].intValue
     }
 }

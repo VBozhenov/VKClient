@@ -25,5 +25,4 @@ class RoundedAvatarWithShadow {
         avatar.frame = border.bounds
         border.addSubview(avatar)
     }
-    
 }

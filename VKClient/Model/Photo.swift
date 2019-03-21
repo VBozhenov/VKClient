@@ -21,14 +21,12 @@ class Photo: Object {
 
     convenience init(json: JSON) {
         self.init()
-        DispatchQueue.global().sync {
-            self.id = json["id"].intValue
-            self.userId = json["owner_id"].intValue
-            self.photo = json["photo_604"].stringValue
-            self.likes = json["likes"]["count"].intValue
-            self.reposts = json["reposts"]["count"].intValue
-            self.isliked = json["likes"]["user_likes"].intValue
-        }
+        self.id = json["id"].intValue
+        self.userId = json["owner_id"].intValue
+        self.photo = json["photo_604"].stringValue
+        self.likes = json["likes"]["count"].intValue
+        self.reposts = json["reposts"]["count"].intValue
+        self.isliked = json["likes"]["user_likes"].intValue
     }
     
     override static func primaryKey() -> String {

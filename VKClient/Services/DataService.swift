@@ -108,6 +108,7 @@ class DataService {
     }
  
     let newsQ = DispatchQueue(label: "newsQueue", qos: .userInitiated, attributes: .concurrent)
+    
     func saveNews(_ news: [News], _ owners: [News], _ groups: [News], _ nextFrom: String,
                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                   update: Bool = true)  {

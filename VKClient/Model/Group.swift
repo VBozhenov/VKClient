@@ -17,11 +17,9 @@ class Group: Object {
     
     convenience init(json: JSON) {
         self.init()
-        DispatchQueue.global().sync {
-            self.id = json["id"].intValue
-            self.name = json["name"].stringValue
-            self.photo = json["photo_100"].stringValue
-        }
+        self.id = json["id"].intValue
+        self.name = json["name"].stringValue
+        self.photo = json["photo_100"].stringValue
     }
     
     override static func primaryKey() -> String {

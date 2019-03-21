@@ -14,6 +14,7 @@
 		E707E69522032AFE0096693E /* CustomPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707E69422032AFE0096693E /* CustomPushAnimator.swift */; };
 		E707E697220339710096693E /* CustomPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707E696220339710096693E /* CustomPopAnimator.swift */; };
 		E707E69922033BBB0096693E /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707E69822033BBB0096693E /* CustomNavigationController.swift */; };
+		E712A1382243941400AE2AFF /* NewsWebLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E712A1372243941400AE2AFF /* NewsWebLinkViewController.swift */; };
 		E71F49B622145A1B00DDB835 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71F49B522145A1B00DDB835 /* DataService.swift */; };
 		E75478262240C4B7002B80BB /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75478252240C4B7002B80BB /* Actions.swift */; };
 		E778E4CE2233A7CA0055A226 /* DetailedFriendFotoCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E778E4CD2233A7CA0055A226 /* DetailedFriendFotoCellLayout.swift */; };
@@ -68,6 +69,7 @@
 		E707E69422032AFE0096693E /* CustomPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimator.swift; sourceTree = "<group>"; };
 		E707E696220339710096693E /* CustomPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimator.swift; sourceTree = "<group>"; };
 		E707E69822033BBB0096693E /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		E712A1372243941400AE2AFF /* NewsWebLinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsWebLinkViewController.swift; sourceTree = "<group>"; };
 		E71F49B522145A1B00DDB835 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		E75478252240C4B7002B80BB /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		E778E4CD2233A7CA0055A226 /* DetailedFriendFotoCellLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedFriendFotoCellLayout.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				E702434321F03C3000BFB542 /* NewsController.swift */,
+				E712A1372243941400AE2AFF /* NewsWebLinkViewController.swift */,
 				E702434521F03C4A00BFB542 /* NewsCell.swift */,
 				E7EA3C272236F90700F8915B /* NewsNoPhotoCell.swift */,
 				E7EA3C2922370C0900F8915B /* ConigureNewsCell.swift */,
@@ -469,6 +472,7 @@
 				E7EA3C282236F90700F8915B /* NewsNoPhotoCell.swift in Sources */,
 				E7AE481F2203706900AE346A /* CustomInteractiveTransition.swift in Sources */,
 				E7D55876223AA88D0064465B /* UtilityNetworkService.swift in Sources */,
+				E712A1382243941400AE2AFF /* NewsWebLinkViewController.swift in Sources */,
 				E7EA3C2A22370C0900F8915B /* ConigureNewsCell.swift in Sources */,
 				E702434421F03C3000BFB542 /* NewsController.swift in Sources */,
 				E7D55874223AA8190064465B /* MessagesNetworkService.swift in Sources */,

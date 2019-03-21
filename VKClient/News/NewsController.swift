@@ -17,6 +17,7 @@ class NewsController: UITableViewController {
     let utilityNetworkService = UtilityNetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
+    var nextFrom = ""
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -27,10 +28,11 @@ class NewsController: UITableViewController {
         activityIndicator.isHidden = true
         
         loadNews()
-        
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Идет обновление...")
         refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        tableView.tableFooterView?.isHidden = true
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +74,17 @@ class NewsController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showWebPage" {
+            let newsWebLinkViewController = segue.destination as! NewsWebLinkViewController
+            if let indexPath = tableView.indexPathForSelectedRow, let news = news {
+                if news[indexPath.row].url != "" {
+                    newsWebLinkViewController.webURL = news[indexPath.row].url
+                }
+            }
+        } else { return }
+    }
+    
     func pairTableAndRealm(config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
         guard let realm = try? Realm(configuration: config) else { return }
         news = realm.objects(News.self)
@@ -98,8 +111,8 @@ class NewsController: UITableViewController {
         }
     }
     
-    func loadNews() {
-        newsNetworkService.loadNews() { [weak self] news, owners, groups, nextFrom ,error in
+    func loadNews(from: String = "") {
+        newsNetworkService.loadNews(startFrom: from) { [weak self] news, owners, groups, nextFrom ,error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -109,6 +122,7 @@ class NewsController: UITableViewController {
                 let nextFrom = nextFrom,
                 let self = self {
                 self.dataService.saveNews(news, owners, groups, nextFrom)
+                self.nextFrom = nextFrom
             }
         }
     }
