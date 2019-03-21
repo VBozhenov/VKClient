@@ -18,22 +18,19 @@ class NewsController: UITableViewController {
     let dataService = DataService()
     var notificationToken: NotificationToken?
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.estimatedRowHeight = 300
-
-        newsNetworkService.loadNews() { [weak self] news, owners, groups, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else if let news = news?.filter({$0.text != ""}),
-                let owners = owners?.filter({$0.ownerPhoto != ""}),
-                let groups = groups,
-                let self = self {
-                self.dataService.saveNews(news, owners, groups)
-            }
-        }
+        activityIndicator.isHidden = true
+        
+        loadNews()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Идет обновление...")
+        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +95,35 @@ class NewsController: UITableViewController {
         } else {
             self.utilityNetworkService.likeAddDelete(action: .deleteLike ,to: "post", withId: news.postId, andOwnerId: news.ownerId)
             self.dataService.likeAddDeleteForNews(action: .delete, primaryKey: news.postId)
+        }
+    }
+    
+    func loadNews() {
+        newsNetworkService.loadNews() { [weak self] news, owners, groups, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            } else if let news = news?.filter({$0.text != ""}),
+                let owners = owners?.filter({$0.ownerPhoto != ""}),
+                let groups = groups,
+                let self = self {
+                self.dataService.saveNews(news, owners, groups)
+            }
+        }
+    }
+    
+    @objc func refresh(sender:AnyObject) {
+        refreshBegin(refreshEnd: {() -> () in
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
+        })    }
+    
+    func refreshBegin(refreshEnd: @escaping () -> ()) {
+        DispatchQueue.global().async() {
+            self.loadNews()
+            DispatchQueue.main.async {
+                refreshEnd()
+            }
         }
     }
 }
