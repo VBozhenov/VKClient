@@ -30,6 +30,30 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="349.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-vs-HKR" customClass="GradientView" customModule="VKClient" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="349.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                    <color key="value" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                                    <point key="value" x="0.0" y="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                                    <point key="value" x="1" y="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="News Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrY-g8-TDA">
                                             <rect key="frame" x="8" y="54" width="359" height="55.5"/>
                                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
@@ -68,7 +92,6 @@
                                             <subviews>
                                                 <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzG-C2-HAI">
                                                     <rect key="frame" x="0.0" y="0.0" width="56" height="22"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="999" image="heartWhite">
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
@@ -78,7 +101,6 @@
                                                 </button>
                                                 <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9W-8G-GfB">
                                                     <rect key="frame" x="65" y="0.0" width="56" height="22"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="999" image="comment">
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
@@ -88,7 +110,6 @@
                                                 </button>
                                                 <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tF-sw-LDr">
                                                     <rect key="frame" x="130" y="0.0" width="56" height="22"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="999" image="share">
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
@@ -122,6 +143,7 @@
                                     <constraints>
                                         <constraint firstItem="gOn-lc-Fr9" firstAttribute="centerX" secondItem="d7m-48-0hG" secondAttribute="centerX" id="0CQ-Qz-HWq"/>
                                         <constraint firstAttribute="trailing" secondItem="mrY-g8-TDA" secondAttribute="trailing" constant="8" id="0Fl-cE-slv"/>
+                                        <constraint firstItem="fdH-vs-HKR" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" id="3jl-Jl-dIz"/>
                                         <constraint firstItem="PTa-Hz-ekd" firstAttribute="centerY" secondItem="4tF-sw-LDr" secondAttribute="centerY" id="7kM-N1-39a"/>
                                         <constraint firstItem="gOn-lc-Fr9" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="8jF-6L-h2N"/>
                                         <constraint firstAttribute="trailing" secondItem="gOn-lc-Fr9" secondAttribute="trailing" constant="8" id="8lz-mN-deG"/>
@@ -130,6 +152,8 @@
                                         <constraint firstItem="mrY-g8-TDA" firstAttribute="top" secondItem="xEY-8Q-SZb" secondAttribute="bottom" constant="8" id="JmV-33-f1r"/>
                                         <constraint firstItem="xEY-8Q-SZb" firstAttribute="top" secondItem="d7m-48-0hG" secondAttribute="top" constant="8" id="M9d-tK-tal"/>
                                         <constraint firstItem="fWi-BJ-Wvg" firstAttribute="centerY" secondItem="xEY-8Q-SZb" secondAttribute="centerY" id="OhY-jb-MXV"/>
+                                        <constraint firstAttribute="trailing" secondItem="fdH-vs-HKR" secondAttribute="trailing" id="Rbi-0X-DkM"/>
+                                        <constraint firstAttribute="bottom" secondItem="fdH-vs-HKR" secondAttribute="bottom" id="Rmw-Yk-JK1"/>
                                         <constraint firstItem="0DS-Oo-g6p" firstAttribute="centerY" secondItem="4tF-sw-LDr" secondAttribute="centerY" id="S1T-9X-WYT"/>
                                         <constraint firstItem="mrY-g8-TDA" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="X1y-Hn-G6h"/>
                                         <constraint firstItem="OuK-59-aWz" firstAttribute="leading" secondItem="d7m-48-0hG" secondAttribute="leading" constant="8" id="YUf-g7-9Xc"/>
@@ -138,6 +162,7 @@
                                         <constraint firstItem="fWi-BJ-Wvg" firstAttribute="leading" secondItem="xEY-8Q-SZb" secondAttribute="trailing" constant="8" id="k4T-VL-gfu"/>
                                         <constraint firstItem="PTa-Hz-ekd" firstAttribute="height" secondItem="4tF-sw-LDr" secondAttribute="height" id="k6S-fN-vHC"/>
                                         <constraint firstAttribute="bottom" secondItem="OuK-59-aWz" secondAttribute="bottom" id="l4A-90-WsG"/>
+                                        <constraint firstItem="fdH-vs-HKR" firstAttribute="top" secondItem="d7m-48-0hG" secondAttribute="top" id="tB1-Pd-8MA"/>
                                         <constraint firstAttribute="trailing" secondItem="fWi-BJ-Wvg" secondAttribute="trailing" constant="8" id="tcS-A5-ONn"/>
                                         <constraint firstItem="PTa-Hz-ekd" firstAttribute="leading" secondItem="0DS-Oo-g6p" secondAttribute="trailing" constant="8" id="te6-00-g4M"/>
                                     </constraints>
@@ -161,6 +186,30 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ssH-AU-h3a" customClass="GradientView" customModule="VKClient" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                    <color key="value" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                                    <point key="value" x="0.0" y="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                                    <point key="value" x="1" y="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOF-vz-f9O">
                                             <rect key="frame" x="8" y="54" width="359" height="55.5"/>
                                             <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
@@ -241,6 +290,7 @@
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="ssH-AU-h3a" firstAttribute="top" secondItem="bql-56-2UW" secondAttribute="top" id="5Vl-sE-D2e"/>
                                         <constraint firstItem="1Ev-HL-NmX" firstAttribute="top" secondItem="bql-56-2UW" secondAttribute="top" constant="8" id="70p-gd-54X"/>
                                         <constraint firstItem="IB6-du-P7O" firstAttribute="leading" secondItem="1Ev-HL-NmX" secondAttribute="trailing" constant="8" id="7OK-YO-mcK"/>
                                         <constraint firstItem="fWa-Jz-8fa" firstAttribute="leading" secondItem="DBF-Rg-Qc9" secondAttribute="trailing" constant="8" id="8VG-P9-7mw"/>
@@ -248,8 +298,11 @@
                                         <constraint firstItem="fWa-Jz-8fa" firstAttribute="centerY" secondItem="eFd-5Y-Ds3" secondAttribute="centerY" id="IV2-Vb-bwh"/>
                                         <constraint firstItem="IB6-du-P7O" firstAttribute="centerY" secondItem="1Ev-HL-NmX" secondAttribute="centerY" id="N6i-9F-Amj"/>
                                         <constraint firstAttribute="trailing" secondItem="fWa-Jz-8fa" secondAttribute="trailing" constant="8" id="NWl-w6-KaQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="ssH-AU-h3a" secondAttribute="bottom" id="Oi4-6U-4Lo"/>
+                                        <constraint firstAttribute="trailing" secondItem="ssH-AU-h3a" secondAttribute="trailing" id="PWX-XN-W5B"/>
                                         <constraint firstItem="VOF-vz-f9O" firstAttribute="top" secondItem="1Ev-HL-NmX" secondAttribute="bottom" constant="8" id="WR3-A9-ZuN"/>
                                         <constraint firstItem="Tlm-0T-tYp" firstAttribute="top" secondItem="VOF-vz-f9O" secondAttribute="bottom" constant="8" id="b04-2w-Tob"/>
+                                        <constraint firstItem="ssH-AU-h3a" firstAttribute="leading" secondItem="bql-56-2UW" secondAttribute="leading" id="dvQ-bS-TsS"/>
                                         <constraint firstAttribute="bottom" secondItem="Tlm-0T-tYp" secondAttribute="bottom" id="hWc-Qj-cm5"/>
                                         <constraint firstItem="Tlm-0T-tYp" firstAttribute="leading" secondItem="bql-56-2UW" secondAttribute="leading" constant="8" id="mec-wa-ZaU"/>
                                         <constraint firstItem="VOF-vz-f9O" firstAttribute="leading" secondItem="bql-56-2UW" secondAttribute="leading" constant="8" id="qYX-6N-uwz"/>
@@ -301,7 +354,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RI0-hi-WIw">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -332,8 +385,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ifJ-KQ-VfW" customClass="CustomNavigationController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News" image="news" id="cr2-Vh-Hbf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BtX-6T-rik">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="BtX-6T-rik">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

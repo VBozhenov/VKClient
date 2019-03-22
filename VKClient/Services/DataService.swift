@@ -109,12 +109,11 @@ class DataService {
  
     let newsQ = DispatchQueue(label: "newsQueue", qos: .userInitiated, attributes: .concurrent)
     
-    func saveNews(_ news: [News], _ owners: [News], _ groups: [News], _ nextFrom: String,
+    func saveNews(_ news: [News], _ owners: [News], _ groups: [News],
                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                   update: Bool = true)  {
         let dispatchGroup = DispatchGroup()
         for oneNews in news {
-            oneNews.nextFrom = nextFrom
             for user in owners {
                 newsQ.async(group: dispatchGroup) {
                     if user.userId == oneNews.ownerId {

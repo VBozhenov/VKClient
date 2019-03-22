@@ -25,6 +25,30 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpl-Bt-wPh" customClass="GradientView" customModule="VKClient" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                    <color key="value" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                                    <point key="value" x="0.0" y="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                                    <point key="value" x="1" y="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1g-iN-1Sy">
                                             <rect key="frame" x="8" y="8" width="319" height="27.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -57,12 +81,16 @@
                                         <constraint firstItem="nVE-1X-3ca" firstAttribute="top" secondItem="4vm-9E-ZXq" secondAttribute="top" priority="750" constant="2" id="GKp-ot-JTT"/>
                                         <constraint firstAttribute="trailing" secondItem="nVE-1X-3ca" secondAttribute="trailing" constant="2" id="J78-nl-rM0"/>
                                         <constraint firstItem="nVE-1X-3ca" firstAttribute="centerY" secondItem="4vm-9E-ZXq" secondAttribute="centerY" id="Tg6-HM-iWl"/>
+                                        <constraint firstAttribute="bottom" secondItem="kpl-Bt-wPh" secondAttribute="bottom" id="VCF-sa-s4R"/>
                                         <constraint firstItem="m1g-iN-1Sy" firstAttribute="leading" secondItem="4vm-9E-ZXq" secondAttribute="leading" constant="8" id="b5N-Mz-ofD"/>
                                         <constraint firstItem="nVE-1X-3ca" firstAttribute="leading" secondItem="m1g-iN-1Sy" secondAttribute="trailing" constant="8" id="fik-Hq-HTz"/>
+                                        <constraint firstAttribute="trailing" secondItem="kpl-Bt-wPh" secondAttribute="trailing" id="fjM-JS-TjL"/>
                                         <constraint firstItem="m1g-iN-1Sy" firstAttribute="centerY" secondItem="4vm-9E-ZXq" secondAttribute="centerY" id="hLz-Lf-Ecl"/>
                                         <constraint firstAttribute="bottom" secondItem="nVE-1X-3ca" secondAttribute="bottom" priority="750" constant="2" id="oL3-PM-4mf"/>
+                                        <constraint firstItem="kpl-Bt-wPh" firstAttribute="top" secondItem="4vm-9E-ZXq" secondAttribute="top" id="vfF-cn-1nR"/>
                                         <constraint firstAttribute="bottom" secondItem="m1g-iN-1Sy" secondAttribute="bottom" priority="750" constant="8" id="x8X-lS-mEY"/>
                                         <constraint firstItem="m1g-iN-1Sy" firstAttribute="top" secondItem="4vm-9E-ZXq" secondAttribute="top" priority="750" constant="8" id="xMN-1y-D4L"/>
+                                        <constraint firstItem="kpl-Bt-wPh" firstAttribute="leading" secondItem="4vm-9E-ZXq" secondAttribute="leading" id="yDr-a8-bmH"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -96,8 +124,8 @@
                     <tabBarItem key="tabBarItem" title="Groups" image="group" id="Mdu-4u-34O"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OEj-kt-q0O">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="OEj-kt-q0O">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

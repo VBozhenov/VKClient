@@ -17,7 +17,7 @@ class NewsController: UITableViewController {
     let utilityNetworkService = UtilityNetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
-    var nextFrom = ""
+    var nextFrom = "0"
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -132,7 +132,10 @@ class NewsController: UITableViewController {
                 let groups = groups,
                 let nextFrom = nextFrom,
                 let self = self {
-                self.dataService.saveNews(news, owners, groups, nextFrom)
+                self.dataService.saveNews(news, owners, groups)
+                self.nextFrom = nextFrom
+//                print(nextFrom)
+//                print(self.nextFrom)
             }
         }
     }
@@ -155,14 +158,14 @@ class NewsController: UITableViewController {
     
     
 //    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        
+//
 //        let offsetY = scrollView.contentOffset.y
 //        let contentHeight = scrollView.contentSize.height
-//        
+//
 //        if offsetY > contentHeight - scrollView.frame.size.height {
-//            
-//            loadNews(from: news?.last?.nextFrom ?? "")
-//            
+//
+//            loadNews(from: nextFrom)
+//
 //            self.tableView.reloadData()
 //        }
 //    }
