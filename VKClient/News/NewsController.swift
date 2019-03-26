@@ -155,7 +155,8 @@ class NewsController: UITableViewController {
         refreshBegin(refreshEnd: {() -> () in
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
-        })    }
+        })
+    }
     
     func refreshBegin(refreshEnd: @escaping () -> ()) {
         DispatchQueue.global().async() {

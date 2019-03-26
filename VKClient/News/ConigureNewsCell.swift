@@ -38,8 +38,6 @@ class ConigureNewsCell {
         } else {
             cell.newsText.text = news.text
         }
-
-        
         
         if news.isliked == 1 {
             cell.likeButton.setImage(UIImage(named: "heartRed"), for: UIControl.State.normal)
