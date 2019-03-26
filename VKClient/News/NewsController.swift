@@ -114,19 +114,26 @@ class NewsController: UITableViewController {
     func pairTableAndRealm(config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
         guard let realm = try? Realm(configuration: config) else { return }
         news = realm.objects(News.self)
-        notificationToken = news?.observe ({ [weak self] (changes: RealmCollectionChange) in
+        notificationToken = news?.observe { [weak self] (changes: RealmCollectionChange) in
             guard let tableView = self?.tableView else { return }
             switch changes {
             case .initial:
                 tableView.reloadData()
-            case .update:
-                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                tableView.beginUpdates()
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                     with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.endUpdates()
             case .error(let error):
                 fatalError("\(error)")
             }
-        })
+        }
     }
-    
+
     func likeAddDelete(_ news: News) {
         if news.isliked == 0 {
             self.utilityNetworkService.likeAddDelete(action: .addLike, to: "post", withId: news.postId, andOwnerId: news.ownerId)
@@ -153,7 +160,6 @@ class NewsController: UITableViewController {
     
     @objc func refresh(sender:AnyObject) {
         refreshBegin(refreshEnd: {() -> () in
-            self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
         })
     }
