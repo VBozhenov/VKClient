@@ -18,4 +18,6 @@ protocol NewsCellProtocol {
     var sharedButton: UIButton! {get}
     var watchedLabel: UILabel! {get}
     var newsPhotoImage: UIImageView! {get}
+    var repostOwnersPhoto: UIImageView! {get}
+    var repostOwnersName: UILabel! {get}
 }

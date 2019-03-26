@@ -109,30 +109,45 @@ class DataService {
  
     let newsQ = DispatchQueue(label: "newsQueue", qos: .userInitiated, attributes: .concurrent)
     
-    func saveNews(_ news: [News], _ owners: [News], _ groups: [News],
+    func saveNews(_ news: [News], _ owners: [NewsOwners], _ groups: [NewsOwners],
                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                   update: Bool = true)  {
+        
         let dispatchGroup = DispatchGroup()
-        for oneNews in news {
-            for user in owners {
-                newsQ.async(group: dispatchGroup) {
-                    if user.userId == oneNews.ownerId {
-                        oneNews.ownerPhoto = user.ownerPhoto
-                        oneNews.userName = user.userName
-                        oneNews.userId = user.userId
+        
+        for new in news {
+            for owner in owners {
+                if new.ownerId == owner.ownerId {
+                    newsQ.async(group: dispatchGroup) {
+                        new.owner = owner
                     }
                 }
             }
             for group in groups {
-                newsQ.async(group: dispatchGroup) {
-                    if (-group.userId) == oneNews.ownerId {
-                        oneNews.ownerPhoto = group.ownerPhoto
-                        oneNews.groupName = group.groupName
-                        oneNews.userId = group.userId
+                if new.ownerId == group.ownerId {
+                    newsQ.async(group: dispatchGroup) {
+                        new.owner = group
+                    }
+                }
+            }
+            if new.repostOwnerId != 0 {
+                for owner in owners {
+                    if new.repostOwnerId == owner.ownerId {
+                        newsQ.async(group: dispatchGroup) {
+                            new.repostOwner = owner
+                        }
+                    }
+                }
+                for group in groups {
+                    if new.repostOwnerId == group.ownerId {
+                        newsQ.async(group: dispatchGroup) {
+                            new.repostOwner = group
+                        }
                     }
                 }
             }
         }
+        
         do {
             let realm = try Realm(configuration: config)
             let oldNews = realm.objects(News.self)

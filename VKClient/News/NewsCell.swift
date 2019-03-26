@@ -21,6 +21,8 @@ class NewsCell: UITableViewCell, NewsCellProtocol {
     @IBOutlet weak var ownersPhoto: UIImageView!
     @IBOutlet weak var ownersName: UILabel!
     @IBOutlet weak var newsPhotoImage: UIImageView!
+    var repostOwnersPhoto: UIImageView!
+    var repostOwnersName: UILabel!
 
     @IBAction func likeButtonPushed(_ sender: UIButton) {
         buttonHandler?()

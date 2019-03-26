@@ -12,18 +12,34 @@ class ConigureNewsCell {
     
     static func configure(_ news: News, cell: NewsCellProtocol) {
 
-        cell.ownersName.text = news.ownerId > 0 ? news.userName : news.groupName
-        cell.newsText.text = news.text
+        cell.ownersName.text = news.owner?.userName == " " ? news.owner?.groupName : news.owner?.userName
         cell.likeButton.setTitle(String(news.likes), for: .normal)
         cell.commentButton.setTitle(String(news.commentsCount), for: .normal)
         cell.sharedButton.setTitle(String(news.repostsCount), for: .normal)
         cell.watchedLabel.text = String(news.views)
+        
+        RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news.owner?.ownerPhoto ?? "",
+                                               destinationAvatar: cell.ownersPhoto)
+        
         if !news.newsPhoto.isEmpty {
             cell.newsPhotoImage.kf.setImage(with: URL(string: news.newsPhoto))
+            cell.newsText.text = news.text
+        } else if !news.repostNewsPhoto.isEmpty {
+            cell.newsPhotoImage.kf.setImage(with: URL(string: news.repostNewsPhoto))
+            cell.newsText.text = news.repostText
+            cell.repostOwnersName.text = news.repostOwner?.userName == " " ? news.repostOwner?.groupName : news.repostOwner?.userName
+            RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news.repostOwner?.ownerPhoto ?? "",
+                                                   destinationAvatar: cell.repostOwnersPhoto)
+        } else if !news.repostText.isEmpty {
+            cell.newsText.text = news.repostText
+            cell.repostOwnersName.text = news.repostOwner?.userName == " " ? news.repostOwner?.groupName : news.repostOwner?.userName
+            RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news.repostOwner?.ownerPhoto ?? "",
+                                                   destinationAvatar: cell.repostOwnersPhoto)
+        } else {
+            cell.newsText.text = news.text
         }
 
-        RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news.ownerPhoto,
-                                               destinationAvatar: cell.ownersPhoto)
+        
         
         if news.isliked == 1 {
             cell.likeButton.setImage(UIImage(named: "heartRed"), for: UIControl.State.normal)

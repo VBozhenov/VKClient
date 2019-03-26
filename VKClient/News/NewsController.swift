@@ -17,7 +17,6 @@ class NewsController: UITableViewController {
     let utilityNetworkService = UtilityNetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
-    var nextFrom = "0"
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -56,16 +55,32 @@ class NewsController: UITableViewController {
         
         guard let news = news else { return UITableViewCell() }
 
-        if news[indexPath.row].newsPhoto.isEmpty {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsNoPhoto") as? NewsNoPhotoCell else { return UITableViewCell() }
+        if !news[indexPath.row].newsPhoto.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "News") as? NewsCell else { return UITableViewCell() }
             ConigureNewsCell.configure(news[indexPath.row], cell: cell)
-            
+
+            cell.buttonHandler = {
+                self.likeAddDelete(news[indexPath.row])
+            }
+            return cell
+        } else if !news[indexPath.row].repostNewsPhoto.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Repost") as? RepostCell else { return UITableViewCell() }
+            ConigureNewsCell.configure(news[indexPath.row], cell: cell)
+
+            cell.buttonHandler = {
+                self.likeAddDelete(news[indexPath.row])
+            }
+            return cell
+        } else if !news[indexPath.row].repostText.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "RepostNoPhoto") as? RepostNoPhotoCell else { return UITableViewCell() }
+            ConigureNewsCell.configure(news[indexPath.row], cell: cell)
+
             cell.buttonHandler = {
                 self.likeAddDelete(news[indexPath.row])
             }
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "News") as? NewsCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsNoPhoto") as? NewsNoPhotoCell else { return UITableViewCell() }
             ConigureNewsCell.configure(news[indexPath.row], cell: cell)
 
             cell.buttonHandler = {
@@ -123,19 +138,15 @@ class NewsController: UITableViewController {
     }
     
     func loadNews(from: String = "") {
-        newsNetworkService.loadNews(startFrom: from) { [weak self] news, owners, groups, nextFrom ,error in
+        newsNetworkService.loadNews(startFrom: from) { [weak self] news, owners, groups, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
-            } else if let news = news?.filter({$0.text != ""}),
-                let owners = owners?.filter({$0.ownerPhoto != ""}),
+            } else if let news = news,
+                let owners = owners,
                 let groups = groups,
-                let nextFrom = nextFrom,
                 let self = self {
                 self.dataService.saveNews(news, owners, groups)
-                self.nextFrom = nextFrom
-//                print(nextFrom)
-//                print(self.nextFrom)
             }
         }
     }

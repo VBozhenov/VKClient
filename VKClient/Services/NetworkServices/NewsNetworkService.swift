@@ -17,7 +17,8 @@ class NewsNetworkService {
     let version = "5.68"
     let token = Session.user.token
     
-    func loadNews(startFrom: String = "", completion: (([News]?, [News]?, [News]?, String?, Error?) -> Void)? = nil) {
+    func loadNews(startFrom: String = "",
+                  completion: (([News]?, [NewsOwners]?, [NewsOwners]?, Error?) -> Void)? = nil) {
         let path = "/method/newsfeed.get"
         
         let params: Parameters = [
@@ -33,13 +34,26 @@ class NewsNetworkService {
                 
             case .success(let value):
                 let json = JSON(value)
-                let news = json["response"]["items"].arrayValue.map { News(json: $0) }
-                let owners = json["response"]["profiles"].arrayValue.map { News(json: $0) }
-                let groups = json["response"]["groups"].arrayValue.map { News(json: $0) }
-                let nextFrom = json["response"]["next_from"].stringValue
-                completion?(news, owners, groups, nextFrom, nil)
+                var news = [News]()
+                var owners = [NewsOwners]()
+                var groups = [NewsOwners]()
+                
+                let jsonGroup = DispatchGroup()
+                DispatchQueue.global().async(group: jsonGroup) {
+                    news = json["response"]["items"].arrayValue.map { News(json: $0) }
+                }
+                DispatchQueue.global().async(group: jsonGroup) {
+                    owners = json["response"]["profiles"].arrayValue.map { NewsOwners(json: $0) }
+                }
+                DispatchQueue.global().async(group: jsonGroup) {
+                    groups = json["response"]["groups"].arrayValue.map { NewsOwners(json: $0) }
+                }
+                
+                jsonGroup.notify(queue: DispatchQueue.main) {
+                    completion?(news, owners, groups, nil)
+                }
             case .failure(let error):
-                completion?(nil, nil, nil, nil, error)
+                completion?(nil, nil, nil, error)
             }
             
         }
