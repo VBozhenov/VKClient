@@ -114,7 +114,7 @@ class DataService {
                   update: Bool = true)  {
         
         let dispatchGroup = DispatchGroup()
-                    
+        
         for new in news {
             for owner in owners {
                 if new.ownerId == owner.ownerId {
