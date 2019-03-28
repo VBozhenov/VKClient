@@ -40,7 +40,7 @@ class NewsNetworkService {
                 
                 let jsonGroup = DispatchGroup()
                 DispatchQueue.global().async(group: jsonGroup) {
-                    news = json["response"]["items"].arrayValue.map { News(json: $0) }.filter {!$0.text.isEmpty }
+                    news = json["response"]["items"].arrayValue.map { News(json: $0) }.filter {!$0.text.isEmpty || !$0.repostText.isEmpty || !$0.newsPhoto.isEmpty || !$0.repostNewsPhoto.isEmpty}
                 }
                 DispatchQueue.global().async(group: jsonGroup) {
                     owners = json["response"]["profiles"].arrayValue.map { NewsOwners(json: $0) }
