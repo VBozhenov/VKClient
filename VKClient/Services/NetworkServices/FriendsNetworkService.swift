@@ -9,11 +9,8 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-import RealmSwift
 
 class FriendsNetworkService {
-    
-    let dataService = DataService()
     
     let baseUrl = "https://api.vk.com"
     let version = "5.68"

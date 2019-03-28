@@ -10,10 +10,5 @@ target 'VKClient' do
   pod 'SwiftyJSON'
   pod 'Kingfisher'
   pod 'RealmSwift'
-  # pod 'Firebase/Core'
-  # pod 'Firebase/Database'
-  # pod 'Firebase/Auth'
-  # pod 'Firebase/Firestore'
-
-
+  
 end

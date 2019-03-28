@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-import RealmSwift
 
 class NewsNetworkService {
         
@@ -44,7 +43,7 @@ class NewsNetworkService {
                     news = json["response"]["items"].arrayValue.map { News(json: $0) }.filter {!$0.text.isEmpty }
                 }
                 DispatchQueue.global().async(group: jsonGroup) {
-                    owners = json["response"].arrayValue.map { NewsOwners(json: $0) }
+                    owners = json["response"]["profiles"].arrayValue.map { NewsOwners(json: $0) }
                 }
                 DispatchQueue.global().async(group: jsonGroup) {
                     groups = json["response"]["groups"].arrayValue.map { NewsOwners(json: $0) }
