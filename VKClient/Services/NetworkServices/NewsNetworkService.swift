@@ -17,7 +17,7 @@ class NewsNetworkService {
     let token = Session.user.token
     
     func loadNews(startFrom: String = "",
-                  completion: (([News]?, [NewsOwners]?, [NewsOwners]?, Error?) -> Void)? = nil) {
+                  completion: (([News]?, [NewsOwners]?, [NewsOwners]?, String?, Error?) -> Void)? = nil) {
         let path = "/method/newsfeed.get"
         
         let params: Parameters = [
@@ -37,6 +37,7 @@ class NewsNetworkService {
                 var news = [News]()
                 var owners = [NewsOwners]()
                 var groups = [NewsOwners]()
+                var nextFrom = ""
                 
                 let jsonGroup = DispatchGroup()
                 DispatchQueue.global().async(group: jsonGroup) {
@@ -48,12 +49,16 @@ class NewsNetworkService {
                 DispatchQueue.global().async(group: jsonGroup) {
                     groups = json["response"]["groups"].arrayValue.map { NewsOwners(json: $0) }
                 }
-                                
+                
+                DispatchQueue.global().async(group: jsonGroup) {
+                    nextFrom = json["response"]["next_from"].stringValue
+                }
+                
                 jsonGroup.notify(queue: DispatchQueue.main) {
-                    completion?(news, owners, groups, nil)
+                    completion?(news, owners, groups, nextFrom, nil)
                 }
             case .failure(let error):
-                completion?(nil, nil, nil, error)
+                completion?(nil, nil, nil, nil, error)
             }
             
         }

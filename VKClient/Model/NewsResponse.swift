@@ -13,7 +13,7 @@ import RealmSwift
 class NewsResponse: Object {
     @objc dynamic var previousPageStartFrom = ""
     @objc dynamic var nextPageStartFrom = ""
-    let news = List<News>()
+    var news = List<News>()
     
     convenience init(json: JSON) {
         self.init()

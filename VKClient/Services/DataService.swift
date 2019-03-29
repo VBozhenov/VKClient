@@ -109,10 +109,14 @@ class DataService {
  
     let newsQ = DispatchQueue(label: "newsQueue", qos: .userInitiated, attributes: .concurrent)
     
-    func saveNews(_ news: [News], _ owners: [NewsOwners], _ groups: [NewsOwners],
+    func saveNews(_ news: [News],
+                  _ owners: [NewsOwners],
+                  _ groups: [NewsOwners],
+                  _ nextFrom: String,
                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                   update: Bool = true)  {
         
+        let newsResponse = NewsResponse()
         let dispatchGroup = DispatchGroup()
         
         for new in news {
@@ -148,12 +152,15 @@ class DataService {
             }
         }
         
+        newsResponse.news.append(objectsIn: news)
+        newsResponse.nextPageStartFrom = nextFrom
+        
         do {
             let realm = try Realm(configuration: config)
-            let oldNews = realm.objects(News.self)
+            let oldNews = realm.objects(NewsResponse.self)
             try realm.write {
                 realm.delete(oldNews)
-                realm.add(news, update: update)
+                realm.add(newsResponse, update: update)
             }
         } catch {
             print(error.localizedDescription)
