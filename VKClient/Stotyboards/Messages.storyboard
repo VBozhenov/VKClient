@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="3621.5999999999999" y="733.5832083958021"/>
         </scene>
-        <!--Title-->
+        <!--Messages-->
         <scene sceneID="OcU-eY-Ach">
             <objects>
                 <tableViewController id="wK3-mg-TZ7" customClass="MessagesController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,36 +37,109 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Message" id="YqH-y0-CYR" customClass="MessagesCell" customModule="VKClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Message" rowHeight="116" id="YqH-y0-CYR" customClass="MessagesCell" customModule="VKClient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="116"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YqH-y0-CYR" id="6ri-OZ-dyQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="115.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zxw-8C-2q9">
-                                            <rect key="frame" x="54" y="11.5" width="313" height="21"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFO-af-HLP" customClass="GradientView" customModule="VKClient" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="115.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                                    <point key="value" x="0.0" y="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                                    <point key="value" x="1" y="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                    <color key="value" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zxw-8C-2q9">
+                                            <rect key="frame" x="54" y="8" width="313" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXf-wf-w3c">
+                                            <rect key="frame" x="54" y="37" width="313" height="70.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R8W-uL-eeo">
-                                            <rect key="frame" x="8" y="3" width="38" height="38"/>
+                                            <rect key="frame" x="8" y="8" width="38" height="38"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="38" id="49d-Cb-1ne"/>
                                                 <constraint firstAttribute="width" constant="38" id="Hdt-Sy-Zne"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                    <real key="value" value="0.69999999999999996"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="shadowOffset">
+                                                    <point key="value" x="3" y="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                    <real key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Zxw-8C-2q9" firstAttribute="leading" secondItem="R8W-uL-eeo" secondAttribute="trailing" constant="8" id="1Ld-f7-f8H"/>
                                         <constraint firstItem="R8W-uL-eeo" firstAttribute="leading" secondItem="6ri-OZ-dyQ" secondAttribute="leading" constant="8" id="3BL-Ul-cJR"/>
-                                        <constraint firstItem="Zxw-8C-2q9" firstAttribute="centerY" secondItem="6ri-OZ-dyQ" secondAttribute="centerY" id="7KB-Cd-IBi"/>
-                                        <constraint firstItem="R8W-uL-eeo" firstAttribute="centerY" secondItem="6ri-OZ-dyQ" secondAttribute="centerY" id="Zle-TJ-HOS"/>
+                                        <constraint firstItem="R8W-uL-eeo" firstAttribute="top" secondItem="6ri-OZ-dyQ" secondAttribute="top" constant="8" id="4lF-Q8-23t"/>
+                                        <constraint firstAttribute="trailing" secondItem="YFO-af-HLP" secondAttribute="trailing" id="7Tl-J1-VB3"/>
+                                        <constraint firstItem="YFO-af-HLP" firstAttribute="leading" secondItem="6ri-OZ-dyQ" secondAttribute="leading" id="8Kf-Sx-cbB"/>
+                                        <constraint firstItem="eXf-wf-w3c" firstAttribute="top" secondItem="Zxw-8C-2q9" secondAttribute="bottom" constant="8" id="gsp-Pr-ZBw"/>
+                                        <constraint firstItem="Zxw-8C-2q9" firstAttribute="top" secondItem="6ri-OZ-dyQ" secondAttribute="top" constant="8" id="hox-xG-310"/>
                                         <constraint firstAttribute="trailing" secondItem="Zxw-8C-2q9" secondAttribute="trailing" constant="8" id="k1Y-JC-1B9"/>
+                                        <constraint firstItem="eXf-wf-w3c" firstAttribute="leading" secondItem="R8W-uL-eeo" secondAttribute="trailing" constant="8" id="mYy-Lx-i29"/>
+                                        <constraint firstAttribute="bottom" secondItem="eXf-wf-w3c" secondAttribute="bottom" constant="8" id="pwS-TR-rSV"/>
+                                        <constraint firstAttribute="trailing" secondItem="eXf-wf-w3c" secondAttribute="trailing" constant="8" id="tBh-t1-meu"/>
+                                        <constraint firstAttribute="bottom" secondItem="YFO-af-HLP" secondAttribute="bottom" id="vAj-oB-ZSw"/>
+                                        <constraint firstItem="YFO-af-HLP" firstAttribute="top" secondItem="6ri-OZ-dyQ" secondAttribute="top" id="xYk-Mu-0UH"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                            <color key="value" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
+                                            <real key="value" value="0.0"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                            <point key="value" x="0.0" y="0.0"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                            <point key="value" x="1" y="0.0"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="lastMessageLabel" destination="eXf-wf-w3c" id="yco-mo-bN9"/>
                                     <outlet property="userFoto" destination="R8W-uL-eeo" id="Fur-w0-JS6"/>
                                     <outlet property="userName" destination="Zxw-8C-2q9" id="IMj-tE-rdR"/>
                                 </connections>
@@ -77,7 +150,7 @@
                             <outlet property="delegate" destination="wK3-mg-TZ7" id="M8j-Su-oMJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="3s5-c2-uQd">
+                    <navigationItem key="navigationItem" title="Messages" id="3s5-c2-uQd">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="XeF-97-PXS">
                             <connections>
                                 <segue destination="ubw-KF-o4C" kind="unwind" unwindAction="myUnwindActionWithUnwindSegue:" id="DGZ-tq-16d"/>

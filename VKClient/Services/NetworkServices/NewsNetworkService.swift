@@ -16,7 +16,7 @@ class NewsNetworkService {
     let version = "5.68"
     let token = Session.user.token
     
-    func loadNews(startFrom: String = "",
+    func loadNews(startFrom: String,
                   completion: (([News]?, [NewsOwners]?, [NewsOwners]?, String?, Error?) -> Void)? = nil) {
         let path = "/method/newsfeed.get"
         

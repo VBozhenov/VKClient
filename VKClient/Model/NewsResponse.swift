@@ -1,5 +1,5 @@
 //
-//  Response.swift
+//  NewsResponse.swift
 //  VKClient
 //
 //  Created by Vladimir Bozhenov on 27/03/2019.
@@ -11,17 +11,17 @@ import SwiftyJSON
 import RealmSwift
 
 class NewsResponse: Object {
-    @objc dynamic var previousPageStartFrom = ""
-    @objc dynamic var nextPageStartFrom = ""
+    @objc dynamic var previousPageStartsFrom = ""
+    @objc dynamic var nextPageStartsFrom = ""
     var news = List<News>()
     
     convenience init(json: JSON) {
         self.init()
-        self.nextPageStartFrom = json["next_from"].stringValue
+        self.nextPageStartsFrom = json["next_from"].stringValue
 
     }
     
     override static func primaryKey() -> String {
-        return "nextPageStartFrom"
+        return "nextPageStartsFrom"
     }
 }

@@ -108,6 +108,7 @@ class DataService {
     }
  
     let newsQ = DispatchQueue(label: "newsQueue", qos: .userInitiated, attributes: .concurrent)
+    let messagesQ = DispatchQueue(label: "messagesQueue", qos: .userInitiated, attributes: .concurrent)
     
     func saveNews(_ news: [News],
                   _ owners: [NewsOwners],
@@ -153,17 +154,21 @@ class DataService {
         }
         
         newsResponse.news.append(objectsIn: news)
-        newsResponse.nextPageStartFrom = nextFrom
+        newsResponse.nextPageStartsFrom = nextFrom
         
-        do {
-            let realm = try Realm(configuration: config)
-            let oldNews = realm.objects(NewsResponse.self)
-            try realm.write {
-                realm.delete(oldNews)
-                realm.add(newsResponse, update: update)
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            do {
+                let realm = try Realm(configuration: config)
+                let oldNews = realm.objects(News.self)
+                let oldResponse = realm.objects(NewsResponse.self)
+                try realm.write {
+                    realm.delete(oldNews)
+                    realm.delete(oldResponse)
+                    realm.add(newsResponse, update: update)
+                }
+            } catch {
+                print(error.localizedDescription)
             }
-        } catch {
-            print(error.localizedDescription)
         }
     }
     
@@ -186,17 +191,42 @@ class DataService {
     
     
     func saveMessages(_ messages: [Message],
+                      _ owners: [MessageOwner],
+                      _ groups: [MessageOwner],
                       config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                       update: Bool = true) {
-        do {
-            let realm = try Realm(configuration: config)
-            let oldMessades = realm.objects(Message.self)
-            try realm.write {
-                realm.delete(oldMessades)
-                realm.add(messages, update: update)
+        
+        let dispatchGroup = DispatchGroup()
+        
+        for message in messages {
+            for owner in owners {
+                if message.userId == owner.ownerId {
+                    messagesQ.async(group: dispatchGroup) {
+                        message.owner = owner
+                    }
+                }
             }
-        } catch {
-            print(error.localizedDescription)
+            
+            for group in groups {
+                if message.userId == group.ownerId {
+                    messagesQ.async(group: dispatchGroup) {
+                        message.owner = group
+                    }
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            do {
+                let realm = try Realm(configuration: config)
+                let oldMessades = realm.objects(Message.self)
+                try realm.write {
+                    realm.delete(oldMessades)
+                    realm.add(messages, update: update)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

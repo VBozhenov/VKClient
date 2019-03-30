@@ -16,10 +16,11 @@ class MessagesNetworkService {
     let version = "5.68"
     let token = Session.user.token
     
-    func loadMessages(completion: (([Message]?, [Message]?, Error?) -> Void)? = nil) {
+    func loadMessages(completion: (([Message]?, [MessageOwner]?, [MessageOwner]?, Error?) -> Void)? = nil) {
         let path = "/method/messages.getConversations"
         
         let params: Parameters = [
+            "access_token": token,
             "extended": "1",
             "v": version
         ]
@@ -31,13 +32,13 @@ class MessagesNetworkService {
             case .success(let value):
                 let json = JSON(value)
                 let messages = json["response"]["items"].arrayValue.map { Message(json: $0) }
-                let users = json["response"]["profiles"].arrayValue.map { Message(json: $0) }
-                completion?(messages, users, nil)
-                print(value)
-                print(messages)
-                print(users)
+                let users = json["response"]["profiles"].arrayValue.map { MessageOwner(json: $0) }
+                let groups = json["response"]["groups"].arrayValue.map { MessageOwner(json: $0) }
+
+                print(json)
+                completion?(messages, users, groups, nil)
             case .failure(let error):
-                completion?(nil, nil, error)
+                completion?(nil, nil, nil, error)
             }
         }
     }

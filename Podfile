@@ -10,5 +10,4 @@ target 'VKClient' do
   pod 'SwiftyJSON'
   pod 'Kingfisher'
   pod 'RealmSwift'
-  
-end
+  end

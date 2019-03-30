@@ -13,19 +13,18 @@ import RealmSwift
 class Message: Object {
     
     @objc dynamic var userId = 0
-    @objc dynamic var text = ""
-    @objc dynamic var unreadCount = 0
-    @objc dynamic var ownerName = ""
-    @objc dynamic var ownerPhoto = ""
+    @objc dynamic var lastMessage = ""
+    @objc dynamic var owner: MessageOwner?
+
+    
+    convenience init(json: JSON) {
+        self.init()
+        self.userId = json["conversation"]["peer"]["id"].intValue
+        self.lastMessage = json["last_message"]["text"].stringValue
+    }
     
     override static func primaryKey() -> String? {
         return "userId"
     }
     
-    convenience init(json: JSON) {
-        self.init()
-        self.userId = json["conversation"]["peer"]["id"].intValue
-        self.text = json["last_message"]["text"].stringValue
-        self.unreadCount = json["conversation"]["unread_count"].intValue
-    }
 }

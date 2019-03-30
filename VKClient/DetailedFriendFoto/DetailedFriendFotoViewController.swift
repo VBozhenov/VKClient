@@ -8,7 +8,7 @@
 
 import UIKit
 import Kingfisher
-import RealmSwift
+import Realm Swift
 
 class DetailedFriendFotoViewController: UICollectionViewController {
     
