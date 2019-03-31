@@ -1,5 +1,5 @@
 //
-//  NewsOwners.swift
+//  Owner.swift
 //  VKClient
 //
 //  Created by Vladimir Bozhenov on 26/03/2019.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-class NewsOwners: Object {
+class Owner: Object {
     
     @objc dynamic var ownerId = 0
     @objc dynamic var ownerPhoto = ""

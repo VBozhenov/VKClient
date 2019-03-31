@@ -111,8 +111,8 @@ class DataService {
     let messagesQ = DispatchQueue(label: "messagesQueue", qos: .userInitiated, attributes: .concurrent)
     
     func saveNews(_ news: [News],
-                  _ owners: [NewsOwners],
-                  _ groups: [NewsOwners],
+                  _ owners: [Owner],
+                  _ groups: [Owner],
                   _ nextFrom: String,
                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                   update: Bool = true)  {
@@ -191,8 +191,8 @@ class DataService {
     
     
     func saveMessages(_ messages: [Message],
-                      _ owners: [MessageOwner],
-                      _ groups: [MessageOwner],
+                      _ owners: [Owner],
+                      _ groups: [Owner],
                       config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                       update: Bool = true) {
         
@@ -223,6 +223,26 @@ class DataService {
                 try realm.write {
                     realm.delete(oldMessades)
                     realm.add(messages, update: update)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    func saveConversation(_ conversations: [Conversation],
+                      config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                      update: Bool = true) {
+        
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            do {
+                let realm = try Realm(configuration: config)
+                let oldConversation = realm.objects(Conversation.self)
+                try realm.write {
+                    realm.delete(oldConversation)
+                    realm.add(conversations, update: update)
                 }
             } catch {
                 print(error.localizedDescription)

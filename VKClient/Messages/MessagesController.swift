@@ -34,7 +34,6 @@ class MessagesController: UITableViewController {
                 self.dataService.saveMessages(messages, users, groups)
             }
         }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +57,17 @@ class MessagesController: UITableViewController {
         cell.lastMessageLabel.text = messages[indexPath.row].lastMessage
 
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let messages = messages,
+            let indexPath = tableView.indexPathForSelectedRow else { return }
+        if segue.identifier == "toConversation"  {
+            let conversationController = segue.destination as! ConversationController
+            conversationController.userId = messages[indexPath.row].userId
+            conversationController.userName = messages[indexPath.row].owner?.userName ?? ""
+            conversationController.userPhoto = messages[indexPath.row].owner?.ownerPhoto ?? ""
+        } else { return }
     }
     
     func pairTableAndRealm(config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {

@@ -14,7 +14,7 @@ class Message: Object {
     
     @objc dynamic var userId = 0
     @objc dynamic var lastMessage = ""
-    @objc dynamic var owner: MessageOwner?
+    @objc dynamic var owner: Owner?
 
     
     convenience init(json: JSON) {

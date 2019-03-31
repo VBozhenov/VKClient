@@ -16,7 +16,7 @@ class MessagesNetworkService {
     let version = "5.68"
     let token = Session.user.token
     
-    func loadMessages(completion: (([Message]?, [MessageOwner]?, [MessageOwner]?, Error?) -> Void)? = nil) {
+    func loadMessages(completion: (([Message]?, [Owner]?, [Owner]?, Error?) -> Void)? = nil) {
         let path = "/method/messages.getConversations"
         
         let params: Parameters = [
@@ -31,12 +31,23 @@ class MessagesNetworkService {
                 
             case .success(let value):
                 let json = JSON(value)
-                let messages = json["response"]["items"].arrayValue.map { Message(json: $0) }
-                let users = json["response"]["profiles"].arrayValue.map { MessageOwner(json: $0) }
-                let groups = json["response"]["groups"].arrayValue.map { MessageOwner(json: $0) }
-
-                print(json)
-                completion?(messages, users, groups, nil)
+                var messages = [Message]()
+                var users = [Owner]()
+                var groups = [Owner]()
+                
+                let jsonGroup = DispatchGroup()
+                DispatchQueue.global().async(group: jsonGroup) {
+                    messages = json["response"]["items"].arrayValue.map { Message(json: $0) }
+                }
+                DispatchQueue.global().async(group: jsonGroup) {
+                    users = json["response"]["profiles"].arrayValue.map { Owner(json: $0) }
+                }
+                DispatchQueue.global().async(group: jsonGroup) {
+                    groups = json["response"]["groups"].arrayValue.map { Owner(json: $0) }
+                }
+                jsonGroup.notify(queue: DispatchQueue.main) {
+                    completion?(messages, users, groups, nil)
+                }
             case .failure(let error):
                 completion?(nil, nil, nil, error)
             }

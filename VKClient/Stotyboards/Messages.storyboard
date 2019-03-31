@@ -117,31 +117,12 @@
                                         <constraint firstAttribute="bottom" secondItem="YFO-af-HLP" secondAttribute="bottom" id="vAj-oB-ZSw"/>
                                         <constraint firstItem="YFO-af-HLP" firstAttribute="top" secondItem="6ri-OZ-dyQ" secondAttribute="top" id="xYk-Mu-0UH"/>
                                     </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                            <color key="value" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
-                                            <real key="value" value="0.0"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
-                                            <real key="value" value="1"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
-                                            <point key="value" x="0.0" y="0.0"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
-                                            <point key="value" x="1" y="0.0"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="lastMessageLabel" destination="eXf-wf-w3c" id="yco-mo-bN9"/>
                                     <outlet property="userFoto" destination="R8W-uL-eeo" id="Fur-w0-JS6"/>
                                     <outlet property="userName" destination="Zxw-8C-2q9" id="IMj-tE-rdR"/>
+                                    <segue destination="7Vg-aZ-J1Y" kind="show" identifier="toConversation" id="Pns-hC-Ro2"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -162,6 +143,114 @@
                 <exit id="ubw-KF-o4C" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4525.6000000000004" y="732.68365817091455"/>
+        </scene>
+        <!--Conversation Controller-->
+        <scene sceneID="0xG-FX-hCn">
+            <objects>
+                <tableViewController id="7Vg-aZ-J1Y" customClass="ConversationController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1k3-T8-CFV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Conversation" rowHeight="101" id="gT4-9V-UXl" customClass="ConversationCell" customModule="VKClient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="101"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gT4-9V-UXl" id="fwb-Xh-2ds">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzU-pc-NzI" customClass="GradientView" customModule="VKClient" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                    <color key="value" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                    <color key="value" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                                    <point key="value" x="0.0" y="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                                    <point key="value" x="1" y="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="My Message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJW-5k-sEV">
+                                            <rect key="frame" x="54" y="8" width="97" height="38"/>
+                                            <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message For Me" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zf0-5h-qdS" userLabel="Message For Me Label">
+                                            <rect key="frame" x="240" y="54" width="127" height="38.5"/>
+                                            <color key="backgroundColor" red="0.83635354042053223" green="0.93337565660476685" blue="0.95462983846664429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vyc-8c-1ZD">
+                                            <rect key="frame" x="8" y="8" width="38" height="38"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="38" id="liG-Pk-NQJ"/>
+                                                <constraint firstAttribute="width" constant="38" id="qNI-Ne-cRc"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="point" keyPath="shadowOffset">
+                                                    <point key="value" x="3" y="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                    <real key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                    <real key="value" value="0.69999999999999996"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="zf0-5h-qdS" secondAttribute="bottom" constant="8" id="7Ge-9C-4ml"/>
+                                        <constraint firstAttribute="trailing" secondItem="zf0-5h-qdS" secondAttribute="trailing" constant="8" id="9sc-ZT-M0m"/>
+                                        <constraint firstItem="zf0-5h-qdS" firstAttribute="top" secondItem="cJW-5k-sEV" secondAttribute="bottom" constant="8" id="ANb-Xf-T07"/>
+                                        <constraint firstItem="gzU-pc-NzI" firstAttribute="leading" secondItem="fwb-Xh-2ds" secondAttribute="leading" id="CZA-6u-F49"/>
+                                        <constraint firstItem="zf0-5h-qdS" firstAttribute="top" secondItem="vyc-8c-1ZD" secondAttribute="bottom" constant="8" id="GI3-8y-MU8"/>
+                                        <constraint firstItem="gzU-pc-NzI" firstAttribute="top" secondItem="fwb-Xh-2ds" secondAttribute="top" id="J8g-jk-2HO"/>
+                                        <constraint firstItem="vyc-8c-1ZD" firstAttribute="top" secondItem="fwb-Xh-2ds" secondAttribute="top" constant="8" id="KF7-he-p70"/>
+                                        <constraint firstItem="vyc-8c-1ZD" firstAttribute="leading" secondItem="fwb-Xh-2ds" secondAttribute="leading" constant="8" id="PEE-N4-UT3"/>
+                                        <constraint firstItem="cJW-5k-sEV" firstAttribute="top" secondItem="fwb-Xh-2ds" secondAttribute="top" constant="8" id="ZyT-Q5-jLV"/>
+                                        <constraint firstAttribute="bottom" secondItem="gzU-pc-NzI" secondAttribute="bottom" id="u8q-hD-jyE"/>
+                                        <constraint firstAttribute="trailing" secondItem="gzU-pc-NzI" secondAttribute="trailing" id="xkJ-r5-R92"/>
+                                        <constraint firstItem="cJW-5k-sEV" firstAttribute="leading" secondItem="vyc-8c-1ZD" secondAttribute="trailing" constant="8" id="xue-r4-gVl"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="messageForMeLabel" destination="zf0-5h-qdS" id="84d-ub-uEk"/>
+                                    <outlet property="myMessageLabel" destination="cJW-5k-sEV" id="adq-yu-kAT"/>
+                                    <outlet property="userPhoto" destination="vyc-8c-1ZD" id="Vbe-Ii-Rdg"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7Vg-aZ-J1Y" id="jip-m7-T3R"/>
+                            <outlet property="delegate" destination="7Vg-aZ-J1Y" id="laV-E4-ud9"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEp-KR-aAK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5442.3999999999996" y="732.68365817091455"/>
         </scene>
     </scenes>
     <resources>

@@ -27,8 +27,8 @@ class News: Object {
     @objc dynamic var repostText = ""
     @objc dynamic var repostNewsPhoto = ""
     
-    @objc dynamic var owner: NewsOwners?
-    @objc dynamic var repostOwner: NewsOwners?
+    @objc dynamic var owner: Owner?
+    @objc dynamic var repostOwner: Owner?
     
     convenience init(json: JSON) {
         self.init()

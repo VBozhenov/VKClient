@@ -17,7 +17,7 @@ class NewsNetworkService {
     let token = Session.user.token
     
     func loadNews(startFrom: String,
-                  completion: (([News]?, [NewsOwners]?, [NewsOwners]?, String?, Error?) -> Void)? = nil) {
+                  completion: (([News]?, [Owner]?, [Owner]?, String?, Error?) -> Void)? = nil) {
         let path = "/method/newsfeed.get"
         
         let params: Parameters = [
@@ -35,8 +35,8 @@ class NewsNetworkService {
             case .success(let value):
                 let json = JSON(value)
                 var news = [News]()
-                var owners = [NewsOwners]()
-                var groups = [NewsOwners]()
+                var owners = [Owner]()
+                var groups = [Owner]()
                 var nextFrom = ""
                 
                 let jsonGroup = DispatchGroup()
@@ -44,10 +44,10 @@ class NewsNetworkService {
                     news = json["response"]["items"].arrayValue.map { News(json: $0) }.filter {!$0.text.isEmpty || !$0.repostText.isEmpty || !$0.newsPhoto.isEmpty || !$0.repostNewsPhoto.isEmpty}
                 }
                 DispatchQueue.global().async(group: jsonGroup) {
-                    owners = json["response"]["profiles"].arrayValue.map { NewsOwners(json: $0) }
+                    owners = json["response"]["profiles"].arrayValue.map { Owner(json: $0) }
                 }
                 DispatchQueue.global().async(group: jsonGroup) {
-                    groups = json["response"]["groups"].arrayValue.map { NewsOwners(json: $0) }
+                    groups = json["response"]["groups"].arrayValue.map { Owner(json: $0) }
                 }
                 
                 DispatchQueue.global().async(group: jsonGroup) {
