@@ -58,18 +58,15 @@ class ConversationController: UITableViewController {
         cell.myMessageLabel.layer.masksToBounds = true
         
         if conversations[indexPath.row].fromId == conversations[indexPath.row].userId {
-            cell.myMessageLabel.text = conversations[indexPath.row].body
-            cell.messageForMeLabel.text = ""
-            cell.userPhoto.kf.setImage(with: URL(string: userPhoto))
-            
-            RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: conversations[indexPath.row].owner?.ownerPhoto ?? "",
-                                                   destinationAvatar: cell.userPhoto)
-        } else {
             cell.messageForMeLabel.text = conversations[indexPath.row].body
             cell.myMessageLabel.text = ""
+            cell.userPhoto.kf.setImage(with: URL(string: userPhoto))
+            RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: userPhoto, destinationAvatar: cell.userPhoto)
+        } else {
+            cell.myMessageLabel.text = conversations[indexPath.row].body
+            cell.messageForMeLabel.text = ""
         }
-
-
+        
         return cell
     }
     

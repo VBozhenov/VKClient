@@ -16,7 +16,6 @@ class Conversation: Object {
     @objc dynamic var fromId = 0
     @objc dynamic var userId = 0
     @objc dynamic var body = ""
-    @objc dynamic var owner: Owner?
     
     
     convenience init(json: JSON) {
