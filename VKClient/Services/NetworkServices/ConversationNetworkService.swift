@@ -46,4 +46,23 @@ class ConversationNetworkService {
             }
         }
     }
+    
+    func sendMessage(text: String,
+                     to userId: Int,
+                     randomId: Int,
+                     completion: ((_ success: Bool) -> Void)? = nil) {
+        let path = "/method/messages.send"
+        
+        let params: Parameters = [
+            "access_token": token,
+            "user_id": userId,
+            "message": text,
+            "random_id": randomId,
+            "v": version
+        ]
+        
+        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+            completion?(true)
+        }
+    }
 }

@@ -19,19 +19,26 @@ class ConversationController: UITableViewController {
     let conversationNetworkService = ConversationNetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
-
+    var textField = UITextField()
+    var sendMessageButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = userName
-        conversationNetworkService.loadConversation(with: userId) { [weak self] conversations, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else if let conversations = conversations,
-                let self = self {
-                self.dataService.saveConversation(conversations)
+        loadConversation(with: userId)
+    }
+    
+    @objc func sendMessageButtonPushed(sender: UIButton!) {
+        if let textToSend = textField.text {
+            print((conversations?.first?.messageId ?? 0) + 1)
+            conversationNetworkService.sendMessage(text: textToSend, to: userId, randomId: (conversations?.first?.messageId ?? 0) + 1) { (success) -> Void in
+                if success {
+                    self.loadConversation(with: self.userId)
+                    DispatchQueue.main.async {
+                        self.textField.text = ""
+                    }
+                }
             }
         }
     }
@@ -71,6 +78,25 @@ class ConversationController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
+        self.textField = UITextField(frame: CGRect(x: 20, y: 0, width: footerView.frame.size.width - 60, height: 40))
+        self.textField.borderStyle = UITextField.BorderStyle.roundedRect
+        self.textField.adjustsFontSizeToFitWidth = true
+        self.sendMessageButton = UIButton(frame: CGRect(x: footerView.frame.size.width - 40, y: 0, width: 40, height: 40))
+        self.sendMessageButton.setImage(UIImage(named: "sendMessageButton"), for: .normal)
+        sendMessageButton.addTarget(self, action: #selector(sendMessageButtonPushed), for: .touchUpInside)
+        footerView.backgroundColor = UIColor.white
+        footerView.addSubview(self.textField)
+        footerView.addSubview(self.sendMessageButton)
+
+        return footerView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+    
     func pairTableAndRealm(config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
         guard let realm = try? Realm(configuration: config) else { return }
         conversations = realm.objects(Conversation.self)
@@ -85,5 +111,17 @@ class ConversationController: UITableViewController {
                 fatalError("\(error)")
             }
         })
+    }
+    
+    func loadConversation(with userId: Int) {
+        conversationNetworkService.loadConversation(with: userId) { [weak self] conversations, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            } else if let conversations = conversations,
+                let self = self {
+                self.dataService.saveConversation(conversations)
+            }
+        }
     }
 }
