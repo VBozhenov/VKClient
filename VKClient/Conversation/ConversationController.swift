@@ -60,10 +60,12 @@ class ConversationController: UITableViewController {
         if conversations[indexPath.row].fromId == conversations[indexPath.row].userId {
             cell.messageForMeLabel.text = conversations[indexPath.row].body
             cell.myMessageLabel.text = ""
+            cell.userPhoto.isHidden = false
             RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: userPhoto, destinationAvatar: cell.userPhoto)
         } else {
             cell.myMessageLabel.text = conversations[indexPath.row].body
             cell.messageForMeLabel.text = ""
+            cell.userPhoto.isHidden = true
         }
         
         return cell
