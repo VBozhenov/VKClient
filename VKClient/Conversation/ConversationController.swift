@@ -60,7 +60,6 @@ class ConversationController: UITableViewController {
         if conversations[indexPath.row].fromId == conversations[indexPath.row].userId {
             cell.messageForMeLabel.text = conversations[indexPath.row].body
             cell.myMessageLabel.text = ""
-            cell.userPhoto.kf.setImage(with: URL(string: userPhoto))
             RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: userPhoto, destinationAvatar: cell.userPhoto)
         } else {
             cell.myMessageLabel.text = conversations[indexPath.row].body
