@@ -6,12 +6,14 @@ PODS:
   - Realm/Headers (3.14.0)
   - RealmSwift (3.14.0):
     - Realm (= 3.14.0)
+  - SnapKit (4.2.0)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
   - Kingfisher
-  - RealmSwift (~> 3.13)
+  - RealmSwift
+  - SnapKit
   - SwiftyJSON
 
 SPEC REPOS:
@@ -20,6 +22,7 @@ SPEC REPOS:
     - Kingfisher
     - Realm
     - RealmSwift
+    - SnapKit
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -27,8 +30,9 @@ SPEC CHECKSUMS:
   Kingfisher: 2558186963e5be42d98c5b110ccb3130148b77e4
   Realm: 221b25919bb5a010a3c597d707f8df3492dcd93a
   RealmSwift: 28f22dfa6a27b9a778cfb09471558b6afcf1022c
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: a18d40f2931ed186536a961830067598e59a3832
+PODFILE CHECKSUM: d34074fb898b4cad4fb2c7c7a4d08936b853a8fa
 
 COCOAPODS: 1.5.3

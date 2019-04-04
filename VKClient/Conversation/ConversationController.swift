@@ -43,6 +43,10 @@ class ConversationController: UITableViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.scrollToRow(at: IndexPath(row: (conversations?.count)! - 1, section: 0), at: .bottom, animated: true)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         pairTableAndRealm()
     }
@@ -57,7 +61,7 @@ class ConversationController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Conversation", for: indexPath) as! ConversationCell
-        guard let conversations = conversations else { return UITableViewCell() }
+        guard let conversations = conversations?.sorted(byKeyPath: "messageId", ascending: true) else { return UITableViewCell() }
 
         cell.messageForMeLabel.layer.cornerRadius = 10
         cell.myMessageLabel.layer.cornerRadius = 10
@@ -86,7 +90,7 @@ class ConversationController: UITableViewController {
         self.sendMessageButton = UIButton(frame: CGRect(x: footerView.frame.size.width - 40, y: 0, width: 40, height: 40))
         self.sendMessageButton.setImage(UIImage(named: "sendMessageButton"), for: .normal)
         sendMessageButton.addTarget(self, action: #selector(sendMessageButtonPushed), for: .touchUpInside)
-        footerView.backgroundColor = UIColor.white
+        footerView.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         footerView.addSubview(self.textField)
         footerView.addSubview(self.sendMessageButton)
 

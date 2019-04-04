@@ -10,4 +10,5 @@ target 'VKClient' do
   pod 'SwiftyJSON'
   pod 'Kingfisher'
   pod 'RealmSwift'
+  pod 'SnapKit'
   end
