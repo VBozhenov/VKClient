@@ -31,7 +31,6 @@ class ConversationController: UITableViewController {
     
     @objc func sendMessageButtonPushed(sender: UIButton!) {
         if let textToSend = textField.text {
-            print((conversations?.first?.messageId ?? 0) + 1)
             conversationNetworkService.sendMessage(text: textToSend, to: userId, randomId: (conversations?.first?.messageId ?? 0) + 1) { (success) -> Void in
                 if success {
                     self.loadConversation(with: self.userId)
