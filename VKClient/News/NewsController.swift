@@ -14,9 +14,11 @@ class NewsController: UITableViewController {
     
     var news: Results<News>?
     let newsNetworkService = NewsNetworkService()
+    var nextFrom = ""
     let utilityNetworkService = UtilityNetworkService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
+    var fetchingMore = false
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -28,7 +30,7 @@ class NewsController: UITableViewController {
         
         activityIndicator.isHidden = true
         
-        loadNews()
+        loadNews(from: nextFrom)
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Идет обновление...")
         refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
@@ -154,6 +156,7 @@ class NewsController: UITableViewController {
                 let groups = groups,
                 let nextFrom = nextFrom,
                 let self = self {
+                self.nextFrom = nextFrom
                 self.dataService.saveNews(news, owners, groups, nextFrom)
             }
         }
@@ -182,10 +185,18 @@ class NewsController: UITableViewController {
 //        let contentHeight = scrollView.contentSize.height
 //
 //        if offsetY > contentHeight - scrollView.frame.size.height {
-//
-//            loadNews(from: nextFrom)
-//
-//            self.tableView.reloadData()
+//            if !fetchingMore {
+//                beginBatchFetch()
+//            }
 //        }
+//    }
+//
+//    func beginBatchFetch() {
+//        fetchingMore = true
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
+//            self.loadNews(from: self.nextFrom)
+//            self.fetchingMore = false
+//            self.tableView.reloadData()
+//        })
 //    }
 }
