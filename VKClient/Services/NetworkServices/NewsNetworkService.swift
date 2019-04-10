@@ -23,6 +23,7 @@ class NewsNetworkService {
         let params: Parameters = [
             "access_token": token,
             "filters": "post,photo",
+            "count": 10,
             "start_from": startFrom,
             "v": version
         ]

@@ -122,14 +122,16 @@ class NewsController: UITableViewController {
             case .initial:
                 tableView.reloadData()
             case .update(_, let deletions, let insertions, let modifications):
-                tableView.beginUpdates()
-                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
-                                     with: .fade)
-                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
-                                     with: .fade)
-                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
-                                     with: .fade)
-                tableView.endUpdates()
+                tableView.reloadData()
+
+//                tableView.beginUpdates()
+//                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+//                                     with: .automatic)
+//                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+//                                     with: .automatic)
+//                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+//                                     with: .automatic)
+//                tableView.endUpdates()
             case .error(let error):
                 fatalError("\(error)")
             }
@@ -179,24 +181,23 @@ class NewsController: UITableViewController {
     
     
     
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//
-//        let offsetY = scrollView.contentOffset.y
-//        let contentHeight = scrollView.contentSize.height
-//
-//        if offsetY > contentHeight - scrollView.frame.size.height {
-//            if !fetchingMore {
-//                beginBatchFetch()
-//            }
-//        }
-//    }
-//
-//    func beginBatchFetch() {
-//        fetchingMore = true
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
-//            self.loadNews(from: self.nextFrom)
-//            self.fetchingMore = false
-//            self.tableView.reloadData()
-//        })
-//    }
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+
+        if offsetY > contentHeight - scrollView.frame.size.height * 2 {
+            if !fetchingMore {
+                beginBatchFetch()
+            }
+        }
+    }
+
+    func beginBatchFetch() {
+        fetchingMore = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
+            self.loadNews(from: self.nextFrom)
+            self.fetchingMore = false
+        })
+    }
 }
