@@ -106,7 +106,22 @@ class DataService {
             print(error.localizedDescription)
         }
     }
- 
+    
+    func deleteNews(config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
+                    update: Bool = true)  {
+        do {
+            let realm = try Realm(configuration: config)
+            let oldNews = realm.objects(News.self)
+            let oldResponse = realm.objects(NewsResponse.self)
+            try realm.write {
+                realm.delete(oldNews)
+                realm.delete(oldResponse)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     let newsQ = DispatchQueue(label: "newsQueue", qos: .userInitiated, attributes: .concurrent)
     let messagesQ = DispatchQueue(label: "messagesQueue", qos: .userInitiated, attributes: .concurrent)
     

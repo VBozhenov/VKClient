@@ -29,7 +29,7 @@ class NewsController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         
         activityIndicator.isHidden = true
-        
+        dataService.deleteNews()
         loadNews(from: nextFrom)
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Идет обновление...")
@@ -186,7 +186,7 @@ class NewsController: UITableViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
 
-        if offsetY > contentHeight - scrollView.frame.size.height * 2 {
+        if offsetY > contentHeight - scrollView.frame.size.height * 3 {
             if !fetchingMore {
                 beginBatchFetch()
             }
