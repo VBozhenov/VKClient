@@ -90,6 +90,7 @@ class ConversationController: UITableViewController {
         self.sendMessageButton.setImage(UIImage(named: "sendMessageButton"), for: .normal)
         sendMessageButton.addTarget(self, action: #selector(sendMessageButtonPushed), for: .touchUpInside)
         footerView.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         footerView.addSubview(self.textField)
         footerView.addSubview(self.sendMessageButton)
 

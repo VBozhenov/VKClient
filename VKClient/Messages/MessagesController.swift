@@ -22,7 +22,9 @@ class MessagesController: UITableViewController {
         super.viewDidLoad()
         
         title = "Messages"
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         messagesNetworkService.loadMessages() { [weak self] messages, users, groups, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -34,9 +36,6 @@ class MessagesController: UITableViewController {
                 self.dataService.saveMessages(messages, users, groups)
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         pairTableAndRealm()
     }
     
