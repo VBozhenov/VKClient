@@ -7,16 +7,19 @@
 //
 
 import UIKit
-import Kingfisher
 import RealmSwift
 
 class DetailedFriendFotoViewController: UICollectionViewController {
     
     var photos: Results<Photo>!
     var indexToScrollTo = IndexPath()
+    var photoService: PhotoService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photoService = PhotoService(container: collectionView)
+
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +33,8 @@ class DetailedFriendFotoViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendFotoImage", for: indexPath) as! DetailedFriendFotoCell
         if let photo = photos[indexPath.row].photo {
-            cell.friendFoto.kf.setImage(with: URL(string: photo))
+            cell.friendFoto.image = photoService?.photo(at: indexPath, by: photo)
+
         }
     
         return cell

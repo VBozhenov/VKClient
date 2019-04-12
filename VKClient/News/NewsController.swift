@@ -8,7 +8,6 @@
 
 import UIKit
 import RealmSwift
-import Kingfisher
 
 class NewsController: UITableViewController {
     
@@ -121,7 +120,7 @@ class NewsController: UITableViewController {
             switch changes {
             case .initial:
                 tableView.reloadData()
-            case .update(_, let deletions, let insertions, let modifications):
+            case .update: //(_, let deletions, let insertions, let modifications):
                 tableView.reloadData()
 
 //                tableView.beginUpdates()

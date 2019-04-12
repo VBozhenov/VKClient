@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 import RealmSwift
 
 class FriendFotoController: UICollectionViewController {
@@ -20,6 +19,8 @@ class FriendFotoController: UICollectionViewController {
     let utilityNetworkService = UtilityNetworkService()
     let friendsNetworkService = FriendsNetworkService()
     let dataService = DataService()
+    var photoService: PhotoService?
+
     
     var notificationToken: NotificationToken?
     
@@ -29,6 +30,7 @@ class FriendFotoController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoService = PhotoService(container: collectionView)
         
         friendsNetworkService.loadFriendsFoto(for: friendId) { [weak self] photos, error in
             if let error = error {
@@ -78,7 +80,8 @@ class FriendFotoController: UICollectionViewController {
                 cell.numberOfLikes.textColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
             }
             
-            cell.friendFoto.kf.setImage(with: URL(string: photo))
+            cell.friendFoto.image = photoService?.photo(at: indexPath, by: photo)
+            
             cell.numberOfLikes.text = String(photos[indexPath.row].likes)
         }
         

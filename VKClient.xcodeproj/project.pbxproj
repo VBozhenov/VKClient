@@ -56,6 +56,8 @@
 		E7D55872223AA7780064465B /* NewsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D55871223AA7780064465B /* NewsNetworkService.swift */; };
 		E7D55874223AA8190064465B /* MessagesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D55873223AA8190064465B /* MessagesNetworkService.swift */; };
 		E7D55876223AA88D0064465B /* UtilityNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D55875223AA88D0064465B /* UtilityNetworkService.swift */; };
+		E7D75DE4225FD677009CC802 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D75DE3225FD677009CC802 /* PhotoService.swift */; };
+		E7D75DE6225FD807009CC802 /* DataReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D75DE5225FD807009CC802 /* DataReloadable.swift */; };
 		E7DB5CAE220FFF74003CBFCD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB5CAD220FFF74003CBFCD /* User.swift */; };
 		E7DB5CB022100082003CBFCD /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB5CAF22100082003CBFCD /* Photo.swift */; };
 		E7DB5CB222100107003CBFCD /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DB5CB122100107003CBFCD /* Group.swift */; };
@@ -121,6 +123,8 @@
 		E7D55871223AA7780064465B /* NewsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNetworkService.swift; sourceTree = "<group>"; };
 		E7D55873223AA8190064465B /* MessagesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesNetworkService.swift; sourceTree = "<group>"; };
 		E7D55875223AA88D0064465B /* UtilityNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityNetworkService.swift; sourceTree = "<group>"; };
+		E7D75DE3225FD677009CC802 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		E7D75DE5225FD807009CC802 /* DataReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataReloadable.swift; sourceTree = "<group>"; };
 		E7DB5CAD220FFF74003CBFCD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E7DB5CAF22100082003CBFCD /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		E7DB5CB122100107003CBFCD /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				E7D55864223A35AA0064465B /* Message.swift */,
 				E768D7B4224FF8FC003F1C77 /* Conversation.swift */,
 				E75478252240C4B7002B80BB /* Actions.swift */,
+				E7D75DE5225FD807009CC802 /* DataReloadable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 			children = (
 				E7D55877223AA8FD0064465B /* NetworkServices */,
 				E71F49B522145A1B00DDB835 /* DataService.swift */,
+				E7D75DE3225FD677009CC802 /* PhotoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -509,6 +515,7 @@
 				E7DB5CB022100082003CBFCD /* Photo.swift in Sources */,
 				E7D28F0921D15CBC008F4475 /* FriendFotoCell.swift in Sources */,
 				E7DB5CB222100107003CBFCD /* Group.swift in Sources */,
+				E7D75DE6225FD807009CC802 /* DataReloadable.swift in Sources */,
 				E7EA3C282236F90700F8915B /* NewsNoPhotoCell.swift in Sources */,
 				E7AE481F2203706900AE346A /* CustomInteractiveTransition.swift in Sources */,
 				E7D55876223AA88D0064465B /* UtilityNetworkService.swift in Sources */,
@@ -523,6 +530,7 @@
 				E702434821F0F70600BFB542 /* News.swift in Sources */,
 				E707E69522032AFE0096693E /* CustomPushAnimator.swift in Sources */,
 				E768D7B5224FF8FC003F1C77 /* Conversation.swift in Sources */,
+				E7D75DE4225FD677009CC802 /* PhotoService.swift in Sources */,
 				E7A11C5B21D0194C000DB879 /* MyGroupsController.swift in Sources */,
 				E702434621F03C4A00BFB542 /* NewsCell.swift in Sources */,
 				E7A11C5921D0192D000DB879 /* MyGroupsCell.swift in Sources */,
