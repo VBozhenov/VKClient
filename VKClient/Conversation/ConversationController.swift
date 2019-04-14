@@ -24,8 +24,25 @@ class ConversationController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         title = userName
         loadConversation(with: userId)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     
     @objc func sendMessageButtonPushed(sender: UIButton!) {
@@ -52,15 +69,15 @@ class ConversationController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         notificationToken?.invalidate()
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return conversations?.count ?? 0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Conversation", for: indexPath) as! ConversationCell
         guard let conversations = conversations?.sorted(byKeyPath: "messageId", ascending: true) else { return UITableViewCell() }
-
+        
         cell.messageForMeLabel.layer.cornerRadius = 10
         cell.myMessageLabel.layer.cornerRadius = 10
         cell.messageForMeLabel.layer.masksToBounds = true
@@ -92,7 +109,7 @@ class ConversationController: UITableViewController {
         footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         footerView.addSubview(self.textField)
         footerView.addSubview(self.sendMessageButton)
-
+        
         return footerView
     }
     
