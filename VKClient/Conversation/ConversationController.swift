@@ -26,6 +26,8 @@ class ConversationController: UITableViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tableView.addGestureRecognizer(hideKeyboardGesture)
         
         title = userName
         loadConversation(with: userId)
@@ -33,16 +35,20 @@ class ConversationController: UITableViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
+            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+            self.tableView.contentInset = contentInsets
+            tableView.scrollToRow(at: IndexPath(row: (conversations?.count)! - 1, section: 0), at: .bottom, animated: true)
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.tableView.contentInset = contentInsets
+        tableView.scrollToRow(at: IndexPath(row: (conversations?.count)! - 1, section: 0), at: .bottom, animated: true)
+    }
+
+    @objc func hideKeyboard() {
+        self.tableView.endEditing(true)
     }
     
     @objc func sendMessageButtonPushed(sender: UIButton!) {
