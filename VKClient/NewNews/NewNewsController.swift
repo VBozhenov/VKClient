@@ -1,16 +1,16 @@
 //
-//  NewsController.swift
+//  NewNewsController.swift
 //  VKClient
 //
-//  Created by Vladimir Bozhenov on 17/01/2019.
+//  Created by Vladimir Bozhenov on 18/04/2019.
 //  Copyright © 2019 Vladimir Bozhenov. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
 
-class NewsController: UITableViewController {
-    
+class NewNewsController: UITableViewController {
+
     var news: Results<News>?
     let newsNetworkService = NewsNetworkService()
     var nextFrom = ""
@@ -18,15 +18,16 @@ class NewsController: UITableViewController {
     let dataService = DataService()
     var notificationToken: NotificationToken?
     var fetchingMore = false
-
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.estimatedRowHeight = 300
-        tableView.rowHeight = UITableView.automaticDimension
-        
+                
+//        tableView.estimatedRowHeight = 300
+//        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(NewNewsCell.self, forCellReuseIdentifier: "NewNews")
+
         activityIndicator.isHidden = true
         dataService.deleteNews()
         loadNews(from: nextFrom)
@@ -47,71 +48,54 @@ class NewsController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return news?.count ?? 0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let news = news else { return UITableViewCell() }
-
-        if !news[indexPath.row].newsPhoto.isEmpty {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "News") as? NewsCell else { return UITableViewCell() }
-            ConigureNewsCell.configure(news[indexPath.row], cell: cell)
-
-            cell.buttonHandler = {
-                self.likeAddDelete(news[indexPath.row])
-            }
-            return cell
-        } else if !news[indexPath.row].repostNewsPhoto.isEmpty {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Repost") as? RepostCell else { return UITableViewCell() }
-            ConigureNewsCell.configure(news[indexPath.row], cell: cell)
-
-            cell.buttonHandler = {
-                self.likeAddDelete(news[indexPath.row])
-            }
-            return cell
-        } else if !news[indexPath.row].repostText.isEmpty {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "RepostNoPhoto") as? RepostNoPhotoCell else { return UITableViewCell() }
-            ConigureNewsCell.configure(news[indexPath.row], cell: cell)
-
-            cell.buttonHandler = {
-                self.likeAddDelete(news[indexPath.row])
-            }
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsNoPhoto") as? NewsNoPhotoCell else { return UITableViewCell() }
-            ConigureNewsCell.configure(news[indexPath.row], cell: cell)
-
-            cell.buttonHandler = {
-                self.likeAddDelete(news[indexPath.row])
-            }
-            return cell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewNews", for: indexPath) as? NewNewsCell else { fatalError() }
+        cell.ownersPhoto.kf.setImage(with: URL(string: news[indexPath.row].owner?.ownerPhoto ?? ""))
+        cell.ownersName.text = news[indexPath.row].owner?.userName == " " ? news[indexPath.row].owner?.groupName : news[indexPath.row].owner?.userName
+        cell.repostIcon.image = UIImage(named: "share")
+        cell.repostOwnersPhoto.kf.setImage(with: URL(string: news[indexPath.row].repostOwner?.ownerPhoto ?? ""))
+        cell.repostOwnersName.text = news[indexPath.row].repostOwner?.userName == " " ? news[indexPath.row].repostOwner?.groupName : news[indexPath.row].repostOwner?.userName
+        
+        cell.buttonHandler = {
+            self.likeAddDelete(news[indexPath.row])
         }
+        return cell
+        
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if let news = news,
-            let indexPath = tableView.indexPathForSelectedRow {
-            if identifier == "showWebPage" {
-                if news[indexPath.row].url == "" {
-                    return false
-                }
-            }
-        }
-        return true
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return NewNewsCell.insets * 4 + NewNewsCell.avatarSize + NewNewsCell.iconSize
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let news = news,
-            let indexPath = tableView.indexPathForSelectedRow else { return }
-        if segue.identifier == "showWebPage"  {
-            let newsWebLinkViewController = segue.destination as! NewsWebLinkViewController
-            newsWebLinkViewController.webURL = news[indexPath.row].url
-        } else { return }
-    }
-    
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        if let news = news,
+//            let indexPath = tableView.indexPathForSelectedRow {
+//            if identifier == "showWebPage" {
+//                if news[indexPath.row].url == "" {
+//                    return false
+//                }
+//            }
+//        }
+//        return true
+//    }
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard let news = news,
+//            let indexPath = tableView.indexPathForSelectedRow else { return }
+//        if segue.identifier == "showWebPage"  {
+//            let newsWebLinkViewController = segue.destination as! NewsWebLinkViewController
+//            newsWebLinkViewController.webURL = news[indexPath.row].url
+//        } else { return }
+//    }
+
     func pairTableAndRealm(config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
         guard let realm = try? Realm(configuration: config) else { return }
         news = realm.objects(News.self)
@@ -120,23 +104,14 @@ class NewsController: UITableViewController {
             switch changes {
             case .initial:
                 tableView.reloadData()
-            case .update: //(_, let deletions, let insertions, let modifications):
+            case .update:
                 tableView.reloadData()
-
-//                tableView.beginUpdates()
-//                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
-//                                     with: .automatic)
-//                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
-//                                     with: .automatic)
-//                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
-//                                     with: .automatic)
-//                tableView.endUpdates()
             case .error(let error):
                 fatalError("\(error)")
             }
         }
     }
-
+    
     func likeAddDelete(_ news: News) {
         if news.isliked == 0 {
             self.utilityNetworkService.likeAddDelete(action: .addLike, to: "post", withId: news.postId, andOwnerId: news.ownerId)
@@ -179,17 +154,17 @@ class NewsController: UITableViewController {
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-
+        
         if offsetY > contentHeight - scrollView.frame.size.height * 3 {
             if !fetchingMore {
                 beginBatchFetch()
             }
         }
     }
-
+    
     func beginBatchFetch() {
         fetchingMore = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
