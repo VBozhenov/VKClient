@@ -64,9 +64,11 @@ class NewNewsController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewNews", for: indexPath) as? NewNewsCell else { fatalError() }
         cell.ownersPhoto.kf.setImage(with: URL(string: news[indexPath.row].owner?.ownerPhoto ?? ""))
         cell.ownersName.text = news[indexPath.row].owner?.userName == " " ? news[indexPath.row].owner?.groupName : news[indexPath.row].owner?.userName
-        cell.repostIcon.image = UIImage(named: "share")
-        cell.repostOwnersPhoto.kf.setImage(with: URL(string: news[indexPath.row].repostOwner?.ownerPhoto ?? ""))
-        cell.repostOwnersName.text = news[indexPath.row].repostOwner?.userName == " " ? news[indexPath.row].repostOwner?.groupName : news[indexPath.row].repostOwner?.userName
+        if news[indexPath.row].repostOwner != nil {
+            cell.repostIcon.image = UIImage(named: "share")
+            cell.repostOwnersPhoto.kf.setImage(with: URL(string: news[indexPath.row].repostOwner?.ownerPhoto ?? ""))
+            cell.repostOwnersName.text = news[indexPath.row].repostOwner?.userName == " " ? news[indexPath.row].repostOwner?.groupName : news[indexPath.row].repostOwner?.userName
+        }
         cell.newsText.text = !news[indexPath.row].repostText.isEmpty ? news[indexPath.row].repostText : news[indexPath.row].text
         cell.setNewsPhoto(news: news[indexPath.row])
         

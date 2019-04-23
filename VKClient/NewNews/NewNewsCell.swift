@@ -20,6 +20,7 @@ class NewNewsCell: UITableViewCell {
     var newsTextSize = CGSize(width: 0, height: 0)
     var imageHeight: CGFloat = 0.0
     var aspectRatio = 0.0
+    var newsPhotoImageSize = CGSize(width: 0, height: 0)
     
     let ownersPhoto: UIImageView = {
         let imageView = UIImageView()
@@ -61,10 +62,6 @@ class NewNewsCell: UITableViewCell {
         return label
     }()
     let newsPhotoImage = UIImageView()
-//    private let watchedLabel = UILabel()
-//    private let likeButton = UIButton()
-//    private let commentButton = UIButton()
-//    private let sharedButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -182,7 +179,7 @@ class NewNewsCell: UITableViewCell {
     private func setNewsPhotoImageFrame() {
         let newsPhotoImageOrigin = CGPoint(x: insets,
                                            y: avatarSize * 2 + insets * 4 + newsTextSize.height)
-        let newsPhotoImageSize = getPhotoSize(aspectRatio: aspectRatio)
+        newsPhotoImageSize = getPhotoSize(aspectRatio: aspectRatio)
         newsPhotoImage.frame = CGRect(origin: newsPhotoImageOrigin,
                                       size: newsPhotoImageSize)
     }
@@ -190,9 +187,9 @@ class NewNewsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
+    
 }

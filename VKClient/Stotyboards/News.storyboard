@@ -746,12 +746,61 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewNews" id="6NK-TP-Tm2" customClass="NewNewsCell" customModule="VKClient" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="48" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewNews" rowHeight="318" id="6NK-TP-Tm2" customClass="NewNewsCell" customModule="VKClient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="48" width="375" height="318"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6NK-TP-Tm2" id="yEy-Dk-2l4">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="317.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tQf-9I-UxQ">
+                                            <rect key="frame" x="8" y="287.5" width="184" height="22"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFu-bp-c24">
+                                                    <rect key="frame" x="0.0" y="0.0" width="56" height="22"/>
+                                                    <state key="normal" title="999" image="heartWhite">
+                                                        <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjz-YE-Ccl">
+                                                    <rect key="frame" x="64" y="0.0" width="56" height="22"/>
+                                                    <state key="normal" title="999" image="comment">
+                                                        <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcL-vW-62m">
+                                                    <rect key="frame" x="128" y="0.0" width="56" height="22"/>
+                                                    <state key="normal" title="999" image="share">
+                                                        <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMS-4K-J6i">
+                                            <rect key="frame" x="335.5" y="287.5" width="31.5" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="RzB-Y3-wLV"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view" translatesAutoresizingMaskIntoConstraints="NO" id="69k-qT-oXr">
+                                            <rect key="frame" x="305.5" y="287.5" width="22" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="5Jw-eK-eI9"/>
+                                                <constraint firstAttribute="width" constant="22" id="yVF-fR-RbZ"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="gMS-4K-J6i" secondAttribute="bottom" constant="8" id="3oa-3K-lRY"/>
+                                        <constraint firstAttribute="bottom" secondItem="69k-qT-oXr" secondAttribute="bottom" constant="8" id="4rs-7o-PDo"/>
+                                        <constraint firstItem="gMS-4K-J6i" firstAttribute="leading" secondItem="69k-qT-oXr" secondAttribute="trailing" constant="8" id="ZRB-8W-3L0"/>
+                                        <constraint firstItem="tQf-9I-UxQ" firstAttribute="leading" secondItem="yEy-Dk-2l4" secondAttribute="leading" constant="8" id="gG1-zH-ZLD"/>
+                                        <constraint firstAttribute="trailing" secondItem="gMS-4K-J6i" secondAttribute="trailing" constant="8" id="rCY-tY-6zE"/>
+                                        <constraint firstAttribute="bottom" secondItem="tQf-9I-UxQ" secondAttribute="bottom" constant="8" id="zG8-Oj-HhU"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="Phz-l1-FAP" kind="show" identifier="showWebPage" id="GcD-6U-GHw"/>
@@ -770,7 +819,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4uw-M6-VS2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3588" y="2303"/>
+            <point key="canvasLocation" x="3588" y="2302.3988005997003"/>
         </scene>
         <!--News Web Link View Controller-->
         <scene sceneID="dUd-bM-9OV">
