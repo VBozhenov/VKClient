@@ -230,7 +230,6 @@
 				E7D28F0521D15C72008F4475 /* FriendFoto */,
 				E789E8392214164B009E51ED /* DetailedFriendFoto */,
 				E7A11C5721D018DF000DB879 /* MyGroups */,
-				E795AFFD22691AE40022A8C5 /* NewNews */,
 				E702434221F03BDB00BFB542 /* News */,
 				E7D55868223A39F90064465B /* Messages */,
 				E768D7B1224FEFED003F1C77 /* Conversation */,
@@ -241,6 +240,7 @@
 				E78054DC21C6CFDB008D179C /* AppDelegate.swift */,
 				E78054E521C6CFDC008D179C /* LaunchScreen.storyboard */,
 				E78054E821C6CFDC008D179C /* Info.plist */,
+				E795AFFD22691AE40022A8C5 /* NewNews */,
 				E7D4110F222C548100F349DD /* GoogleService-Info.plist */,
 			);
 			path = VKClient;

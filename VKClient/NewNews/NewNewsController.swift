@@ -24,8 +24,8 @@ class NewNewsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-//        tableView.estimatedRowHeight = 300
-//        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 300
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(NewNewsCell.self, forCellReuseIdentifier: "NewNews")
 
         activityIndicator.isHidden = true
@@ -63,6 +63,8 @@ class NewNewsController: UITableViewController {
         cell.repostIcon.image = UIImage(named: "share")
         cell.repostOwnersPhoto.kf.setImage(with: URL(string: news[indexPath.row].repostOwner?.ownerPhoto ?? ""))
         cell.repostOwnersName.text = news[indexPath.row].repostOwner?.userName == " " ? news[indexPath.row].repostOwner?.groupName : news[indexPath.row].repostOwner?.userName
+        cell.newsText.text = !news[indexPath.row].repostText.isEmpty ? news[indexPath.row].repostText : news[indexPath.row].text
+        cell.setNewsPhoto(news: news[indexPath.row])
         
         cell.buttonHandler = {
             self.likeAddDelete(news[indexPath.row])
@@ -72,7 +74,7 @@ class NewNewsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return NewNewsCell.insets * 4 + NewNewsCell.avatarSize + NewNewsCell.iconSize
+        return NewNewsCell.insets * 6 + NewNewsCell.avatarSize * 2 + NewNewsCell.iconSize + NewNewsCell.newsTextSize.height + NewNewsCell.imageHeight
     }
     
 //    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

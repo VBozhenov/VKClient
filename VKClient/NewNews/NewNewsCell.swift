@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NewNewsCell: UITableViewCell {
     
@@ -16,6 +17,9 @@ class NewNewsCell: UITableViewCell {
     static let insets: CGFloat = 8
     static let avatarSize: CGFloat = 38
     static let iconSize: CGFloat = 30
+    static var newsTextSize = CGSize(width: 0, height: 0)
+    static var imageHeight: CGFloat = 0.0
+    static var aspectRatio = 0.0
     
     let ownersPhoto: UIImageView = {
         let imageView = UIImageView()
@@ -48,12 +52,19 @@ class NewNewsCell: UITableViewCell {
         label.numberOfLines = 1
         return label
     }()
-//    private let newsText = UILabel()
+    let newsText: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.adjustsFontForContentSizeCategory = true
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
+    let newsPhotoImage = UIImageView()
 //    private let watchedLabel = UILabel()
 //    private let likeButton = UIButton()
 //    private let commentButton = UIButton()
 //    private let sharedButton = UIButton()
-//    private let newsPhotoImage = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -71,6 +82,8 @@ class NewNewsCell: UITableViewCell {
         contentView.addSubview(repostIcon)
         contentView.addSubview(repostOwnersPhoto)
         contentView.addSubview(repostOwnersName)
+        contentView.addSubview(newsText)
+        contentView.addSubview(newsPhotoImage)
     }
     
     override func layoutSubviews() {
@@ -81,6 +94,8 @@ class NewNewsCell: UITableViewCell {
         setRepostIconFrame()
         setRepostOwnersPhotoFrame()
         setRepostOwnersNameFrame()
+        setNewsTextFrame()
+        setNewsPhotoImageFrame()
     }
     
     private func setOwnersPhotoFrame() {
@@ -128,6 +143,50 @@ class NewNewsCell: UITableViewCell {
                                         size: repostOwnersNameSize)
     }
     
+    func getLabelSize(text: String, font: UIFont) -> CGSize {
+        let maxWidth = bounds.width - NewNewsCell.insets * 2
+        let textBlock = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+        let rect = text.boundingRect(with: textBlock, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let width = Double(rect.size.width)
+        let height = Double(rect.size.height)
+        let size = CGSize(width: width, height: height)
+        return size
+    }
+    
+    private func setNewsTextFrame() {
+        let newsTextOrigin = CGPoint(x: NewNewsCell.insets,
+                                     y: NewNewsCell.avatarSize * 2 + NewNewsCell.insets * 3)
+        NewNewsCell.newsTextSize = getLabelSize(text: newsText.text!,
+                                                font: newsText.font)
+        newsText.frame = CGRect(origin: newsTextOrigin,
+                                size: NewNewsCell.newsTextSize)
+    }
+    
+    func getPhotoSize(aspectRatio: Double) -> CGSize {
+        let width = bounds.width - NewNewsCell.insets * 2
+        let height = aspectRatio != 0 ? (width / CGFloat(aspectRatio)) : 0.0
+        NewNewsCell.imageHeight = height
+        let size = CGSize(width: width, height: height)
+        return size
+    }
+    
+    func setNewsPhoto(news: News) {
+        NewNewsCell.aspectRatio = news.newsPhotoAspectRatio != 0 ? news.newsPhotoAspectRatio : news.repostNewsPhotoAspectRatio
+        if !news.newsPhoto.isEmpty {
+            newsPhotoImage.kf.setImage(with: URL(string: news.newsPhoto))
+        } else if !news.repostNewsPhoto.isEmpty {
+            newsPhotoImage.kf.setImage(with: URL(string: news.repostNewsPhoto))
+        }
+    }
+    
+    private func setNewsPhotoImageFrame() {
+        let newsPhotoImageOrigin = CGPoint(x: NewNewsCell.insets,
+                                           y: NewNewsCell.avatarSize * 2 + NewNewsCell.insets * 4 + NewNewsCell.newsTextSize.height)
+        let newsPhotoImageSize = getPhotoSize(aspectRatio: NewNewsCell.aspectRatio)
+        newsPhotoImage.frame = CGRect(origin: newsPhotoImageOrigin,
+                                      size: newsPhotoImageSize)
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
