@@ -14,12 +14,12 @@ class NewNewsCell: UITableViewCell {
     var buttonHandler:(()->())?
     var numberOfLikes = 0
     
-    static let insets: CGFloat = 8
-    static let avatarSize: CGFloat = 38
-    static let iconSize: CGFloat = 30
-    static var newsTextSize = CGSize(width: 0, height: 0)
-    static var imageHeight: CGFloat = 0.0
-    static var aspectRatio = 0.0
+    let insets: CGFloat = 8
+    let avatarSize: CGFloat = 38
+    let iconSize: CGFloat = 30
+    var newsTextSize = CGSize(width: 0, height: 0)
+    var imageHeight: CGFloat = 0.0
+    var aspectRatio = 0.0
     
     let ownersPhoto: UIImageView = {
         let imageView = UIImageView()
@@ -99,52 +99,52 @@ class NewNewsCell: UITableViewCell {
     }
     
     private func setOwnersPhotoFrame() {
-        let ownersPhotoOrigin = CGPoint(x: NewNewsCell.insets,
-                                        y: NewNewsCell.insets)
-        let ownersPhotoSize = CGSize(width: NewNewsCell.avatarSize,
-                                     height: NewNewsCell.avatarSize)
+        let ownersPhotoOrigin = CGPoint(x: insets,
+                                        y: insets)
+        let ownersPhotoSize = CGSize(width: avatarSize,
+                                     height: avatarSize)
         ownersPhoto.frame = CGRect(origin: ownersPhotoOrigin,
                                    size: ownersPhotoSize)
     }
     
     private func setOwnersNameFrame() {
-        let ownersNameOrigin = CGPoint(x: NewNewsCell.avatarSize + NewNewsCell.insets * 2,
-                                       y: NewNewsCell.insets)
-        let ownersNameSize = CGSize(width: bounds.width - NewNewsCell.avatarSize - NewNewsCell.insets * 3,
-                                    height: NewNewsCell.avatarSize)
+        let ownersNameOrigin = CGPoint(x: avatarSize + insets * 2,
+                                       y: insets)
+        let ownersNameSize = CGSize(width: bounds.width - avatarSize - insets * 3,
+                                    height: avatarSize)
         ownersName.frame = CGRect(origin: ownersNameOrigin,
                                   size: ownersNameSize)
     }
     
     private func setRepostIconFrame() {
-        let repostIconOrigin = CGPoint(x: NewNewsCell.insets,
-                                       y: NewNewsCell.avatarSize * 1.5 - NewNewsCell.iconSize / 2 + NewNewsCell.insets * 2)
-        let repostIconSize = CGSize(width: NewNewsCell.iconSize,
-                                    height: NewNewsCell.iconSize)
+        let repostIconOrigin = CGPoint(x: insets,
+                                       y: avatarSize * 1.5 - iconSize / 2 + insets * 2)
+        let repostIconSize = CGSize(width: iconSize,
+                                    height: iconSize)
         repostIcon.frame = CGRect(origin: repostIconOrigin,
                                   size: repostIconSize)
     }
     
     private func setRepostOwnersPhotoFrame() {
-        let repostOwnersPhotoOrigin = CGPoint(x: NewNewsCell.iconSize + NewNewsCell.insets * 2 ,
-                                              y: NewNewsCell.avatarSize + NewNewsCell.insets * 2)
-        let repostOwnersPhotoSize = CGSize(width: NewNewsCell.avatarSize,
-                                           height: NewNewsCell.avatarSize)
+        let repostOwnersPhotoOrigin = CGPoint(x: iconSize + insets * 2 ,
+                                              y: avatarSize + insets * 2)
+        let repostOwnersPhotoSize = CGSize(width: avatarSize,
+                                           height: avatarSize)
         repostOwnersPhoto.frame = CGRect(origin: repostOwnersPhotoOrigin,
                                          size: repostOwnersPhotoSize)
     }
     
     private func setRepostOwnersNameFrame() {
-        let repostOwnersNameOrigin = CGPoint(x: NewNewsCell.avatarSize + NewNewsCell.iconSize + NewNewsCell.insets * 3,
-                                             y: NewNewsCell.avatarSize + NewNewsCell.insets * 2)
-        let repostOwnersNameSize = CGSize(width: bounds.width - NewNewsCell.avatarSize - NewNewsCell.iconSize - NewNewsCell.insets * 4,
-                                          height: NewNewsCell.avatarSize)
+        let repostOwnersNameOrigin = CGPoint(x: avatarSize + iconSize + insets * 3,
+                                             y: avatarSize + insets * 2)
+        let repostOwnersNameSize = CGSize(width: bounds.width - avatarSize - iconSize - insets * 4,
+                                          height: avatarSize)
         repostOwnersName.frame = CGRect(origin: repostOwnersNameOrigin,
                                         size: repostOwnersNameSize)
     }
     
     func getLabelSize(text: String, font: UIFont) -> CGSize {
-        let maxWidth = bounds.width - NewNewsCell.insets * 2
+        let maxWidth = bounds.width - insets * 2
         let textBlock = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
         let rect = text.boundingRect(with: textBlock, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         let width = Double(rect.size.width)
@@ -154,24 +154,24 @@ class NewNewsCell: UITableViewCell {
     }
     
     private func setNewsTextFrame() {
-        let newsTextOrigin = CGPoint(x: NewNewsCell.insets,
-                                     y: NewNewsCell.avatarSize * 2 + NewNewsCell.insets * 3)
-        NewNewsCell.newsTextSize = getLabelSize(text: newsText.text!,
-                                                font: newsText.font)
+        let newsTextOrigin = CGPoint(x: insets,
+                                     y: avatarSize * 2 + insets * 3)
+        newsTextSize = getLabelSize(text: newsText.text!,
+                                    font: newsText.font)
         newsText.frame = CGRect(origin: newsTextOrigin,
-                                size: NewNewsCell.newsTextSize)
+                                size: newsTextSize)
     }
     
     func getPhotoSize(aspectRatio: Double) -> CGSize {
-        let width = bounds.width - NewNewsCell.insets * 2
+        let width = bounds.width - insets * 2
         let height = aspectRatio != 0 ? (width / CGFloat(aspectRatio)) : 0.0
-        NewNewsCell.imageHeight = height
+        imageHeight = height
         let size = CGSize(width: width, height: height)
         return size
     }
     
     func setNewsPhoto(news: News) {
-        NewNewsCell.aspectRatio = news.newsPhotoAspectRatio != 0 ? news.newsPhotoAspectRatio : news.repostNewsPhotoAspectRatio
+        aspectRatio = news.newsPhotoAspectRatio != 0 ? news.newsPhotoAspectRatio : news.repostNewsPhotoAspectRatio
         if !news.newsPhoto.isEmpty {
             newsPhotoImage.kf.setImage(with: URL(string: news.newsPhoto))
         } else if !news.repostNewsPhoto.isEmpty {
@@ -180,9 +180,9 @@ class NewNewsCell: UITableViewCell {
     }
     
     private func setNewsPhotoImageFrame() {
-        let newsPhotoImageOrigin = CGPoint(x: NewNewsCell.insets,
-                                           y: NewNewsCell.avatarSize * 2 + NewNewsCell.insets * 4 + NewNewsCell.newsTextSize.height)
-        let newsPhotoImageSize = getPhotoSize(aspectRatio: NewNewsCell.aspectRatio)
+        let newsPhotoImageOrigin = CGPoint(x: insets,
+                                           y: avatarSize * 2 + insets * 4 + newsTextSize.height)
+        let newsPhotoImageSize = getPhotoSize(aspectRatio: aspectRatio)
         newsPhotoImage.frame = CGRect(origin: newsPhotoImageOrigin,
                                       size: newsPhotoImageSize)
     }

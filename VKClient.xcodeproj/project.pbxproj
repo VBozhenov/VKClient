@@ -178,7 +178,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E702434221F03BDB00BFB542 /* News */ = {
+		E702434221F03BDB00BFB542 /* OLdNews */ = {
 			isa = PBXGroup;
 			children = (
 				E702434321F03C3000BFB542 /* NewsController.swift */,
@@ -190,7 +190,7 @@
 				E7EA3C2922370C0900F8915B /* ConigureNewsCell.swift */,
 				E7B3BD6722379BDC003B68F3 /* NewsCellProtocol.swift */,
 			);
-			path = News;
+			path = OLdNews;
 			sourceTree = "<group>";
 		};
 		E768D7B1224FEFED003F1C77 /* Conversation */ = {
@@ -230,7 +230,8 @@
 				E7D28F0521D15C72008F4475 /* FriendFoto */,
 				E789E8392214164B009E51ED /* DetailedFriendFoto */,
 				E7A11C5721D018DF000DB879 /* MyGroups */,
-				E702434221F03BDB00BFB542 /* News */,
+				E795AFFD22691AE40022A8C5 /* NewNews */,
+				E702434221F03BDB00BFB542 /* OLdNews */,
 				E7D55868223A39F90064465B /* Messages */,
 				E768D7B1224FEFED003F1C77 /* Conversation */,
 				E702434121F03B6B00BFB542 /* Model */,
@@ -240,7 +241,6 @@
 				E78054DC21C6CFDB008D179C /* AppDelegate.swift */,
 				E78054E521C6CFDC008D179C /* LaunchScreen.storyboard */,
 				E78054E821C6CFDC008D179C /* Info.plist */,
-				E795AFFD22691AE40022A8C5 /* NewNews */,
 				E7D4110F222C548100F349DD /* GoogleService-Info.plist */,
 			);
 			path = VKClient;

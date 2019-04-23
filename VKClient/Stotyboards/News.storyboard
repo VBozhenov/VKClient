@@ -176,7 +176,6 @@
                                     <outlet property="ownersPhoto" destination="xEY-8Q-SZb" id="sO9-eF-5zY"/>
                                     <outlet property="sharedButton" destination="4tF-sw-LDr" id="eoX-vC-Ft1"/>
                                     <outlet property="watchedLabel" destination="PTa-Hz-ekd" id="YHn-DV-X4c"/>
-                                    <segue destination="Phz-l1-FAP" kind="show" identifier="showWebPage" id="g4S-Zd-A2I"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsNoPhoto" rowHeight="140" id="9N5-bK-JyP" customClass="NewsNoPhotoCell" customModule="VKClient" customModuleProvider="target">
@@ -320,7 +319,6 @@
                                     <outlet property="ownersPhoto" destination="1Ev-HL-NmX" id="9MN-vK-YpM"/>
                                     <outlet property="sharedButton" destination="eFd-5Y-Ds3" id="xj7-Rh-8gn"/>
                                     <outlet property="watchedLabel" destination="fWa-Jz-8fa" id="jrF-gY-fYe"/>
-                                    <segue destination="Phz-l1-FAP" kind="show" identifier="showWebPage" id="ZiP-jd-TvG"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Repost" rowHeight="350" id="1sq-cp-LdT" userLabel="Repost" customClass="RepostCell" customModule="VKClient" customModuleProvider="target">
@@ -522,7 +520,6 @@
                                     <outlet property="repostOwnersPhoto" destination="962-Un-y6s" id="Pz4-RI-2iF"/>
                                     <outlet property="sharedButton" destination="xlq-hC-dHg" id="h9i-KR-Cvv"/>
                                     <outlet property="watchedLabel" destination="p87-1M-UPg" id="qYO-rg-C6d"/>
-                                    <segue destination="Phz-l1-FAP" kind="show" identifier="showWebPage" id="g0I-Ie-GfK"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepostNoPhoto" rowHeight="140" id="ZdF-dR-7tq" userLabel="ReporsNoPhoto" customClass="RepostNoPhotoCell" customModule="VKClient" customModuleProvider="target">
@@ -712,7 +709,6 @@
                                     <outlet property="repostOwnersPhoto" destination="eEr-yk-0Uu" id="DEX-pe-jcA"/>
                                     <outlet property="sharedButton" destination="m0W-8n-AzB" id="lLO-fZ-QX7"/>
                                     <outlet property="watchedLabel" destination="vYE-bD-pqs" id="6Xl-6L-3dX"/>
-                                    <segue destination="Phz-l1-FAP" kind="show" identifier="showWebPage" id="R69-jE-UDg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -757,6 +753,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Phz-l1-FAP" kind="show" identifier="showWebPage" id="GcD-6U-GHw"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -838,7 +837,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="EhK-Yz-dhg" kind="relationship" relationship="rootViewController" id="M5p-7X-oDl"/>
+                        <segue destination="nXd-V6-y3j" kind="relationship" relationship="rootViewController" id="Wdv-CN-rTj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ngI-Rp-zi8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -853,7 +852,4 @@
         <image name="share" width="22" height="22"/>
         <image name="view" width="44" height="44"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="ZiP-jd-TvG"/>
-    </inferredMetricsTieBreakers>
 </document>

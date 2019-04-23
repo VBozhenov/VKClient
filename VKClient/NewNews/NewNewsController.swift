@@ -19,6 +19,10 @@ class NewNewsController: UITableViewController {
     var notificationToken: NotificationToken?
     var fetchingMore = false
     
+    let insets: CGFloat = 8
+    let avatarSize: CGFloat = 38
+    let iconSize: CGFloat = 30
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
@@ -74,29 +78,48 @@ class NewNewsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return NewNewsCell.insets * 6 + NewNewsCell.avatarSize * 2 + NewNewsCell.iconSize + NewNewsCell.newsTextSize.height + NewNewsCell.imageHeight
+        
+        var imageHeight: CGFloat = 0
+        var newsTextHight: CGFloat = 0
+        
+        guard let news = self.news else { return 0.0 }
+        if news[indexPath.row].newsPhotoAspectRatio != 0 {
+            imageHeight = ceil((tableView.bounds.width - insets * 2) / CGFloat(news[indexPath.row].newsPhotoAspectRatio))
+        } else if news[indexPath.row].repostNewsPhotoAspectRatio != 0 {
+            imageHeight = ceil((tableView.bounds.width - insets * 2) / CGFloat(news[indexPath.row].repostNewsPhotoAspectRatio))
+        }
+        
+        let maxWidth = tableView.bounds.width - insets * 2
+        let textBlock = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+        let text = !news[indexPath.row].repostText.isEmpty ? news[indexPath.row].repostText : news[indexPath.row].text
+        let rect = text.boundingRect(with: textBlock, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], context: nil)
+        newsTextHight = rect.size.height
+        
+        let cellHight = insets * 6 + avatarSize * 2 + iconSize + newsTextHight + imageHeight
+        
+        return cellHight
     }
     
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        if let news = news,
-//            let indexPath = tableView.indexPathForSelectedRow {
-//            if identifier == "showWebPage" {
-//                if news[indexPath.row].url == "" {
-//                    return false
-//                }
-//            }
-//        }
-//        return true
-//    }
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let news = news,
-//            let indexPath = tableView.indexPathForSelectedRow else { return }
-//        if segue.identifier == "showWebPage"  {
-//            let newsWebLinkViewController = segue.destination as! NewsWebLinkViewController
-//            newsWebLinkViewController.webURL = news[indexPath.row].url
-//        } else { return }
-//    }
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if let news = news,
+            let indexPath = tableView.indexPathForSelectedRow {
+            if identifier == "showWebPage" {
+                if news[indexPath.row].url == "" {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let news = news,
+            let indexPath = tableView.indexPathForSelectedRow else { return }
+        if segue.identifier == "showWebPage"  {
+            let newsWebLinkViewController = segue.destination as! NewsWebLinkViewController
+            newsWebLinkViewController.webURL = news[indexPath.row].url
+        } else { return }
+    }
 
     func pairTableAndRealm(config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
         guard let realm = try? Realm(configuration: config) else { return }
