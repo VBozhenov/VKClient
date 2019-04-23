@@ -25,6 +25,10 @@ class NewNewsCell: UITableViewCell {
     let ownersPhoto: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        imageView.shadowOpacity = 0.7
+        imageView.shadowOffset = CGPoint(x: 3, y: 3)
+        imageView.shadowRadius = 4
         return imageView
     }()
     let ownersName: UILabel = {
@@ -43,6 +47,10 @@ class NewNewsCell: UITableViewCell {
     let repostOwnersPhoto: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        imageView.shadowOpacity = 0.7
+        imageView.shadowOffset = CGPoint(x: 3, y: 3)
+        imageView.shadowRadius = 4
         return imageView
     }()
     let repostOwnersName: UILabel = {

@@ -62,11 +62,15 @@ class NewNewsController: UITableViewController {
         guard let news = news else { return UITableViewCell() }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewNews", for: indexPath) as? NewNewsCell else { fatalError() }
-        cell.ownersPhoto.kf.setImage(with: URL(string: news[indexPath.row].owner?.ownerPhoto ?? ""))
+        RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news[indexPath.row].owner?.ownerPhoto ?? "",
+                                               destinationAvatar: cell.ownersPhoto)
+//        cell.ownersPhoto.kf.setImage(with: URL(string: news[indexPath.row].owner?.ownerPhoto ?? ""))
         cell.ownersName.text = news[indexPath.row].owner?.userName == " " ? news[indexPath.row].owner?.groupName : news[indexPath.row].owner?.userName
         if news[indexPath.row].repostOwner != nil {
             cell.repostIcon.image = UIImage(named: "share")
-            cell.repostOwnersPhoto.kf.setImage(with: URL(string: news[indexPath.row].repostOwner?.ownerPhoto ?? ""))
+            RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news[indexPath.row].repostOwner?.ownerPhoto ?? "",
+                                                   destinationAvatar: cell.repostOwnersPhoto)
+//            cell.repostOwnersPhoto.kf.setImage(with: URL(string: news[indexPath.row].repostOwner?.ownerPhoto ?? ""))
             cell.repostOwnersName.text = news[indexPath.row].repostOwner?.userName == " " ? news[indexPath.row].repostOwner?.groupName : news[indexPath.row].repostOwner?.userName
         }
         cell.newsText.text = !news[indexPath.row].repostText.isEmpty ? news[indexPath.row].repostText : news[indexPath.row].text
