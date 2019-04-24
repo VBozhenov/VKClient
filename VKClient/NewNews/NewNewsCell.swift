@@ -70,6 +70,34 @@ class NewNewsCell: UITableViewCell {
         return label
     }()
     let newsPhotoImage = UIImageView()
+    let likeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "heartWhite"), for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+        button.setTitle("999", for: .normal)
+        return button
+    }()
+    let commentButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "comment"), for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+        button.setTitle("999", for: .normal)
+        return button
+    }()
+    let sharedButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "share"), for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+        button.setTitle("999", for: .normal)
+        return button
+    }()
+    let watchedLabel: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "view"), for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+        button.setTitle("999", for: .normal)
+        return button
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -89,6 +117,10 @@ class NewNewsCell: UITableViewCell {
         contentView.addSubview(repostOwnersName)
         contentView.addSubview(newsText)
         contentView.addSubview(newsPhotoImage)
+        contentView.addSubview(likeButton)
+        contentView.addSubview(commentButton)
+        contentView.addSubview(sharedButton)
+        contentView.addSubview(watchedLabel)
     }
     
     override func layoutSubviews() {
@@ -101,6 +133,10 @@ class NewNewsCell: UITableViewCell {
         setRepostOwnersNameFrame()
         setNewsTextFrame()
         setNewsPhotoImageFrame()
+        setLikeButtonFrame()
+        setCommentButtonFrame()
+        setSharedButtonFrame()
+        setWatchedLabelFrame()
     }
     
     private func setOwnersPhotoFrame() {
@@ -190,6 +226,42 @@ class NewNewsCell: UITableViewCell {
         newsPhotoImageSize = getPhotoSize(aspectRatio: aspectRatio)
         newsPhotoImage.frame = CGRect(origin: newsPhotoImageOrigin,
                                       size: newsPhotoImageSize)
+    }
+    
+    private func setLikeButtonFrame() {
+        let likeButtonOrigin = CGPoint(x: insets,
+                                       y: avatarSize * 2 + insets * 5 + newsTextSize.height + newsPhotoImageSize.height)
+        let likeButtonSize = CGSize(width: iconSize * 2,
+                                    height: iconSize)
+        likeButton.frame = CGRect(origin: likeButtonOrigin,
+                                  size: likeButtonSize)
+    }
+    
+    private func setCommentButtonFrame() {
+        let commentButtonOrigin = CGPoint(x: insets * 2 + iconSize * 2,
+                                          y: avatarSize * 2 + insets * 5 + newsTextSize.height + newsPhotoImageSize.height)
+        let commentButtonSize = CGSize(width: iconSize * 2,
+                                       height: iconSize)
+        commentButton.frame = CGRect(origin: commentButtonOrigin,
+                                     size: commentButtonSize)
+    }
+    
+    private func setSharedButtonFrame() {
+        let sharedButtonOrigin = CGPoint(x: insets * 3 + iconSize * 4,
+                                         y: avatarSize * 2 + insets * 5 + newsTextSize.height + newsPhotoImageSize.height)
+        let sharedButtonSize = CGSize(width: iconSize * 2,
+                                      height: iconSize)
+        sharedButton.frame = CGRect(origin: sharedButtonOrigin,
+                                    size: sharedButtonSize)
+    }
+    
+    private func setWatchedLabelFrame() {
+        let watchedLabelOrigin = CGPoint(x: bounds.width - insets - iconSize * 2,
+                                         y: avatarSize * 2 + insets * 5 + newsTextSize.height + newsPhotoImageSize.height)
+        let watchedLabelSize = CGSize(width: iconSize * 2,
+                                      height: iconSize)
+        watchedLabel.frame = CGRect(origin: watchedLabelOrigin,
+                                    size: watchedLabelSize)
     }
 
     override func awakeFromNib() {
