@@ -61,21 +61,12 @@ class NewNewsController: UITableViewController {
         guard let news = news else { return UITableViewCell() }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewNews", for: indexPath) as? NewNewsCell else { fatalError() }
-        RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news[indexPath.row].owner?.ownerPhoto ?? "",
-                                               destinationAvatar: cell.ownersPhoto)
-        cell.ownersName.text = news[indexPath.row].owner?.userName == " " ? news[indexPath.row].owner?.groupName : news[indexPath.row].owner?.userName
-        if news[indexPath.row].repostOwner != nil {
-            cell.repostIcon.image = UIImage(named: "share")
-            RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news[indexPath.row].repostOwner?.ownerPhoto ?? "",
-                                                   destinationAvatar: cell.repostOwnersPhoto)
-            cell.repostOwnersName.text = news[indexPath.row].repostOwner?.userName == " " ? news[indexPath.row].repostOwner?.groupName : news[indexPath.row].repostOwner?.userName
-        }
-        cell.newsText.text = !news[indexPath.row].repostText.isEmpty ? news[indexPath.row].repostText : news[indexPath.row].text
-        cell.setNewsPhoto(news: news[indexPath.row])
+
+        cell.setCell(news: news[indexPath.row])
         
-        cell.buttonHandler = {
-            self.likeAddDelete(news[indexPath.row])
-        }
+//        cell.buttonHandler = {
+//            self.likeAddDelete(news[indexPath.row])
+//        }
         return cell
         
     }
@@ -140,15 +131,15 @@ class NewNewsController: UITableViewController {
         }
     }
     
-    func likeAddDelete(_ news: News) {
-        if news.isliked == 0 {
-            self.utilityNetworkService.likeAddDelete(action: .addLike, to: "post", withId: news.postId, andOwnerId: news.ownerId)
-            self.dataService.likeAddDeleteForNews(action: .add, primaryKey: news.postId)
-        } else {
-            self.utilityNetworkService.likeAddDelete(action: .deleteLike ,to: "post", withId: news.postId, andOwnerId: news.ownerId)
-            self.dataService.likeAddDeleteForNews(action: .delete, primaryKey: news.postId)
-        }
-    }
+//    func likeAddDelete(_ news: News) {
+//        if news.isliked == 0 {
+//            self.utilityNetworkService.likeAddDelete(action: .addLike, to: "post", withId: news.postId, andOwnerId: news.ownerId)
+//            self.dataService.likeAddDeleteForNews(action: .add, primaryKey: news.postId)
+//        } else {
+//            self.utilityNetworkService.likeAddDelete(action: .deleteLike ,to: "post", withId: news.postId, andOwnerId: news.ownerId)
+//            self.dataService.likeAddDeleteForNews(action: .delete, primaryKey: news.postId)
+//        }
+//    }
     
     func loadNews(from: String = "") {
         newsNetworkService.loadNews(startFrom: from) { [weak self] news, owners, groups, nextFrom,  error in

@@ -184,16 +184,6 @@ class NewNewsCell: UITableViewCell {
                                         size: repostOwnersNameSize)
     }
     
-    func getLabelSize(text: String, font: UIFont) -> CGSize {
-        let maxWidth = bounds.width - insets * 2
-        let textBlock = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
-        let rect = text.boundingRect(with: textBlock, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-        let width = Double(rect.size.width)
-        let height = Double(rect.size.height)
-        let size = CGSize(width: width, height: height)
-        return size
-    }
-    
     private func setNewsTextFrame() {
         let newsTextOrigin = CGPoint(x: insets,
                                      y: avatarSize * 2 + insets * 3)
@@ -201,23 +191,6 @@ class NewNewsCell: UITableViewCell {
                                     font: newsText.font)
         newsText.frame = CGRect(origin: newsTextOrigin,
                                 size: newsTextSize)
-    }
-    
-    func getPhotoSize(aspectRatio: Double) -> CGSize {
-        let width = bounds.width - insets * 2
-        let height = aspectRatio != 0 ? (width / CGFloat(aspectRatio)) : 0.0
-        imageHeight = height
-        let size = CGSize(width: width, height: height)
-        return size
-    }
-    
-    func setNewsPhoto(news: News) {
-        aspectRatio = news.newsPhotoAspectRatio != 0 ? news.newsPhotoAspectRatio : news.repostNewsPhotoAspectRatio
-        if !news.newsPhoto.isEmpty {
-            newsPhotoImage.kf.setImage(with: URL(string: news.newsPhoto))
-        } else if !news.repostNewsPhoto.isEmpty {
-            newsPhotoImage.kf.setImage(with: URL(string: news.repostNewsPhoto))
-        }
     }
     
     private func setNewsPhotoImageFrame() {
@@ -256,20 +229,59 @@ class NewNewsCell: UITableViewCell {
     }
     
     private func setWatchedLabelFrame() {
-        let watchedLabelOrigin = CGPoint(x: bounds.width - insets - iconSize * 2,
+        let watchedLabelOrigin = CGPoint(x: bounds.width - insets - iconSize * 3,
                                          y: avatarSize * 2 + insets * 5 + newsTextSize.height + newsPhotoImageSize.height)
-        let watchedLabelSize = CGSize(width: iconSize * 2,
+        let watchedLabelSize = CGSize(width: iconSize * 3,
                                       height: iconSize)
         watchedLabel.frame = CGRect(origin: watchedLabelOrigin,
                                     size: watchedLabelSize)
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    
+    func getLabelSize(text: String, font: UIFont) -> CGSize {
+        let maxWidth = bounds.width - insets * 2
+        let textBlock = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+        let rect = text.boundingRect(with: textBlock, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let width = Double(rect.size.width)
+        let height = Double(rect.size.height)
+        let size = CGSize(width: width, height: height)
+        return size
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func getPhotoSize(aspectRatio: Double) -> CGSize {
+        let width = bounds.width - insets * 2
+        let height = aspectRatio != 0 ? (width / CGFloat(aspectRatio)) : 0.0
+        imageHeight = height
+        let size = CGSize(width: width, height: height)
+        return size
     }
     
+    func setCell(news: News) {
+        RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news.owner?.ownerPhoto ?? "",
+                                               destinationAvatar: ownersPhoto)
+        ownersName.text = news.owner?.userName == " " ? news.owner?.groupName : news.owner?.userName
+        if news.repostOwner != nil {
+            repostIcon.image = UIImage(named: "share")
+            RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: news.repostOwner?.ownerPhoto ?? "",
+                                                   destinationAvatar: repostOwnersPhoto)
+            repostOwnersName.text = news.repostOwner?.userName == " " ? news.repostOwner?.groupName : news.repostOwner?.userName
+        }
+        newsText.text = !news.repostText.isEmpty ? news.repostText : news.text
+        aspectRatio = news.newsPhotoAspectRatio != 0 ? news.newsPhotoAspectRatio : news.repostNewsPhotoAspectRatio
+        if !news.newsPhoto.isEmpty {
+            newsPhotoImage.kf.setImage(with: URL(string: news.newsPhoto))
+        } else if !news.repostNewsPhoto.isEmpty {
+            newsPhotoImage.kf.setImage(with: URL(string: news.repostNewsPhoto))
+        }
+        
+        likeButton.setTitle(String(news.likes), for: .normal)
+        commentButton.setTitle(String(news.commentsCount), for: .normal)
+        sharedButton.setTitle(String(news.repostsCount), for: .normal)
+        watchedLabel.setTitle(String(news.views), for: .normal)
+        
+        if news.isliked == 1 {
+            likeButton.setImage(UIImage(named: "heartRed"), for: UIControl.State.normal)
+        } else {
+            likeButton.setImage(UIImage(named: "heartWhite"), for: UIControl.State.normal)
+        }
+    }
 }
