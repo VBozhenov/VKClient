@@ -764,12 +764,19 @@
                             <outlet property="delegate" destination="nXd-V6-y3j" id="x9g-xX-nSv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="News" id="Z9O-cN-Uvw"/>
+                    <navigationItem key="navigationItem" title="News" id="Z9O-cN-Uvw">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="f1v-5Z-cLR">
+                            <connections>
+                                <segue destination="yhy-te-18v" kind="unwind" unwindAction="myUnwindActionWithUnwindSegue:" id="AJ6-5A-RJC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="bQt-ra-SvF" id="D75-Ee-1sH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4uw-M6-VS2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="yhy-te-18v" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3574" y="1788"/>
         </scene>
@@ -851,6 +858,6 @@
         <image name="heartWhite" width="22" height="22"/>
         <image name="news" width="30" height="25"/>
         <image name="share" width="22" height="22"/>
-        <image name="view" width="44" height="44"/>
+        <image name="view" width="22" height="22"/>
     </resources>
 </document>

@@ -23,7 +23,7 @@ class DataService {
                 realm.delete(oldUsersFriendsList)
                 realm.add(users, update: update)
             }
-            print("Realm is located at:", realm.configuration.fileURL!)
+//            print("Realm is located at:", realm.configuration.fileURL!)
         } catch {
             print(error.localizedDescription)
         }

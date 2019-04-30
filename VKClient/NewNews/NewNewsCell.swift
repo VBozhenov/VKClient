@@ -10,10 +10,7 @@ import UIKit
 import Kingfisher
 
 class NewNewsCell: UITableViewCell {
-    
-    var buttonHandler:(()->())?
-    var numberOfLikes = 0
-    
+        
     let insets: CGFloat = 8
     let avatarSize: CGFloat = 38
     let iconSize: CGFloat = 30

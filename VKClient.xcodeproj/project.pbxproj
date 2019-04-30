@@ -178,7 +178,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E702434221F03BDB00BFB542 /* OLdNews */ = {
+		E702434221F03BDB00BFB542 /* OLdNews (удалить) */ = {
 			isa = PBXGroup;
 			children = (
 				E702434321F03C3000BFB542 /* NewsController.swift */,
@@ -190,7 +190,7 @@
 				E7EA3C2922370C0900F8915B /* ConigureNewsCell.swift */,
 				E7B3BD6722379BDC003B68F3 /* NewsCellProtocol.swift */,
 			);
-			path = OLdNews;
+			path = "OLdNews (удалить)";
 			sourceTree = "<group>";
 		};
 		E768D7B1224FEFED003F1C77 /* Conversation */ = {
@@ -231,7 +231,7 @@
 				E789E8392214164B009E51ED /* DetailedFriendFoto */,
 				E7A11C5721D018DF000DB879 /* MyGroups */,
 				E795AFFD22691AE40022A8C5 /* NewNews */,
-				E702434221F03BDB00BFB542 /* OLdNews */,
+				E702434221F03BDB00BFB542 /* OLdNews (удалить) */,
 				E7D55868223A39F90064465B /* Messages */,
 				E768D7B1224FEFED003F1C77 /* Conversation */,
 				E702434121F03B6B00BFB542 /* Model */,
