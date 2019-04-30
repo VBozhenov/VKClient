@@ -67,7 +67,6 @@ class NewNewsController: UITableViewController {
         cell.likeButton.addTarget(self, action: #selector(likeAddDelete), for: .touchUpInside)
  
         return cell
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
