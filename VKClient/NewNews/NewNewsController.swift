@@ -133,7 +133,7 @@ class NewNewsController: UITableViewController {
         let buttonRow = sender.tag
         guard let news = news?[buttonRow] else { return }
         if news.isliked == 0 {
-            self.utilityNetworkService.likeAddDelete(action: .addLike, to: "post", withId: news.postId, andOwnerId: news.ownerId)
+            self.utilityNetworkService.likeAddDelete(action: .addLike, to: "post", withId: news.postId, andOwnerId: -news.ownerId)
             self.dataService.likeAddDeleteForNews(action: .add, primaryKey: news.postId)
         } else {
             self.utilityNetworkService.likeAddDelete(action: .deleteLike ,to: "post", withId: news.postId, andOwnerId: news.ownerId)

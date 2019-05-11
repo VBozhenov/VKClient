@@ -72,9 +72,6 @@ extension LoginFormViewController: WKNavigationDelegate {
 
         performSegue(withIdentifier: "VKLogin", sender: nil)
 
-
     }
-    
-    
 }
 

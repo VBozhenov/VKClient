@@ -174,10 +174,8 @@ class DataService {
         dispatchGroup.notify(queue: DispatchQueue.main) {
             do {
                 let realm = try Realm(configuration: config)
-//                let oldNews = realm.objects(News.self)
                 let oldResponse = realm.objects(NewsResponse.self)
                 try realm.write {
-//                    realm.delete(oldNews)
                     realm.delete(oldResponse)
                     realm.add(newsResponse, update: update)
                 }

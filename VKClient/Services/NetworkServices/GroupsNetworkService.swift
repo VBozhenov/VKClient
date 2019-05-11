@@ -12,7 +12,6 @@ import SwiftyJSON
 
 class GroupsNetworkService {
     
-    
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
     let token = Session.user.token
