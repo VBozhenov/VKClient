@@ -7,8 +7,8 @@ target 'VKClient' do
 
   # Pods for VKClient
   pod 'Alamofire', '~> 4.8'
-  pod 'SwiftyJSON', '~> 4.2'
-  pod 'Kingfisher', '~> 5.1'
+  pod 'SwiftyJSON', '~> 5.0'
+  pod 'Kingfisher', '~> 5.3'
   pod 'RealmSwift', '~> 3.14'
   # pod 'SnapKit'
   end
