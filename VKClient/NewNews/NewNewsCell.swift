@@ -19,7 +19,7 @@ class NewNewsCell: UITableViewCell {
     var aspectRatio = 0.0
     var newsPhotoImageSize = CGSize(width: 0, height: 0)
     
-    let ownersPhoto: UIImageView = {
+    var ownersPhoto: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -233,6 +233,11 @@ class NewNewsCell: UITableViewCell {
         watchedLabel.frame = CGRect(origin: watchedLabelOrigin,
                                     size: watchedLabelSize)
     }
+    
+//    override func prepareForReuse() {
+//        super .prepareForReuse()
+////        ownersPhoto = UIImageView(image: nil)
+//    }
     
     func getLabelSize(text: String, font: UIFont) -> CGSize {
         let maxWidth = bounds.width - insets * 2
