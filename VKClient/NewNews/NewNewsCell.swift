@@ -234,11 +234,6 @@ class NewNewsCell: UITableViewCell {
                                     size: watchedLabelSize)
     }
     
-//    override func prepareForReuse() {
-//        super .prepareForReuse()
-////        ownersPhoto = UIImageView(image: nil)
-//    }
-    
     func getLabelSize(text: String, font: UIFont) -> CGSize {
         let maxWidth = bounds.width - insets * 2
         let textBlock = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
