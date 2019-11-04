@@ -1,5 +1,5 @@
 //
-//  GroupsNetworkService.swift
+//  GroupsService.swift
 //  VKClient
 //
 //  Created by Vladimir Bozhenov on 14/03/2019.
@@ -10,13 +10,14 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class GroupsNetworkService {
+class GroupsService {
     
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
     let token = Session.user.token
+    let dataService = DataService()
     
-    func loadGroups(completion: (([Group]?, Error?) -> Void)? = nil) {
+    func loadGroups() {
         let path = "/method/groups.get"
         
         let params: Parameters = [
@@ -30,10 +31,12 @@ class GroupsNetworkService {
                 
             case .success(let value):
                 let json = JSON(value)
-                let groups = json["response"]["items"].arrayValue.map { Group(json: $0) }
-                completion?(groups, nil)
+                let groups = json["response"]["items"].arrayValue
+                    .map { Group(json: $0) }
+                    .filter ({$0.name != ""})
+                self.dataService.saveGroups(groups)
             case .failure(let error):
-                completion?(nil, error)
+                print(error.localizedDescription)
             }
         }
     }

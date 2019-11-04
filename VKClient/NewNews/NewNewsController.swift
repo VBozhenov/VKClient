@@ -12,7 +12,7 @@ import RealmSwift
 class NewNewsController: UITableViewController {
 
     var news: Results<News>?
-    let newsNetworkService = NewsNetworkService()
+    let newsService = NewsService()
     var nextFrom = ""
     let utilityNetworkService = UtilityNetworkService()
     let dataService = DataService()
@@ -142,17 +142,11 @@ class NewNewsController: UITableViewController {
     }
     
     func loadNews(from: String = "") {
-        newsNetworkService.loadNews(startFrom: from) { [weak self] news, owners, groups, nextFrom,  error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else if let news = news,
-                let owners = owners,
-                let groups = groups,
-                let nextFrom = nextFrom,
+        newsService.loadNews(startFrom: from)
+        { [weak self] nextFrom in
+            if let nextFrom = nextFrom,
                 let self = self {
                 self.nextFrom = nextFrom
-                self.dataService.saveNews(news, owners, groups, nextFrom)
             }
         }
     }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -48,9 +48,9 @@
 		E7D55867223A39E90064465B /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D55866223A39E90064465B /* MessagesController.swift */; };
 		E7D5586A223A3AC00064465B /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D55869223A3AC00064465B /* Messages.storyboard */; };
 		E7D5586C223A3DB80064465B /* MessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5586B223A3DB80064465B /* MessagesCell.swift */; };
-		E7D5586E223AA4CE0064465B /* FriendsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5586D223AA4CE0064465B /* FriendsNetworkService.swift */; };
-		E7D55870223AA6830064465B /* GroupsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5586F223AA6830064465B /* GroupsNetworkService.swift */; };
-		E7D55872223AA7780064465B /* NewsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D55871223AA7780064465B /* NewsNetworkService.swift */; };
+		E7D5586E223AA4CE0064465B /* FriendsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5586D223AA4CE0064465B /* FriendsService.swift */; };
+		E7D55870223AA6830064465B /* GroupsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5586F223AA6830064465B /* GroupsService.swift */; };
+		E7D55872223AA7780064465B /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D55871223AA7780064465B /* NewsService.swift */; };
 		E7D55874223AA8190064465B /* MessagesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D55873223AA8190064465B /* MessagesNetworkService.swift */; };
 		E7D55876223AA88D0064465B /* UtilityNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D55875223AA88D0064465B /* UtilityNetworkService.swift */; };
 		E7D75DE4225FD677009CC802 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D75DE3225FD677009CC802 /* PhotoService.swift */; };
@@ -110,9 +110,9 @@
 		E7D55866223A39E90064465B /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		E7D55869223A3AC00064465B /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		E7D5586B223A3DB80064465B /* MessagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesCell.swift; sourceTree = "<group>"; };
-		E7D5586D223AA4CE0064465B /* FriendsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsNetworkService.swift; sourceTree = "<group>"; };
-		E7D5586F223AA6830064465B /* GroupsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsNetworkService.swift; sourceTree = "<group>"; };
-		E7D55871223AA7780064465B /* NewsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNetworkService.swift; sourceTree = "<group>"; };
+		E7D5586D223AA4CE0064465B /* FriendsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsService.swift; sourceTree = "<group>"; };
+		E7D5586F223AA6830064465B /* GroupsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsService.swift; sourceTree = "<group>"; };
+		E7D55871223AA7780064465B /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
 		E7D55873223AA8190064465B /* MessagesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesNetworkService.swift; sourceTree = "<group>"; };
 		E7D55875223AA88D0064465B /* UtilityNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityNetworkService.swift; sourceTree = "<group>"; };
 		E7D75DE3225FD677009CC802 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
@@ -320,9 +320,9 @@
 		E7D55877223AA8FD0064465B /* NetworkServices */ = {
 			isa = PBXGroup;
 			children = (
-				E7D5586D223AA4CE0064465B /* FriendsNetworkService.swift */,
-				E7D5586F223AA6830064465B /* GroupsNetworkService.swift */,
-				E7D55871223AA7780064465B /* NewsNetworkService.swift */,
+				E7D5586D223AA4CE0064465B /* FriendsService.swift */,
+				E7D5586F223AA6830064465B /* GroupsService.swift */,
+				E7D55871223AA7780064465B /* NewsService.swift */,
 				E7D55873223AA8190064465B /* MessagesNetworkService.swift */,
 				E768D7B2224FF458003F1C77 /* ConversationNetworkService.swift */,
 				E7D55875223AA88D0064465B /* UtilityNetworkService.swift */,
@@ -460,7 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7D5586E223AA4CE0064465B /* FriendsNetworkService.swift in Sources */,
+				E7D5586E223AA4CE0064465B /* FriendsService.swift in Sources */,
 				E78054F321C6D35F008D179C /* LoginFormViewController.swift in Sources */,
 				E7E66589220779940071B5C9 /* Session.swift in Sources */,
 				E7E2AA57224B642000D4E699 /* NewsResponse.swift in Sources */,
@@ -479,7 +479,7 @@
 				E75478262240C4B7002B80BB /* Actions.swift in Sources */,
 				E768D7B3224FF458003F1C77 /* ConversationNetworkService.swift in Sources */,
 				E7D28F0B21D15CF5008F4475 /* FriendsController.swift in Sources */,
-				E7D55870223AA6830064465B /* GroupsNetworkService.swift in Sources */,
+				E7D55870223AA6830064465B /* GroupsService.swift in Sources */,
 				E707E69922033BBB0096693E /* CustomNavigationController.swift in Sources */,
 				E7DB5CB022100082003CBFCD /* Photo.swift in Sources */,
 				E7D28F0921D15CBC008F4475 /* FriendFotoCell.swift in Sources */,
@@ -505,7 +505,7 @@
 				E77F91C1221DE1B2006E0647 /* Throttler.swift in Sources */,
 				E7D28F0721D15CA2008F4475 /* FriendFotoController.swift in Sources */,
 				E7B3BD6B2237AD13003B68F3 /* RoundedAvatarWithShadow.swift in Sources */,
-				E7D55872223AA7780064465B /* NewsNetworkService.swift in Sources */,
+				E7D55872223AA7780064465B /* NewsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

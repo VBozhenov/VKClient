@@ -17,11 +17,9 @@ class FriendFotoController: UICollectionViewController {
     var photos: Results<Photo>?
     
     let utilityNetworkService = UtilityNetworkService()
-    let friendsNetworkService = FriendsNetworkService()
+    let friendsService = FriendsService()
     let dataService = DataService()
     var photoService: PhotoService?
-
-    
     var notificationToken: NotificationToken?
     
     @IBAction func fotoButtonPushed(_ sender: UIButton) {
@@ -31,22 +29,12 @@ class FriendFotoController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoService = PhotoService(container: collectionView)
-        
-        friendsNetworkService.loadFriendsFoto(for: friendId) { [weak self] photos, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else if let photos = photos, let self = self {
-                self.dataService.savePhoto(photos, userId: self.friendId)
-            }
-        }
-        
+        friendsService.loadFriendsFoto(for: friendId)
         title = friendName
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         pairTableAndRealm()
     }
     

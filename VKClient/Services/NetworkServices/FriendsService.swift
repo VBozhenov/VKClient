@@ -1,5 +1,5 @@
 //
-//  FriendsNetworkService.swift
+//  FriendsService.swift
 //  VKClient
 //
 //  Created by Vladimir Bozhenov on 14/03/2019.
@@ -10,13 +10,39 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class FriendsNetworkService {
+class FriendsService {
     
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
     let token = Session.user.token
+    let dataService = DataService()
     
-    func loadFriends(completion: (([User]?, Error?) -> Void)? = nil) {
+//    func loadFriends(completion: (([User]?, Error?) -> Void)? = nil) {
+//        let path = "/method/friends.get"
+//
+//        let params: Parameters = [
+//            "access_token": token,
+//            "order": "name",
+//            "fields": "photo_200_orig",
+//            "v": version
+//        ]
+//
+//        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+//
+//            switch response.result {
+//
+//            case .success(let value):
+//                let json = JSON(value)
+//                let friends = json["response"]["items"].arrayValue.map { User(json: $0) }
+//                completion?(friends, nil)
+//            case .failure(let error):
+//                completion?(nil, error)
+//            }
+//
+//        }
+//    }
+    
+    func loadFriends() {
         let path = "/method/friends.get"
         
         let params: Parameters = [
@@ -26,16 +52,20 @@ class FriendsNetworkService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+        Alamofire.request(baseUrl + path,
+                          method: .get,
+                          parameters: params).responseJSON(queue: .global()) { response in
             
             switch response.result {
                 
             case .success(let value):
                 let json = JSON(value)
-                let friends = json["response"]["items"].arrayValue.map { User(json: $0) }
-                completion?(friends, nil)
+                let friends = json["response"]["items"].arrayValue
+                    .map { User(json: $0) }
+                    .filter({$0.lastName != ""})
+                self.dataService.saveUsers(friends)
             case .failure(let error):
-                completion?(nil, error)
+                print(error.localizedDescription)
             }
             
         }
@@ -64,7 +94,7 @@ class FriendsNetworkService {
         }
     }
     
-    func loadFriendsFoto(for userId: Int, completion: (([Photo]?, Error?) -> Void)? = nil) {
+    func loadFriendsFoto(for userId: Int) {
         let path = "/method/photos.getAll"
         
         let params: Parameters = [
@@ -82,9 +112,9 @@ class FriendsNetworkService {
             case .success(let value):
                 let json = JSON(value)
                 photos = json["response"]["items"].arrayValue.map { Photo(json: $0) }
-                completion?(photos, nil)
+                self.dataService.savePhoto(photos, userId: userId)
             case .failure(let error):
-                completion?(nil, error)
+                print(error.localizedDescription)
             }
         }
     }

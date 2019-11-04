@@ -1,5 +1,5 @@
 //
-//  NewsNetworkService.swift
+//  NewsService.swift
 //  VKClient
 //
 //  Created by Vladimir Bozhenov on 14/03/2019.
@@ -10,14 +10,15 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class NewsNetworkService {
+class NewsService {
         
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
     let token = Session.user.token
+    let dataService = DataService()
     
     func loadNews(startFrom: String,
-                  completion: (([News]?, [Owner]?, [Owner]?, String?, Error?) -> Void)? = nil) {
+                  completion: ((String?) -> Void)? = nil) {
         let path = "/method/newsfeed.get"
         
         let params: Parameters = [
@@ -55,10 +56,11 @@ class NewsNetworkService {
                 }
                 
                 jsonGroup.notify(queue: DispatchQueue.main) {
-                    completion?(news, owners, groups, nextFrom, nil)
+                    self.dataService.saveNews(news, owners, groups, nextFrom)
+                    completion?(nextFrom)
                 }
             case .failure(let error):
-                completion?(nil, nil, nil, nil, error)
+                completion?(nil)
             }
             
         }

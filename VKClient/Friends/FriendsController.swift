@@ -15,7 +15,7 @@ class FriendsController: UITableViewController {
     var mySearchedUsers: Results<User>?
     var filteredFriends: Results<User>?
     
-    let friendsNetworkService = FriendsNetworkService()
+    let friendsService = FriendsService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
 
@@ -29,17 +29,18 @@ class FriendsController: UITableViewController {
         searchController.searchBar.placeholder = "Search Names"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        friendsService.loadFriends()
         
-        friendsNetworkService.loadFriends() { [weak self] users, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else if let users = users?.filter({$0.lastName != ""}),
-                let self = self {
-
-                self.dataService.saveUsers(users)
-            }
-        }
+//        friendsService.loadFriends() { [weak self] users, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            } else if let users = users?.filter({$0.lastName != ""}),
+//                let self = self {
+//
+//                self.dataService.saveUsers(users)
+//            }
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

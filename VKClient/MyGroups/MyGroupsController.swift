@@ -16,7 +16,7 @@ class MyGroupsController: UITableViewController {
     var mySearchedGroups: Results<Group>?
     var allSearchedGroups = [Group]()
     
-    let groupsNetworkService = GroupsNetworkService()
+    let groupsService = GroupsService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
     
@@ -33,15 +33,7 @@ class MyGroupsController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        groupsNetworkService.loadGroups() { [weak self] groups, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else if let groups = groups?.filter ({$0.name != ""}),
-                let self = self {
-                self.dataService.saveGroups(groups)
-            }
-        }
+        groupsService.loadGroups()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,7 +121,7 @@ class MyGroupsController: UITableViewController {
                     groupId = groups[indexPath.row].id
                     self.dataService.deleteGroup(groupId: groupId)
                 }
-                self.groupsNetworkService.groupLeaveJoin(action: .leaveGroup, with: groupId)
+                self.groupsService.groupLeaveJoin(action: .leaveGroup, with: groupId)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         } else {
@@ -145,7 +137,7 @@ class MyGroupsController: UITableViewController {
                     let groupId = self.allSearchedGroups[indexPath.row].id
                     let groupsId = [Int]()
                     if !groupsId.contains(groupId) {
-                        self.groupsNetworkService.groupLeaveJoin(action: .joinGroup, with: groupId)
+                        self.groupsService.groupLeaveJoin(action: .joinGroup, with: groupId)
                         let groupAdded = self.allSearchedGroups[indexPath.row]
                         self.dataService.addGroup(group: groupAdded)
                         self.searchController.isActive = true
@@ -171,7 +163,7 @@ class MyGroupsController: UITableViewController {
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         
-        groupsNetworkService.searchGroups(searchText) { [weak self] groups, error in
+        groupsService.searchGroups(searchText) { [weak self] groups, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
