@@ -30,7 +30,6 @@ class FriendFotoController: UICollectionViewController {
         super.viewDidLoad()
         photoService = PhotoService(container: collectionView)
         friendsService.loadFriendsFoto(for: friendId)
-        print(friendId)
         title = friendName
     }
 
