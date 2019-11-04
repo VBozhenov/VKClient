@@ -26,7 +26,9 @@ class GroupsService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+        Alamofire.request(baseUrl + path,
+                          method: .get,
+                          parameters: params).responseJSON(queue: .global()) { response in
             switch response.result {
                 
             case .success(let value):
@@ -41,7 +43,8 @@ class GroupsService {
         }
     }
     
-    func searchGroups(_ searchText: String, completion: (([Group]?, Error?) -> Void)? = nil) {
+    func searchGroups(_ searchText: String,
+                      completion: (([Group]?, Error?) -> Void)? = nil) {
         var groups = [Group]()
         let path = "/method/groups.search"
         
@@ -51,7 +54,9 @@ class GroupsService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+        Alamofire.request(baseUrl + path,
+                          method: .get,
+                          parameters: params).responseJSON(queue: .global()) { response in
             switch response.result {
                 
             case .success(let value):
@@ -64,7 +69,9 @@ class GroupsService {
         }
     }
     
-    func groupLeaveJoin(action: GetAction, with groupID: Int, completion: (() -> Void)? = nil) {
+    func groupLeaveJoin(action: GetAction,
+                        with groupID: Int,
+                        completion: (() -> Void)? = nil) {
         let path = action.rawValue
         
         let params: Parameters = [
@@ -73,7 +80,9 @@ class GroupsService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+        Alamofire.request(baseUrl + path,
+                          method: .get,
+                          parameters: params).responseJSON(queue: .global()) { response in
             completion?()
         }
     }

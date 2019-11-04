@@ -17,31 +17,6 @@ class FriendsService {
     let token = Session.user.token
     let dataService = DataService()
     
-//    func loadFriends(completion: (([User]?, Error?) -> Void)? = nil) {
-//        let path = "/method/friends.get"
-//
-//        let params: Parameters = [
-//            "access_token": token,
-//            "order": "name",
-//            "fields": "photo_200_orig",
-//            "v": version
-//        ]
-//
-//        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
-//
-//            switch response.result {
-//
-//            case .success(let value):
-//                let json = JSON(value)
-//                let friends = json["response"]["items"].arrayValue.map { User(json: $0) }
-//                completion?(friends, nil)
-//            case .failure(let error):
-//                completion?(nil, error)
-//            }
-//
-//        }
-//    }
-    
     func loadFriends() {
         let path = "/method/friends.get"
         
@@ -61,7 +36,7 @@ class FriendsService {
             case .success(let value):
                 let json = JSON(value)
                 let friends = json["response"]["items"].arrayValue
-                    .map { User(json: $0) }
+                    .map { RealmUser(json: $0) }
                     .filter({$0.lastName != ""})
                 self.dataService.saveUsers(friends)
             case .failure(let error):
@@ -71,8 +46,9 @@ class FriendsService {
         }
     }
     
-    func searchFriends(_ searchText: String, completion: (([User]?, Error?) -> Void)? = nil) {
-        var friends = [User]()
+    func searchFriends(_ searchText: String,
+                       completion: (([RealmUser]?, Error?) -> Void)? = nil) {
+        var friends = [RealmUser]()
         let path = "/method/users.search"
         
         let params: Parameters = [
@@ -81,12 +57,14 @@ class FriendsService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+        Alamofire.request(baseUrl + path,
+                          method: .get,
+                          parameters: params).responseJSON(queue: .global()) { response in
             switch response.result {
                 
             case .success(let value):
                 let json = JSON(value)
-                friends = json["response"]["items"].arrayValue.map { User(json: $0) }
+                friends = json["response"]["items"].arrayValue.map { RealmUser(json: $0) }
                 completion?(friends, nil)
             case .failure(let error):
                 completion?(nil, error)
@@ -104,15 +82,18 @@ class FriendsService {
             "count": 200,
             "v": version
         ]
-        var photos = [Photo]()
+        var photos = [RealmPhoto]()
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+        Alamofire.request(baseUrl + path,
+                          method: .get,
+                          parameters: params).responseJSON(queue: .global()) { response in
             switch response.result {
                 
             case .success(let value):
                 let json = JSON(value)
-                photos = json["response"]["items"].arrayValue.map { Photo(json: $0) }
-                self.dataService.savePhoto(photos, userId: userId)
+                photos = json["response"]["items"].arrayValue.map { RealmPhoto(json: $0) }
+                self.dataService.savePhoto(photos,
+                                           userId: userId)
             case .failure(let error):
                 print(error.localizedDescription)
             }

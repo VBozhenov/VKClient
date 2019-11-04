@@ -11,13 +11,10 @@ import RealmSwift
 
 class FriendsController: UITableViewController {
     
-    var users: Results<User>?
-    var mySearchedUsers: Results<User>?
-    var filteredFriends: Results<User>?
-    
-    let friendsService = FriendsService()
-    let dataService = DataService()
-    var notificationToken: NotificationToken?
+    var users: [User]? = []
+    var mySearchedUsers: [User]? = []
+    var filteredFriends: [User]? = []
+    let friendsAdapter = FriendsAdapter()
 
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -29,28 +26,20 @@ class FriendsController: UITableViewController {
         searchController.searchBar.placeholder = "Search Names"
         navigationItem.searchController = searchController
         definesPresentationContext = true
-        friendsService.loadFriends()
-        
-//        friendsService.loadFriends() { [weak self] users, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            } else if let users = users?.filter({$0.lastName != ""}),
-//                let self = self {
-//
-//                self.dataService.saveUsers(users)
-//            }
-//        }
+        friendsAdapter.getFriends() { [weak self] users in
+          self?.users = users
+          self?.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        pairTableAndRealm()
+//        pairTableAndRealm()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        notificationToken?.invalidate()
+//        notificationToken?.invalidate()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,37 +52,46 @@ class FriendsController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
             guard let mySearchedUsers = mySearchedUsers else { return 0 }
-            return filterUsers(from: mySearchedUsers, in: section).count
+            return filterUsers(from: mySearchedUsers,
+                               in: section).count
         } else {
             guard let users = users else { return 0 }
-            return filterUsers(from: users, in: section).count
+            return filterUsers(from: users,
+                               in: section).count
         }
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView,
+                            titleForHeaderInSection section: Int) -> String? {
         if isFiltering() {
             guard let mySearchedUsers = mySearchedUsers else { return nil }
-            return firstLetters(in: mySearchedUsers)[section]
+            return firstLetters(in:
+                mySearchedUsers)[section]
         } else {
             guard let users = users else { return nil }
             return firstLetters(in: users)[section]
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as! FriendsCell
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell",
+                                                 for: indexPath) as! FriendsCell
         
-        var filteredFriends: Results<User>
+        var filteredFriends: [User]
         
         if isFiltering() {
             guard let mySearchedUsers = mySearchedUsers else { return UITableViewCell() }
-            filteredFriends = filterUsers(from: mySearchedUsers, in: indexPath.section)
+            filteredFriends = filterUsers(from: mySearchedUsers,
+                                          in: indexPath.section)
         } else {
             guard let users = users else { return UITableViewCell() }
-            filteredFriends = filterUsers(from: users, in: indexPath.section)
+            filteredFriends = filterUsers(from: users,
+                                          in: indexPath.section)
         }
         
             cell.friendNameLabel.text = filteredFriends[indexPath.row].lastName + " " + filteredFriends[indexPath.row].firstName
@@ -129,7 +127,8 @@ class FriendsController: UITableViewController {
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         if isFiltering() {
             guard let mySearchedUsers = mySearchedUsers else { return nil }
-            return firstLetters(in: mySearchedUsers)
+            return firstLetters(in:
+                mySearchedUsers)
         } else {
             guard let users = users else { return nil }
             return firstLetters(in: users)
@@ -142,10 +141,12 @@ class FriendsController: UITableViewController {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 if isFiltering() {
                     guard let mySearchedUsers = mySearchedUsers else { return }
-                    filteredFriends = filterUsers(from: mySearchedUsers ,in: indexPath.section)
+                    filteredFriends = filterUsers(from: mySearchedUsers,
+                                                  in: indexPath.section)
                 } else {
                     guard let users = users else { return }
-                    filteredFriends = filterUsers(from: users ,in: indexPath.section)
+                    filteredFriends = filterUsers(from: users,
+                                                  in: indexPath.section)
                 }
                 guard let filteredFriends = self.filteredFriends else { return }
                 friendFotoController.friendId = filteredFriends[indexPath.row].id
@@ -154,12 +155,13 @@ class FriendsController: UITableViewController {
         }
     }
     
-    func filterUsers (from users: Results<User>, in section: Int) -> Results<User> {
+    func filterUsers (from users: [User],
+                      in section: Int) -> [User] {
         let key = firstLetters(in: users)[section]
-        return users.filter("lastName BEGINSWITH[cd] %@", key)
+        return users.filter { $0.lastName.first == key.first }  // ("lastName BEGINSWITH[cd] %@", key)
     }
  
-    func firstLetters (in users: Results<User>) -> [String] {
+    func firstLetters (in users: [User]) -> [String] {
         var firstLetters = [String]()
         for user in users {
             firstLetters.append(String(user.lastName.first!))
@@ -173,29 +175,13 @@ class FriendsController: UITableViewController {
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         
-        mySearchedUsers = users?.filter("lastName CONTAINS[cd] %@ OR firstName CONTAINS[cd] %@", searchText, searchText)
+        mySearchedUsers = users?.filter { $0.lastName.contains(searchText) || $0.firstName.contains(searchText) } //("lastName CONTAINS[cd] %@ OR firstName CONTAINS[cd] %@", searchText, searchText)
         
         tableView.reloadData()
     }
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
-    }
-        
-    func pairTableAndRealm(config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
-        guard let realm = try? Realm(configuration: config) else { return }
-        users = realm.objects(User.self)
-        notificationToken = users?.observe ({ [weak self] (changes: RealmCollectionChange) in
-            guard let tableView = self?.tableView else { return }
-            switch changes {
-            case .initial:
-                tableView.reloadData()
-            case .update:
-                tableView.reloadData()
-            case .error(let error):
-                fatalError("\(error)")
-            }
-        })
     }
 }
 

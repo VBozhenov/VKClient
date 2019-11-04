@@ -29,7 +29,9 @@ class NewsService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+        Alamofire.request(baseUrl + path,
+                          method: .get,
+                          parameters: params).responseJSON(queue: .global()) { response in
             
             switch response.result {
                 
@@ -56,7 +58,10 @@ class NewsService {
                 }
                 
                 jsonGroup.notify(queue: DispatchQueue.main) {
-                    self.dataService.saveNews(news, owners, groups, nextFrom)
+                    self.dataService.saveNews(news,
+                                              owners,
+                                              groups,
+                                              nextFrom)
                     completion?(nextFrom)
                 }
             case .failure(let error):

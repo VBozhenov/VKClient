@@ -1,5 +1,5 @@
 //
-//  ConversationNetworkService.swift
+//  ConversationService.swift
 //  VKClient
 //
 //  Created by Vladimir Bozhenov on 30/03/2019.
@@ -10,14 +10,14 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class ConversationNetworkService {
+class ConversationService {
     
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
     let token = Session.user.token
+    let dataService = DataService()
     
-    func loadConversation(with userId: Int,
-                          completion: (([Conversation]?, Error?) -> Void)? = nil) {
+    func loadConversation(with userId: Int) {
         let path = "/method/messages.getHistory"
         
         let params: Parameters = [
@@ -26,7 +26,9 @@ class ConversationNetworkService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+        Alamofire.request(baseUrl + path,
+                          method: .get,
+                          parameters: params).responseJSON(queue: .global()) { response in
             
             switch response.result {
                 
@@ -39,10 +41,10 @@ class ConversationNetworkService {
                     conversationMessages = json["response"]["items"].arrayValue.map { Conversation(json: $0) }
                 }
                 jsonGroup.notify(queue: DispatchQueue.main) {
-                    completion?(conversationMessages, nil)
+                    self.dataService.saveConversation(conversationMessages)
                 }
             case .failure(let error):
-                completion?(nil, error)
+                print(error.localizedDescription)
             }
         }
     }
@@ -61,7 +63,9 @@ class ConversationNetworkService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+        Alamofire.request(baseUrl + path,
+                          method: .get,
+                          parameters: params).responseJSON(queue: .global()) { response in
             completion?(true)
         }
     }

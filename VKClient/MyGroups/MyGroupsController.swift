@@ -50,7 +50,8 @@ class MyGroupsController: UITableViewController {
         return isFiltering() ? 2 : 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             if isFiltering() {
                 guard let mySearchedGroups = mySearchedGroups else { return 0 }
@@ -64,13 +65,16 @@ class MyGroupsController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView,
+                            titleForHeaderInSection section: Int) -> String? {
         return section == 1 ? "Global search" : nil
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroups", for: indexPath) as! MyGroupsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroups",
+                                                 for: indexPath) as! MyGroupsCell
         
         let group: String
         
@@ -103,13 +107,14 @@ class MyGroupsController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
+    override func tableView(_ tableView: UITableView,
+                            editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         var action = UITableViewRowAction()
         
         if indexPath.section == 0 {
             
-            action = UITableViewRowAction(style: .destructive, title: "Delete") {
+            action = UITableViewRowAction(style: .destructive,
+                                          title: "Delete") {
                 _, indexPath in
                 var groupId = 0
                 if self.isFiltering() {
@@ -121,34 +126,43 @@ class MyGroupsController: UITableViewController {
                     groupId = groups[indexPath.row].id
                     self.dataService.deleteGroup(groupId: groupId)
                 }
-                self.groupsService.groupLeaveJoin(action: .leaveGroup, with: groupId)
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                self.groupsService.groupLeaveJoin(action: .leaveGroup,
+                                                  with: groupId)
+                tableView.deleteRows(at: [indexPath],
+                                     with: .fade)
             }
         } else {
             
-            action = UITableViewRowAction(style: .default, title: "Add") {
+            action = UITableViewRowAction(style: .default,
+                                          title: "Add") {
                 _, indexPath in
                 
                 let alertController = UIAlertController(
                     title: "Do you want to add\n \(self.allSearchedGroups[indexPath.row].name)?",
                     message: nil,
                     preferredStyle: .alert)
-                let alertButtonOne = UIAlertAction(title: "ОК", style: .default) { (action:UIAlertAction) in
+                let alertButtonOne = UIAlertAction(title: "ОК",
+                                                   style: .default) { (action:UIAlertAction) in
                     let groupId = self.allSearchedGroups[indexPath.row].id
                     let groupsId = [Int]()
                     if !groupsId.contains(groupId) {
-                        self.groupsService.groupLeaveJoin(action: .joinGroup, with: groupId)
+                        self.groupsService.groupLeaveJoin(action: .joinGroup,
+                                                          with: groupId)
                         let groupAdded = self.allSearchedGroups[indexPath.row]
                         self.dataService.addGroup(group: groupAdded)
                         self.searchController.isActive = true
                     }
                 }
                 
-                let alertButtonTwo = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let alertButtonTwo = UIAlertAction(title: "Cancel",
+                                                   style: .cancel,
+                                                   handler: nil)
                 
                 alertController.addAction(alertButtonOne)
                 alertController.addAction(alertButtonTwo)
-                self.present(alertController, animated: true, completion: nil)
+                self.present(alertController,
+                             animated: true,
+                             completion: nil)
             }
             
             action.backgroundColor = UIColor.blue
@@ -161,9 +175,11 @@ class MyGroupsController: UITableViewController {
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+    func filterContentForSearchText(_ searchText: String,
+                                    scope: String = "All") {
         
-        groupsService.searchGroups(searchText) { [weak self] groups, error in
+        groupsService.searchGroups(searchText) { [weak self] groups,
+            error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -177,7 +193,8 @@ class MyGroupsController: UITableViewController {
             }
         }
         
-        mySearchedGroups = groups?.filter("name CONTAINS[cd] %@", searchText)
+        mySearchedGroups = groups?.filter("name CONTAINS[cd] %@",
+                                          searchText)
     }
     
     func isFiltering() -> Bool {

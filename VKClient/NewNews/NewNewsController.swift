@@ -36,7 +36,8 @@ class NewNewsController: UITableViewController {
         loadNews(from: nextFrom)
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Идет обновление...")
-        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        refreshControl?.addTarget(self, action: #selector(refresh),
+                                  for: UIControl.Event.valueChanged)
         tableView.tableFooterView?.isHidden = true
     }
     
@@ -52,24 +53,29 @@ class NewNewsController: UITableViewController {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         return news?.count ?? 0
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let news = news else { return UITableViewCell() }
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewNews", for: indexPath) as? NewNewsCell else { fatalError() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewNews",
+                                                       for: indexPath) as? NewNewsCell else { fatalError() }
 
         cell.setCell(news: news[indexPath.row])
         cell.likeButton.tag = indexPath.row
-        cell.likeButton.addTarget(self, action: #selector(likeAddDelete), for: .touchUpInside)
+        cell.likeButton.addTarget(self, action: #selector(likeAddDelete),
+                                  for: .touchUpInside)
  
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView,
+                            heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         var imageHeight: CGFloat = 0
         var newsTextHight: CGFloat = 0
@@ -82,9 +88,11 @@ class NewNewsController: UITableViewController {
         }
         
         let maxWidth = tableView.bounds.width - insets * 2
-        let textBlock = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+        let textBlock = CGSize(width: maxWidth,
+                               height: CGFloat.greatestFiniteMagnitude)
         let text = !news[indexPath.row].repostText.isEmpty ? news[indexPath.row].repostText : news[indexPath.row].text
-        let rect = text.boundingRect(with: textBlock, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], context: nil)
+        let rect = text.boundingRect(with: textBlock,
+                                     options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], context: nil)
         newsTextHight = rect.size.height
         
         let cellHight = insets * 6 + avatarSize * 2 + iconSize + newsTextHight + imageHeight
@@ -92,7 +100,8 @@ class NewNewsController: UITableViewController {
         return cellHight
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String,
+                                     sender: Any?) -> Bool {
         if let news = news,
             let indexPath = tableView.indexPathForSelectedRow {
             if identifier == "showWebPage" {
@@ -104,7 +113,8 @@ class NewNewsController: UITableViewController {
         return true
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue,
+                          sender: Any?) {
         guard let news = news,
             let indexPath = tableView.indexPathForSelectedRow else { return }
         if segue.identifier == "showWebPage"  {
@@ -133,11 +143,18 @@ class NewNewsController: UITableViewController {
         let buttonRow = sender.tag
         guard let news = news?[buttonRow] else { return }
         if news.isliked == 0 {
-            self.utilityNetworkService.likeAddDelete(action: .addLike, to: "post", withId: news.postId, andOwnerId: -news.ownerId)
-            self.dataService.likeAddDeleteForNews(action: .add, primaryKey: news.postId)
+            self.utilityNetworkService.likeAddDelete(action: .addLike,
+                                                     to: "post",
+                                                     withId: news.postId,
+                                                     andOwnerId: -news.ownerId)
+            self.dataService.likeAddDeleteForNews(action: .add,
+                                                  primaryKey: news.postId)
         } else {
-            self.utilityNetworkService.likeAddDelete(action: .deleteLike ,to: "post", withId: news.postId, andOwnerId: news.ownerId)
-            self.dataService.likeAddDeleteForNews(action: .delete, primaryKey: news.postId)
+            self.utilityNetworkService.likeAddDelete(action: .deleteLike ,
+                                                     to: "post", withId: news.postId,
+                                                     andOwnerId: news.ownerId)
+            self.dataService.likeAddDeleteForNews(action: .delete,
+                                                  primaryKey: news.postId)
         }
     }
     
@@ -180,7 +197,8 @@ class NewNewsController: UITableViewController {
     
     func beginBatchFetch() {
         fetchingMore = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25,
+                                      execute: {
             self.loadNews(from: self.nextFrom)
             self.fetchingMore = false
         })
