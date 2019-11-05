@@ -38,7 +38,6 @@ class FriendsAdapter {
         })
         notificationToken = token
         friendsService.loadFriends()
-        //      APIService.instance.requestUsersFriendsList()
     }
     
     func user(from realmUser: RealmUser) -> User {

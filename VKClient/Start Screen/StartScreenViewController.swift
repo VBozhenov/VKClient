@@ -17,7 +17,6 @@ class StartScreenViewController: UIViewController {
     @IBOutlet weak var logInButton: UIButton!
     
     @IBAction func loginButtonPushed(_ sender: UIButton) {
-//        deleteCookies()
     }
     
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {
