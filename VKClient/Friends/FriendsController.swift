@@ -79,8 +79,6 @@ class FriendsController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell",
                                                  for: indexPath) as! FriendsCell
         
-        var filteredFriends: [User]
-        
         if isFiltering() {
             guard let mySearchedUsers = mySearchedUsers else { return UITableViewCell() }
             filteredFriends = filterUsers(from: mySearchedUsers,
@@ -91,12 +89,13 @@ class FriendsController: UITableViewController {
                                           in: indexPath.section)
         }
         
-            cell.friendNameLabel.text = filteredFriends[indexPath.row].lastName + " " + filteredFriends[indexPath.row].firstName
-
-            if let avatar = filteredFriends[indexPath.row].avatar {
-                RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: avatar,
-                                                       destinationAvatar: cell.friendAvatar)
-            }
+        guard let filteredFriends = filteredFriends else { return UITableViewCell() }
+        cell.friendNameLabel.text = filteredFriends[indexPath.row].lastName + " " + filteredFriends[indexPath.row].firstName
+        
+        if let avatar = filteredFriends[indexPath.row].avatar {
+            RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: avatar,
+                                                   destinationAvatar: cell.friendAvatar)
+        }
         
         return cell
     }
@@ -155,7 +154,7 @@ class FriendsController: UITableViewController {
     func filterUsers (from users: [User],
                       in section: Int) -> [User] {
         let key = firstLetters(in: users)[section]
-        return users.filter { $0.lastName.first == key.first }  // ("lastName BEGINSWITH[cd] %@", key)
+        return users.filter { $0.lastName.first == key.first }
     }
  
     func firstLetters (in users: [User]) -> [String] {
@@ -172,7 +171,7 @@ class FriendsController: UITableViewController {
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         
-        mySearchedUsers = users?.filter { $0.lastName.contains(searchText) || $0.firstName.contains(searchText) } //("lastName CONTAINS[cd] %@ OR firstName CONTAINS[cd] %@", searchText, searchText)
+        mySearchedUsers = users?.filter { $0.lastName.contains(searchText) || $0.firstName.contains(searchText) }
         
         tableView.reloadData()
     }
