@@ -39,6 +39,8 @@
 		E7A11C5B21D0194C000DB879 /* MyGroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A11C5A21D0194C000DB879 /* MyGroupsController.swift */; };
 		E7AE481F2203706900AE346A /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE481E2203706900AE346A /* CustomInteractiveTransition.swift */; };
 		E7B3BD6B2237AD13003B68F3 /* RoundedAvatarWithShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B3BD6A2237AD13003B68F3 /* RoundedAvatarWithShadow.swift */; };
+		E7BAA70C23721D38001894FD /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAA70B23721D38001894FD /* FriendViewModel.swift */; };
+		E7BAA70E23721DB7001894FD /* FriendViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAA70D23721DB7001894FD /* FriendViewModelFactory.swift */; };
 		E7BCA87322062BE700FDC05A /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BCA87222062BE700FDC05A /* Groups.storyboard */; };
 		E7BCA879220634F700FDC05A /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BCA878220634F700FDC05A /* Friends.storyboard */; };
 		E7BCA87B2206352100FDC05A /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BCA87A2206352100FDC05A /* News.storyboard */; };
@@ -104,6 +106,8 @@
 		E7A11C5A21D0194C000DB879 /* MyGroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsController.swift; sourceTree = "<group>"; };
 		E7AE481E2203706900AE346A /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
 		E7B3BD6A2237AD13003B68F3 /* RoundedAvatarWithShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedAvatarWithShadow.swift; sourceTree = "<group>"; };
+		E7BAA70B23721D38001894FD /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
+		E7BAA70D23721DB7001894FD /* FriendViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModelFactory.swift; sourceTree = "<group>"; };
 		E7BCA87222062BE700FDC05A /* Groups.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Groups.storyboard; sourceTree = "<group>"; };
 		E7BCA878220634F700FDC05A /* Friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		E7BCA87A2206352100FDC05A /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
@@ -325,6 +329,8 @@
 			children = (
 				E7D28F0A21D15CF5008F4475 /* FriendsController.swift */,
 				E7D28F0C21D15D0E008F4475 /* FriendsCell.swift */,
+				E7BAA70B23721D38001894FD /* FriendViewModel.swift */,
+				E7BAA70D23721DB7001894FD /* FriendViewModelFactory.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -480,6 +486,7 @@
 				E710FE002370AB7D0090C4B8 /* Photo.swift in Sources */,
 				E7D5586E223AA4CE0064465B /* FriendsService.swift in Sources */,
 				E78054F321C6D35F008D179C /* LoginFormViewController.swift in Sources */,
+				E7BAA70E23721DB7001894FD /* FriendViewModelFactory.swift in Sources */,
 				E710FDFC2370A8F80090C4B8 /* User.swift in Sources */,
 				E710FDFE2370AB420090C4B8 /* RealmPhoto.swift in Sources */,
 				E7E66589220779940071B5C9 /* Session.swift in Sources */,
@@ -497,6 +504,7 @@
 				E710FE032370AE8D0090C4B8 /* FriendsAdapter.swift in Sources */,
 				E7F0EDF221E353DF00F299B5 /* UIImageView.swift in Sources */,
 				E75478262240C4B7002B80BB /* Actions.swift in Sources */,
+				E7BAA70C23721D38001894FD /* FriendViewModel.swift in Sources */,
 				E768D7B3224FF458003F1C77 /* ConversationService.swift in Sources */,
 				E7D28F0B21D15CF5008F4475 /* FriendsController.swift in Sources */,
 				E7D55870223AA6830064465B /* GroupsService.swift in Sources */,

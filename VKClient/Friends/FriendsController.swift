@@ -15,6 +15,9 @@ class FriendsController: UITableViewController {
     var mySearchedUsers: [User]? = []
     var filteredFriends: [User]? = []
     let friendsAdapter = FriendsAdapter()
+    private let viewModelFactory = FriendViewModelFactory()
+    private var viewModels: [FriendViewModel] = []
+
 
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -26,17 +29,14 @@ class FriendsController: UITableViewController {
         searchController.searchBar.placeholder = "Search Names"
         navigationItem.searchController = searchController
         definesPresentationContext = true
-        friendsAdapter.getFriends() { [weak self] users in
-          self?.users = users
-          self?.tableView.reloadData()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
+        friendsAdapter.getFriends() { [weak self] users in
+            guard let self = self else { return }
+            self.users = users
+            self.tableView.reloadData()
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,12 +53,14 @@ class FriendsController: UITableViewController {
                             numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
             guard let mySearchedUsers = mySearchedUsers else { return 0 }
-            return filterUsers(from: mySearchedUsers,
-                               in: section).count
+            filteredFriends = filterUsers(from: mySearchedUsers,
+            in: section)
+            return filteredFriends?.count ?? 0
         } else {
             guard let users = users else { return 0 }
-            return filterUsers(from: users,
-                               in: section).count
+            filteredFriends = filterUsers(from: users,
+            in: section)
+            return filteredFriends?.count ?? 0
         }
     }
     
@@ -88,14 +90,9 @@ class FriendsController: UITableViewController {
             filteredFriends = filterUsers(from: users,
                                           in: indexPath.section)
         }
-        
         guard let filteredFriends = filteredFriends else { return UITableViewCell() }
-        cell.friendNameLabel.text = filteredFriends[indexPath.row].lastName + " " + filteredFriends[indexPath.row].firstName
-        
-        if let avatar = filteredFriends[indexPath.row].avatar {
-            RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: avatar,
-                                                   destinationAvatar: cell.friendAvatar)
-        }
+        self.viewModels = self.viewModelFactory.constructViewModels(from: filteredFriends)
+        cell.configure(with: viewModels[indexPath.row])
         
         return cell
     }
@@ -156,7 +153,7 @@ class FriendsController: UITableViewController {
         let key = firstLetters(in: users)[section]
         return users.filter { $0.lastName.first == key.first }
     }
- 
+
     func firstLetters (in users: [User]) -> [String] {
         var firstLetters = [String]()
         for user in users {
@@ -164,18 +161,18 @@ class FriendsController: UITableViewController {
         }
         return Array(Set(firstLetters)).sorted()
     }
-    
+
     func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
-    
+
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        
-        mySearchedUsers = users?.filter { $0.lastName.contains(searchText) || $0.firstName.contains(searchText) }
-        
+
+        mySearchedUsers = users?.filter { $0.lastName.lowercased().contains(searchText.lowercased()) || $0.firstName.lowercased().contains(searchText.lowercased()) }
+
         tableView.reloadData()
     }
-    
+
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
