@@ -92,7 +92,7 @@ class NewNewsController: UITableViewController {
                                height: CGFloat.greatestFiniteMagnitude)
         let text = !news[indexPath.row].repostText.isEmpty ? news[indexPath.row].repostText : news[indexPath.row].text
         let rect = text.boundingRect(with: textBlock,
-                                     options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], context: nil)
+                                     options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.brandTextFont], context: nil)
         newsTextHight = rect.size.height
         
         let cellHight = insets * 6 + avatarSize * 2 + iconSize + newsTextHight + imageHeight

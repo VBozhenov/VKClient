@@ -30,7 +30,7 @@ class NewNewsCell: UITableViewCell {
     }()
     let ownersName: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.brandLabelFont
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .left
         label.numberOfLines = 1
@@ -52,7 +52,7 @@ class NewNewsCell: UITableViewCell {
     }()
     let repostOwnersName: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.brandLabelFont
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .left
         label.numberOfLines = 1
@@ -60,7 +60,7 @@ class NewNewsCell: UITableViewCell {
     }()
     let newsText: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.brandTextFont
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .left
         label.numberOfLines = 0
