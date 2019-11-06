@@ -22,7 +22,7 @@ class NewNewsCell: UITableViewCell {
     var ownersPhoto: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        imageView.shadowColor = .brandBlack
         imageView.shadowOpacity = 0.7
         imageView.shadowOffset = CGPoint(x: 3, y: 3)
         imageView.shadowRadius = 4
@@ -44,7 +44,7 @@ class NewNewsCell: UITableViewCell {
     let repostOwnersPhoto: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        imageView.shadowColor = .brandBlack
         imageView.shadowOpacity = 0.7
         imageView.shadowOffset = CGPoint(x: 3, y: 3)
         imageView.shadowRadius = 4
@@ -70,28 +70,28 @@ class NewNewsCell: UITableViewCell {
     let likeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "heartWhite"), for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+        button.setTitleColor(.brandGrey, for: .normal)
         button.setTitle("999", for: .normal)
         return button
     }()
     let commentButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "comment"), for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+        button.setTitleColor(.brandGrey, for: .normal)
         button.setTitle("999", for: .normal)
         return button
     }()
     let sharedButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "share"), for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+        button.setTitleColor(.brandGrey, for: .normal)
         button.setTitle("999", for: .normal)
         return button
     }()
     let watchedLabel: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "view"), for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+        button.setTitleColor(.brandGrey, for: .normal)
         button.setTitle("999", for: .normal)
         return button
     }()

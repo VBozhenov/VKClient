@@ -41,6 +41,7 @@
 		E7B3BD6B2237AD13003B68F3 /* RoundedAvatarWithShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B3BD6A2237AD13003B68F3 /* RoundedAvatarWithShadow.swift */; };
 		E7BAA70C23721D38001894FD /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAA70B23721D38001894FD /* FriendViewModel.swift */; };
 		E7BAA70E23721DB7001894FD /* FriendViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAA70D23721DB7001894FD /* FriendViewModelFactory.swift */; };
+		E7BAA7102372D2A6001894FD /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BAA70F2372D2A6001894FD /* CustomColors.swift */; };
 		E7BCA87322062BE700FDC05A /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BCA87222062BE700FDC05A /* Groups.storyboard */; };
 		E7BCA879220634F700FDC05A /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BCA878220634F700FDC05A /* Friends.storyboard */; };
 		E7BCA87B2206352100FDC05A /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BCA87A2206352100FDC05A /* News.storyboard */; };
@@ -108,6 +109,7 @@
 		E7B3BD6A2237AD13003B68F3 /* RoundedAvatarWithShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedAvatarWithShadow.swift; sourceTree = "<group>"; };
 		E7BAA70B23721D38001894FD /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 		E7BAA70D23721DB7001894FD /* FriendViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModelFactory.swift; sourceTree = "<group>"; };
+		E7BAA70F2372D2A6001894FD /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		E7BCA87222062BE700FDC05A /* Groups.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Groups.storyboard; sourceTree = "<group>"; };
 		E7BCA878220634F700FDC05A /* Friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		E7BCA87A2206352100FDC05A /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				E7F0EDF121E353DF00F299B5 /* UIImageView.swift */,
 				E7EA7DF021EA750C00D813B3 /* GradientView.swift */,
 				E7B3BD6A2237AD13003B68F3 /* RoundedAvatarWithShadow.swift */,
+				E7BAA70F2372D2A6001894FD /* CustomColors.swift */,
 			);
 			path = "Animation, custom controllers, layouts";
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				E7D55865223A35AA0064465B /* Message.swift in Sources */,
 				E789E8382214163E009E51ED /* DetailedFriendFotoCell.swift in Sources */,
 				E778E4CE2233A7CA0055A226 /* DetailedFriendFotoCellLayout.swift in Sources */,
+				E7BAA7102372D2A6001894FD /* CustomColors.swift in Sources */,
 				E78054DD21C6CFDB008D179C /* AppDelegate.swift in Sources */,
 				E7BFDF99228C63B7004DE780 /* NewsWebLinkViewController.swift in Sources */,
 				E768D7B0224FEFB5003F1C77 /* ConversationController.swift in Sources */,

@@ -165,7 +165,7 @@ class MyGroupsController: UITableViewController {
                              completion: nil)
             }
             
-            action.backgroundColor = UIColor.blue
+            action.backgroundColor = .brandBlue
         }
         
         return [action]

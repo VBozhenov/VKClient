@@ -67,11 +67,11 @@ class FriendFotoController: UICollectionViewController {
             if isLiked == 1 {
                 cell.likeCellButton.setImage(UIImage(named: "heartRed"),
                                              for: UIControl.State.normal)
-                cell.numberOfLikes.textColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+                cell.numberOfLikes.textColor = .brandRed
             } else {
                 cell.likeCellButton.setImage(UIImage(named: "heartWhite"),
                                              for: UIControl.State.normal)
-                cell.numberOfLikes.textColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+                cell.numberOfLikes.textColor = .brandBlue
             }
             
             cell.friendFoto.image = photoService?.photo(at: indexPath,
