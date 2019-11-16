@@ -1,5 +1,5 @@
 //
-//  MessagesNetworkService.swift
+//  MessagesService.swift
 //  VKClient
 //
 //  Created by Vladimir Bozhenov on 14/03/2019.
@@ -10,13 +10,14 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class MessagesNetworkService {
+class MessagesService {
         
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
     let token = Session.user.token
+    let dataService = DataService()
     
-    func loadMessages(completion: (([Message]?, [Owner]?, [Owner]?, Error?) -> Void)? = nil) {
+    func loadMessages() {
         let path = "/method/messages.getConversations"
         
         let params: Parameters = [
@@ -25,7 +26,9 @@ class MessagesNetworkService {
             "v": version
         ]
         
-        Alamofire.request(baseUrl + path, method: .get, parameters: params).responseJSON(queue: .global()) { response in
+        Alamofire.request(baseUrl + path,
+                          method: .get,
+                          parameters: params).responseJSON(queue: .global()) { response in
             
             switch response.result {
                 
@@ -37,7 +40,9 @@ class MessagesNetworkService {
                 
                 let jsonGroup = DispatchGroup()
                 DispatchQueue.global().async(group: jsonGroup) {
-                    messages = json["response"]["items"].arrayValue.map { Message(json: $0) }
+                    messages = json["response"]["items"].arrayValue
+                        .map { Message(json: $0) }
+                        .filter({$0.lastMessage != ""})
                 }
                 DispatchQueue.global().async(group: jsonGroup) {
                     users = json["response"]["profiles"].arrayValue.map { Owner(json: $0) }
@@ -46,10 +51,12 @@ class MessagesNetworkService {
                     groups = json["response"]["groups"].arrayValue.map { Owner(json: $0) }
                 }
                 jsonGroup.notify(queue: DispatchQueue.main) {
-                    completion?(messages, users, groups, nil)
+                    self.dataService.saveMessages(messages,
+                                                  users,
+                                                  groups)
                 }
             case .failure(let error):
-                completion?(nil, nil, nil, error)
+                print(error.localizedDescription)
             }
         }
     }

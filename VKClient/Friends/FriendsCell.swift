@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FriendsCell: UITableViewCell {
 
@@ -20,4 +21,10 @@ class FriendsCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    func configure(with viewModel: FriendViewModel) {
+        friendNameLabel.text = viewModel.name
+        RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: viewModel.avatar, destinationAvatar: friendAvatar)
+    }
+
 }

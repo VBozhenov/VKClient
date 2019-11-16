@@ -11,17 +11,15 @@ import RealmSwift
 
 class DataService {
     
-    func saveUsers(_ users: [User],
-                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                   update: Bool = true) {
+    func saveUsers(_ users: [RealmUser]) {
         do {
-            let realm = try Realm(configuration: config)
-            let oldUsersFriendsList = realm.objects(User.self)
-            let oldUsersPhotos = realm.objects(Photo.self)
+            let realm = try Realm()
+            let oldUsersFriendsList = realm.objects(RealmUser.self)
+            let oldUsersPhotos = realm.objects(RealmPhoto.self)
             try realm.write {
                 realm.delete(oldUsersPhotos)
                 realm.delete(oldUsersFriendsList)
-                realm.add(users, update: update)
+                realm.add(users, update: .all)
             }
 //            print("Realm is located at:", realm.configuration.fileURL!)
         } catch {
@@ -29,16 +27,17 @@ class DataService {
         }
     }
     
-    func savePhoto(_ photos: [Photo],
+    func savePhoto(_ photos: [RealmPhoto],
                    userId: Int,
-                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
-                   update: Bool = true) {
+                   config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)) {
         do {
             let realm = try Realm(configuration: config)
-            guard let user = realm.object(ofType: User.self, forPrimaryKey: userId) else { return }
+            guard let user = realm.object(ofType: RealmUser.self,
+                                          forPrimaryKey: userId) else { return }
             try realm.write {
                 for photo in photos {
-                    if realm.object(ofType: Photo.self, forPrimaryKey: photo.photo) == nil {
+                    if realm.object(ofType: RealmPhoto.self,
+                                    forPrimaryKey: photo.photo) == nil {
                         user.photos.append(photo)
                     }
                 }
@@ -53,7 +52,7 @@ class DataService {
                                config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true),
                                update: Bool = true) {
         let realm = try! Realm(configuration: config)
-        let object = realm.object(ofType: Photo.self, forPrimaryKey: primaryKey)
+        let object = realm.object(ofType: RealmPhoto.self, forPrimaryKey: primaryKey)
         try! realm.write {
             if action == .add {
                 object?.isliked += 1

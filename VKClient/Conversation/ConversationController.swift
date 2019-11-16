@@ -15,7 +15,7 @@ class ConversationController: UITableViewController {
     var userId = 0
     var userName = ""
     var userPhoto = ""
-    let conversationNetworkService = ConversationNetworkService()
+    let conversationService = ConversationService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
     var textField = UITextField()
@@ -53,7 +53,7 @@ class ConversationController: UITableViewController {
     
     @objc func sendMessageButtonPushed(sender: UIButton!) {
         if let textToSend = textField.text {
-            conversationNetworkService.sendMessage(text: textToSend, to: userId, randomId: (conversations?.first?.messageId ?? 0) + 1) { (success) -> Void in
+            conversationService.sendMessage(text: textToSend, to: userId, randomId: (conversations?.first?.messageId ?? 0) + 1) { (success) -> Void in
                 if success {
                     self.loadConversation(with: self.userId)
                     DispatchQueue.main.async {
@@ -111,7 +111,7 @@ class ConversationController: UITableViewController {
         self.sendMessageButton = UIButton(frame: CGRect(x: footerView.frame.size.width - 40, y: 0, width: 40, height: 40))
         self.sendMessageButton.setImage(UIImage(named: "sendMessageButton"), for: .normal)
         sendMessageButton.addTarget(self, action: #selector(sendMessageButtonPushed), for: .touchUpInside)
-        footerView.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        footerView.backgroundColor = .brandLightBlue
         footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         footerView.addSubview(self.textField)
         footerView.addSubview(self.sendMessageButton)
@@ -140,14 +140,6 @@ class ConversationController: UITableViewController {
     }
     
     func loadConversation(with userId: Int) {
-        conversationNetworkService.loadConversation(with: userId) { [weak self] conversations, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else if let conversations = conversations,
-                let self = self {
-                self.dataService.saveConversation(conversations)
-            }
-        }
+        conversationService.loadConversation(with: userId)
     }
 }

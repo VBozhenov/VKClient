@@ -13,7 +13,7 @@ class MessagesController: UITableViewController {
     
     var messages: Results<Message>?
     
-    let messagesNetworkService = MessagesNetworkService()
+    let messagesService = MessagesService()
     let dataService = DataService()
     var notificationToken: NotificationToken?
 
@@ -24,17 +24,7 @@ class MessagesController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        messagesNetworkService.loadMessages() { [weak self] messages, users, groups, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            } else if let messages = messages?.filter({$0.lastMessage != ""}),
-                let users = users,
-                let groups = groups,
-                let self = self {
-                self.dataService.saveMessages(messages, users, groups)
-            }
-        }
+        messagesService.loadMessages()
         pairTableAndRealm()
     }
     
@@ -42,12 +32,15 @@ class MessagesController: UITableViewController {
         notificationToken?.invalidate()
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         return messages?.count ?? 0
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Message", for: indexPath) as! MessagesCell
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Message",
+                                                 for: indexPath) as! MessagesCell
         guard let messages = messages else { return UITableViewCell() }
         RoundedAvatarWithShadow.roundAndShadow(sourceAvatar: messages[indexPath.row].owner?.ownerPhoto ?? "",
                                                destinationAvatar: cell.userFoto)
@@ -57,7 +50,8 @@ class MessagesController: UITableViewController {
         return cell
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue,
+                          sender: Any?) {
         guard let messages = messages,
             let indexPath = tableView.indexPathForSelectedRow else { return }
         if segue.identifier == "toConversation"  {
