@@ -16,7 +16,7 @@ class MyGroupsController: UITableViewController {
     var mySearchedGroups: Results<Group>?
     var allSearchedGroups = [Group]()
     
-    let groupsService = GroupsService()
+    let proxy = GroupsServiceProxy(groupService: GroupsService())
     let dataService = DataService()
     var notificationToken: NotificationToken?
     
@@ -33,7 +33,7 @@ class MyGroupsController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        groupsService.loadGroups()
+        proxy.loadGroups()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,8 +126,9 @@ class MyGroupsController: UITableViewController {
                     groupId = groups[indexPath.row].id
                     self.dataService.deleteGroup(groupId: groupId)
                 }
-                self.groupsService.groupLeaveJoin(action: .leaveGroup,
-                                                  with: groupId)
+                self.proxy.groupLeaveJoin(action: .leaveGroup,
+                                          with: groupId,
+                                          completion: nil)
                 tableView.deleteRows(at: [indexPath],
                                      with: .fade)
             }
@@ -146,8 +147,9 @@ class MyGroupsController: UITableViewController {
                     let groupId = self.allSearchedGroups[indexPath.row].id
                     let groupsId = [Int]()
                     if !groupsId.contains(groupId) {
-                        self.groupsService.groupLeaveJoin(action: .joinGroup,
-                                                          with: groupId)
+                        self.proxy.groupLeaveJoin(action: .joinGroup,
+                                                  with: groupId,
+                                                  completion: nil)
                         let groupAdded = self.allSearchedGroups[indexPath.row]
                         self.dataService.addGroup(group: groupAdded)
                         self.searchController.isActive = true
@@ -178,7 +180,7 @@ class MyGroupsController: UITableViewController {
     func filterContentForSearchText(_ searchText: String,
                                     scope: String = "All") {
         
-        groupsService.searchGroups(searchText) { [weak self] groups,
+        proxy.searchGroups(searchText) { [weak self] groups,
             error in
             if let error = error {
                 print(error.localizedDescription)
