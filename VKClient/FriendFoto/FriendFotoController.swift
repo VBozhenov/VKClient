@@ -17,7 +17,7 @@ class FriendFotoController: UICollectionViewController {
     var photos: Results<RealmPhoto>?
     
     let utilityNetworkService = UtilityNetworkService()
-    let friendsService = FriendsService()
+    let proxy = FriendsServiceProxy(friendsService: FriendsService())
     let dataService = DataService()
     var photoService: PhotoService?
     var notificationToken: NotificationToken?
@@ -29,7 +29,7 @@ class FriendFotoController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoService = PhotoService(container: collectionView)
-        friendsService.loadFriendsFoto(for: friendId)
+        proxy.loadFriendsFoto(for: friendId)
         title = friendName
     }
 
