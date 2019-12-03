@@ -12,7 +12,7 @@ import RealmSwift
 class FriendsAdapter {
     
     var notificationToken: NotificationToken?
-    let friendsService = FriendsService()
+    let proxy = FriendsServiceProxy(friendsService: FriendsService())
     
     func getFriends(then completion: @escaping ([User]) -> Void) {
         guard let realm = try? Realm() else { return }
@@ -37,7 +37,7 @@ class FriendsAdapter {
             }
         })
         notificationToken = token
-        friendsService.loadFriends()
+        proxy.loadFriends()
     }
     
     func user(from realmUser: RealmUser) -> User {

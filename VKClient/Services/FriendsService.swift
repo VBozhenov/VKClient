@@ -10,7 +10,14 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class FriendsService {
+protocol FriendsServiceInterface {
+    func loadFriends()
+    func searchFriends(_ searchText: String,
+                       completion: (([RealmUser]?, Error?) -> Void)?)
+    func loadFriendsFoto(for userId: Int)
+}
+
+class FriendsService: FriendsServiceInterface {
     
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
@@ -98,5 +105,31 @@ class FriendsService {
                 print(error.localizedDescription)
             }
         }
+    }
+}
+
+class FriendsServiceProxy: FriendsServiceInterface {
+    
+    let friendsService: FriendsService
+    
+    init(friendsService: FriendsService) {
+        self .friendsService = friendsService
+    }
+    
+    func loadFriends() {
+        self.friendsService.loadFriends()
+        print("called func loadFriends")
+    }
+    
+    func searchFriends(_ searchText: String,
+                       completion: (([RealmUser]?, Error?) -> Void)?) {
+        self.friendsService.searchFriends(searchText,
+                           completion: completion)
+        print("called func searchFriends with search text: \(searchText)")
+    }
+    
+    func loadFriendsFoto(for userId: Int) {
+        self.friendsService.loadFriendsFoto(for: userId)
+        print("called func loadFriendsFoto for userID: \(userId)")
     }
 }

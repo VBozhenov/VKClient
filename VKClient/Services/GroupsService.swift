@@ -10,7 +10,16 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class GroupsService {
+protocol GroupsServiceInterface {
+    func loadGroups()
+    func searchGroups(_ searchText: String,
+                      completion: (([Group]?, Error?) -> Void)?)
+    func groupLeaveJoin(action: GetAction,
+                        with groupID: Int,
+                        completion: (() -> Void)?)
+}
+
+class GroupsService: GroupsServiceInterface {
     
     let baseUrl = "https://api.vk.com"
     let version = "5.68"
@@ -85,5 +94,35 @@ class GroupsService {
                           parameters: params).responseJSON(queue: .global()) { response in
             completion?()
         }
+    }
+}
+
+class GroupsServiceProxy: GroupsServiceInterface {
+    
+    let groupService: GroupsService
+    
+    init(groupService: GroupsService) {
+        self.groupService = groupService
+    }
+    
+    func loadGroups() {
+        self.groupService.loadGroups()
+        print("called func loadGroups")
+    }
+    
+    func searchGroups(_ searchText: String,
+                      completion: (([Group]?, Error?) -> Void)?) {
+        self.groupService.searchGroups(searchText,
+                                       completion: completion)
+        print("called func searchGroups with text: \(searchText)")
+    }
+    
+    func groupLeaveJoin(action: GetAction,
+                        with groupID: Int,
+                        completion: (() -> Void)?) {
+        self.groupService.groupLeaveJoin(action: action,
+                                         with: groupID,
+                                         completion: completion)
+        print("called func groupLeaveJoin for groupID: \(groupID)")
     }
 }
